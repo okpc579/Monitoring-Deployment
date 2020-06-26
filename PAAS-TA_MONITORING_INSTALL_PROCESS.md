@@ -28,6 +28,8 @@ common_vars.yml 작성이 끝나면 PaaS-TA Monitoring 옵션과 필요한 변�
 그리고 PaaS-TA VM 들을 확인하기 위한 Logsearch를 설치하고 
 Monitoring을 할 환경을 정하여 옵션으로 Pinpoint(SaaS), Container Service(CaaS), Monasca(IaaS)를 설치 후 PaaS-TA Monitoring을 설치한다.
 
+
+
 ## <div id='2'/>1.1. BOSH 설치
 
 deploy-openstack.sh 에 모니터링 관련 옵션인
