@@ -5,7 +5,11 @@
   * [deploy-logsearch.sh](#3)
   * [logsearch-vars.yml](#4)
 
-## <div id='1'/>1.	Logsearch 설치
+## <div id='1'/>1.	
+
+### <div id='2'/>1.1.	logsearch-deployment.yml
+
+## <div id='1'/>2.	Logsearch 설치
 
 PaaS-TA VM Log수집을 위해서는 Logsearch가 설치되어야 한다. 
 
