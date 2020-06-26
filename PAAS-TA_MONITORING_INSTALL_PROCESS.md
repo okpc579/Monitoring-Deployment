@@ -3,7 +3,7 @@
 1. [PaaS-TA Monitoring 설치 순서](#1)
   * [BOSH 설치](#2)
   * [common_vars.yml 설정](#3)
-  * [PaaS-TA 설치](#4)
+  * [통합 Monitoring을 적용한 PaaS-TA 5.0 설치](#4)
   * [Logsearch 설치](#5)
   * [Pinpoint 설치](#6)
   * [Container Service 설치](#7)
@@ -17,14 +17,19 @@
 
 metric_url와 syslog_address를 정했다면 PaaS-TA Monitoring 옵션과 필요한 변수를 포함하여 BOSH을 설치한다.
 옵션과 필요한 변수는 하단의 [BOSH 설치](https://github.com/okpc579/Monitoring-Deployment/blob/master/PAAS-TA_MONITORING_INSTALL_PROCESS.md#2)를 확인하거나
-[BOSH 설치 가이드](https://github.com/okpc579/PaaS-TA-Deployment/blob/master/bosh-deployment/README.md)에서 확인할 
+[BOSH 설치 가이드](https://github.com/okpc579/PaaS-TA-Deployment/blob/master/bosh-deployment/README.md)에서 확인할 수 있다.
 
-BOSH의 설치가 끝났으면 BOSH을 설치할때 정보와  common_vars.yml을 작성
+BOSH의 설치가 끝났으면 BOSH을 설치할때 정보와 common_vars.yml을 작성해야 한다.
 [common_vars.yml 설정](https://github.com/okpc579/Monitoring-Deployment/blob/master/PAAS-TA_MONITORING_INSTALL_PROCESS.md#12-common_varsyml-%EC%84%A4%EC%A0%95)
 
-그리고 파스타 설치시 옵션파일이랑 변수를 넣어서 설치를 한다(설치 가이드 링크)
+common_vars.yml 작성이 끝났다면 PaaS-TA Monitoring 옵션과 필요한 변수를 포함하여 BOSH을 설치한다.
+옵션과 필요한 변수는 하단의 [통합 Monitoring을 적용한 PaaS-TA 5.0 설치](https://github.com/okpc579/Monitoring-Deployment/blob/master/PAAS-TA_MONITORING_INSTALL_PROCESS.md#4)를 확인하거나
+[통합 Monitoring을 적용한 PaaS-TA 5.0 설치 가이드](https://github.com/okpc579/Monitoring-Deployment/blob/master/paasta-deployment/README.md)에서 확인할 수 있다.
 
-그리고 로그서치를 설치하고 
+그리고 PaaS-TA VM 들을 확인하기 위한 Logsearch를 설치하고 
+Monitoring을 할 환경을 정하여 옵션으로 Pinpoint(SaaS), Container Service(CaaS), Monasca(IaaS)를 설치 후 PaaS-TA Monitoring을 설치한다.
+
+
 
 모니터링 하고싶은 환경에따라 옵셔널 릴리즈 파일을 설치후 파스타 모니터링 설치
 (각 가이드 링크)
@@ -82,20 +87,20 @@ syslog_fallback_servers=[]
 옵션파일과 common 파일에 저런 값이 들어가있는질 확인
    
 
-## <div id='4'/>1.4. Logsearch 설치
+## <div id='5'/>1.4. Logsearch 설치
 
 logsearch 설치
 
-## <div id='5'/>1.5. Pinpoint 설치
+## <div id='6'/>1.5. Pinpoint 설치
 
 Pinpoint설치
 
-## <div id='6'/>1.6. CaaS 설치
+## <div id='7'/>1.6. CaaS 설치
 CaaS설치
 
-## <div id='7'/>1.7. Monasca 설치
+## <div id='8'/>1.7. Monasca 설치
 IaaS설치
 
 
-## <div id='8'/>1.8. PaaS-TA Monitoring 설치
+## <div id='9'/>1.8. PaaS-TA Monitoring 설치
 PaaS-TA Monitoring 설치
