@@ -36,15 +36,15 @@ PaaS-TA 3.5 버전부터는 BOSH 2.0 기반으로 deploy를 진행하며 기존 
     <th>스펙</th>
   </tr>
   <tr>
-  <td>collector      </td><td>pinpoint\_medium</td><td>2vCPU / 2GB RAM / 8GB Disk</td>
+  <td>collector      </td><td>small-highmem-16GB</td><td>2vCPU / 2GB RAM / 8GB Disk</td>
   </tr>
-  <td>h_master      </td><td>pinpoint\_medium</td><td>2vCPU / 2GB RAM / 8GB Disk</td>
-  </tr>
-  <tr>
-  <td>haproxy_webui </td><td>services-small </td><td>1vCPU / 1GB RAM / 4GB Disk</td>
+  <td>h_master      </td><td>small-highmem-16GB</td><td>2vCPU / 2GB RAM / 8GB Disk</td>
   </tr>
   <tr>
-  <td>pinpoint_web          </0><td>services-small </td><td>1vCPU / 1GB RAM / 4GB Disk</td>
+  <td>haproxy_webui </td><td>small-highmem-16GB</td><td>1vCPU / 1GB RAM / 4GB Disk</td>
+  </tr>
+  <tr>
+  <td>pinpoint_web          </0><td>small-highmem-16GB</td><td>1vCPU / 1GB RAM / 4GB Disk</td>
   </tr>
 </table>
 
