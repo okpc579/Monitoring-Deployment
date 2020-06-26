@@ -11,7 +11,24 @@
 
 # <div id='1'/>1. PaaS-TA Monitoring 설치 순서
 
+본 문서(PaaS-TA Monitoring 설치 가이드)는 PaaS-TA 5.0 환경기준으로 PaaS-TA Monitoring 설치를 위한 가이드를 제공한다.
 
+최종적으로 PaaS-TA Monitoring 설치를 위해서는 우선 PaaS-TA Monitoring 설치시에 IaaS의 네트워크에 맞춰서 후에 설치할 PaaS-TA Monitoring InfluxDB IP인 metric_url와 Logsearch의 ls-router IP인 syslog_address를 미리 정해둘 필요가 있다.
+
+metric_url와 syslog_address를 정했으면 PaaS-TA Monitoring 옵션과 필요한 변수를 포함하여 BOSH을 설치한다.
+[BOSH 설치 가이드](https://github.com/okpc579/PaaS-TA-Deployment/blob/master/bosh-deployment/README.md)
+BOSH를 설치하고 common_vars.yml을 작성(작성가이드는 링크)
+
+그리고 파스타 설치시 옵션파일이랑 변수를 넣어서 설치를 한다(설치 가이드 링크)
+
+그리고 로그서치를 설치하고 
+
+모니터링 하고싶은 환경에따라 옵셔널 릴리즈 파일을 설치후 파스타 모니터링 설치
+(각 가이드 링크)
+
+
+큰 순서는 BOSH 설치한 뒤 COMMON_VARS.YML 작성하고 PAAS-TA를 설치한뒤, LOGSEARCH를 설치하고,
+옵셔널로 PINPOINT, CONTAINER SERVICE, MONASCA 를 설치후 PAAS-TA MONITORING 설치
 
 
 ## <div id='2'/>1.1. BOSH 설치
@@ -37,7 +54,6 @@ paasta_admin_username: "admin"			# PaaS-TA Admin Username
 paasta_admin_password: "admin"			# PaaS-TA Admin Password
 uaa_client_admin_secret: "admin-secret"		# UAAC Admin Client에 접근하기 위한 Secret 변수
 uaa_client_portal_secret: "clientsecret"	# UAAC Portal Client에 접근하기 위한 Secret 변수
-
 
 metric_url: "10.0.161.101"			# Monitoring InfluxDB IP
 syslog_address: "10.0.121.100"            	# Logsearch의 ls-router IP
