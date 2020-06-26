@@ -17,8 +17,8 @@
 # <div id='1'> 1. 문서 개요
 ### <div id='11'> 1.1. 목적
 
-본 문서(SaaS Monitoring Pinpoint 서비스팩 설치 가이드)는 전자정부표준프레임워크 기반의 PaaS-TA에서 제공되는 서비스팩인 Pinpoint 서비스팩을 Bosh2.0을 이용하여 설치 하는 방법과 PaaS-TA의 SaaS 형태로 제공하는 Application 에서 Pinpoint 서비스를 사용하는 방법을 기술하였다.
-PaaS-TA 3.5 버전부터는 Bosh2.0 기반으로 deploy를 진행하며 기존 Bosh1.0 기반으로 설치를 원할경우에는 PaaS-TA 3.1 이하 버전의 문서를 참고한다.
+본 문서(SaaS Monitoring Pinpoint 서비스팩 설치 가이드)는 전자정부표준프레임워크 기반의 PaaS-TA에서 제공되는 서비스팩인 Pinpoint 서비스팩을 BOSH 2.0을 이용하여 설치 하는 방법과 PaaS-TA의 SaaS 형태로 제공하는 Application 에서 Pinpoint 서비스를 사용하는 방법을 기술하였다.
+PaaS-TA 3.5 버전부터는 BOSH 2.0 기반으로 deploy를 진행하며 기존 BOSH 1.0 기반으로 설치를 원할경우에는 PaaS-TA 3.1 이하 버전의 문서를 참고한다.
 
 ### <div id='12'> 1.2. 범위
 설치 범위는 Pinpoint 서비스팩을 검증하기 위한 기본 설치를 기준으로 작성하였다.
@@ -142,7 +142,7 @@ BOSH CLI v2 가 설치 되어 있지 않을 경우 먼저 BOSH2.0 설치 가이�
 
 - **사용 예시**
 
-		$ cd ~/workspace/paasta-5.0/release/paasta-monitoring
+		$ cd #{HOME}/workspace/paasta-5.0/release/paasta-monitoring
 		
 		$ bosh -e micro-bosh upload-release  paasta-pinpoint-monitoring-release.tgz
 
@@ -230,14 +230,14 @@ BOSH CLI v2 가 설치 되어 있지 않을 경우 먼저 BOSH2.0 설치 가이�
 
 
 
-### <div id='23'> 2.3. PINPOINT 서비스 Deployment 파일 및 deploy_pinpoint-프로바이더.sh 수정 및 배포
+### <div id='23'> 2.3. Pinpoint Deployment 파일 및 deploy-pinpoint.sh 수정 및 배포
 
-BOSH Deployment manifest 는 components 요소 및 배포의 속성을 정의한 YAML 파일이다.
-Deployment manifest 에는 sotfware를 설치 하기 위해서 어떤 Stemcell (OS, BOSH agent) 을 사용할것이며 Release (Software packages, Config templates, Scripts) 이름과 버전, VMs 용량, Jobs params 등을 정의가 되어 있다.
+BOSH Deployment manifest 는 Components 요소 및 배포의 속성을 정의한 YAML 파일이다.
+Deployment manifest 에는 Software를 설치 하기 위해서 어떤 Stemcell (OS, BOSH Agent) 을 사용할것이며 Release (Software Packages, Config Templates, Scripts) 이름과 버전, VMs 용량, Jobs Params 등을 정의가 되어 있다.
 
-deployment 파일에서 사용하는 network, vm_type 등은 cloud config 를 활용하고 해당 가이드는 Bosh2.0 가이드를 참고한다.
+deployment 파일에서 사용하는 network, vm_type 등은 cloud-config 를 활용하고 해당 가이드는 BOSH 2.0 가이드를 참고한다.
 
--	cloud config 내용 조회
+-	cloud-config 내용 조회
 
 - **사용 예시**
 
@@ -523,40 +523,55 @@ deployment 파일에서 사용하는 network, vm_type 등은 cloud config 를 �
 -	Deployment 파일을 서버 환경에 맞게 수정한다.
 
 ```yaml
-# pinpoint_property.yml 설정 파일 내용
+# pinpoint-vars.yml 설정 파일 내용
 ---
 ### On-Demand Bosh Deployment Name Setting ###
-deployment_name: paasta-pinpoint-monitoring                       #Deployment Name
-#
+deployment_name: "paasta-pinpoint-monitoring"		# On-Demand Deployment Name
 #### Main Stemcells Setting ###
-stemcell_os: ubuntu-xenial                                      # Deployment Main Stemcell OS
-stemcell_version: latest                                       # Main Stemcell Version
-stemcell_alias: default                                         # Main Stemcell Alias
-#
-#
-#### VM Type
-vm_type: caas_small_highmem
-#broker_vm_type: service_medium
-#service_vm_type: service_tiny
-#test_vm_type: service_tiny
-#
+stemcell_os: "ubuntu-xenial"				# Deployment Main Stemcell OS
+stemcell_version: "315.36"				# Main Stemcell Version
+stemcell_alias: "default"   				# Main Stemcell Alias
 #### On-Demand Release Deployment Setting ### 
-releases_name :  paasta-pinpoint-monitoring-release                              # Release Name
-internal_networks_name : default                        # Some Network From Your 'bosh cloud-config(cc)'
-external_networks_name : vip
-haproxy_public_ip : 15.165.3.150
-mariadb_disk_type : 30GB # MariaDB Disk Type 'bosh cloud-config(cc)'
-PemSSH : false                                                       #  h_master에서 ssh접근시 사용하는 key file(default : false) 
-```
+releases_name:  "paasta-pinpoint-monitoring-release"	# On-Demand Release Name
+public_networks_name: "vip"				# Pinpoint Public Network Name
+PemSSH: "true"						# h_master에서 모니터링 하려는 VM에 SSH접근시 사용하는 Key File 지정 여부(default:false) 
 
+
+# H-Master
+h_master_azs: ["z3"]					# H-Master 가용 존
+h_master_instances: 1					# H-Master 인스턴스 수
+h_master_vm_type: "small-highmem-16GB"			# H-Master VM 종류
+h_master_network: "default"				# H-Master 네트워크
+h_master_persistent_disk_type: "30GB"			# H-Master 영구 Disk 종류
+
+# COLLECTOR
+collector_azs: ["z3"]					# Collector 가용 존
+collector_instances: 1					# Collector 인스턴스 수
+collector_vm_type: "small-highmem-16GB"			# Collector VM 종류
+collector_network: "default"				# Collector 네트워크
+collector_persistent_disk_type: "30GB"			# Collector 영구 Disk 종류
+
+# PINPOINT
+pinpoint_web_azs: ["z3"]				# Pinpoint 가용 존
+pinpoint_web_instances: 1				# Pinpoint 인스턴스 수
+pinpoint_web_vm_type: "small-highmem-16GB"		# Pinpoint VM 종류
+pinpoint_web_network: "default"				# Pinpoint 네트워크
+pinpoint_web_persistent_disk_type: "30GB"		# Pinpoint 영구 Disk 종류
+
+# HAPROXY
+haproxy_webui_azs: ["z7"]				# HAProxy 가용 존
+haproxy_webui_instances: 1				# HAProxy 인스턴스 수
+haproxy_webui_vm_type: "small-highmem-16GB"		# HAProxy VM 종류
+haproxy_webui_network: "default"			# HAProxy 네트워크
+haproxy_webui_persistent_disk_type: "30GB"		# HAProxy 영구 Disk 종류
 
 
 -	Pinpoint 서비스팩을 배포한다.
 
 - **사용 예시**
 
-		$ cd ~/workspace/paasta-5.0/deployment/paasta-deployment-monitoring/paasta-pinpoint-monitoring
-		$ ./deploy_pinpoint-{클라우드프로바이더}.sh
+		$ cd ${HOME}/workspace/paasta-5.0/deployment/paasta-deployment-monitoring/paasta-pinpoint-monitoring
+		$ ./deploy-pinpoint.sh
 		  Using deployment 'paasta-pinpoint-monitoring'
 
 		  + azs:
