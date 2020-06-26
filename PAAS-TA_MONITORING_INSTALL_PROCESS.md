@@ -17,7 +17,8 @@
 
 metric_url와 syslog_address를 정했으면 PaaS-TA Monitoring 옵션과 필요한 변수를 포함하여 BOSH을 설치한다.
 [BOSH 설치 가이드](https://github.com/okpc579/PaaS-TA-Deployment/blob/master/bosh-deployment/README.md)
-BOSH를 설치하고 common_vars.yml을 작성(작성가이드는 링크)
+
+BOSH의 설치가 끝났으면 BOSH을 설치할때 정보와  common_vars.yml을 작성[common_vars.yml 설정] (https://github.com/okpc579/Monitoring-Deployment/blob/master/PAAS-TA_MONITORING_INSTALL_PROCESS.md#12-common_varsyml-%EC%84%A4%EC%A0%95)
 
 그리고 파스타 설치시 옵션파일이랑 변수를 넣어서 설치를 한다(설치 가이드 링크)
 
