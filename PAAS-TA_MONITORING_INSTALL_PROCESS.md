@@ -34,7 +34,9 @@ Monitoring을 할 환경을 정하여 옵션으로 Pinpoint(SaaS), Container Ser
 
 deploy-openstack.sh 에 모니터링 관련 옵션을 추가하고
 ```
-syslog.yml, use-compiled-releases-syslog.yml(선택), paasta-addon/paasta-monitoring-agent.yml
+-o syslog.yml
+-o use-compiled-releases-syslog.yml(선택)
+-o paasta-addon/paasta-monitoring-agent.yml
 ```
 각 {IaaS}-vars.yml에 하단의 정보를 추가해야 한다.
 ```
