@@ -7,10 +7,10 @@
 
 ## <div id='1'/>1.	Logsearch 설치
 
-PaaS-TA VM Log수집을 위해서는 logsearch가 설치되어야 한다. 
+PaaS-TA VM Log수집을 위해서는 Logsearch가 설치되어야 한다. 
 
 ```
-$ cd ~/workspace/paasta-5.0/deployment/paasta-deployment-monitoring/paasta-monitoring
+$ cd ${HOME}/workspace/paasta-5.0/deployment/paasta-deployment-monitoring/paasta-monitoring
 ```
 
 ### <div id='2'/>1.1.	logsearch-deployment.yml
@@ -366,70 +366,70 @@ system_domain은 PaaS-TA 설치시 설정했던 system_domain을 입력하면 �
 router_ip는 ls-router가 설치된 azs에서 정의한 cider값의 적당한 IP를 지정한다.
 
 ```
-bosh –e {director_name} -d logsearch deploy logsearch-deployment.yml \
-  -v inception_os_user_name=ubuntu \  # home user명 (release file path와 연관성 있음. /home/ubuntu/paasta-5.0 이하 release 파일들의 경로 설정)
-  -v router_ip=10.20.50.34 \   # 배포한 ls-router VM의 private ip
-  -v system_domain={system_domain}  #PaaS-TA 설치시 설정한 System Domain
+bosh –e {director_name} -d logsearch deploy logsearch-deployment.yml \				
+				 -o use-compiled-releases-logsearch.yml \
+					-l logsearch-vars.yml \
+					-l ../../common/common_vars.yml
 ```
 
 ### <div id='4'/>1.2. logsearch-vars.yml
 
 ```
 # SERVICE VARIABLE
-inception_os_user_name: "ubuntu"					# Deployment Name
+inception_os_user_name: "ubuntu"								# Deployment Name
 
 # STEMCELL
-stemcell_os: "ubuntu-xenial"							# Stemcell OS
-stemcell_version: "315.36"								# Stemcell Version
+stemcell_os: "ubuntu-xenial"												# Stemcell OS
+stemcell_version: "315.36"														# Stemcell Version
 
 # ELASTICSEARCH-MASTER
-elasticsearch_master_azs: ["z5"]					# Elasticsearch-Master 가용 존
-elasticsearch_master_instances: 1					# Elasticsearch-Master 인스턴스 수
+elasticsearch_master_azs: ["z5"]								# Elasticsearch-Master 가용 존
+elasticsearch_master_instances: 1							# Elasticsearch-Master 인스턴스 수
 elasticsearch_master_vm_type: "medium"		# Elasticsearch-Master VM 종류
-elasticsearch_master_network: "default"		# Elasticsearch-Master 네트워크
+elasticsearch_master_network: "default"	# Elasticsearch-Master 네트워크
 elasticsearch_master_persistent_disk_type: "10GB"		# Elasticsearch-Master 영구 Disk 종류
 
 
 # CLUSTER-MONITOR
-cluster_monitor_azs: ["z6"]								# Cluster-Monitor 가용 존
-cluster_monitor_instances: 1							# Cluster-Monitor 인스턴스 수
-cluster_monitor_vm_type: "medium"					# Cluster-Monitor VM 종류
-cluster_monitor_network: "default"				# Cluster-Monitor 네트워크
-cluster_monitor_persistent_disk_type: "10GB"			# Cluster-Monitor 영구 Disk 종류
+cluster_monitor_azs: ["z6"]														# Cluster-Monitor 가용 존
+cluster_monitor_instances: 1													# Cluster-Monitor 인스턴스 수
+cluster_monitor_vm_type: "medium"								# Cluster-Monitor VM 종류
+cluster_monitor_network: "default"							# Cluster-Monitor 네트워크
+cluster_monitor_persistent_disk_type: "10GB"						# Cluster-Monitor 영구 Disk 종류
 
 
 # MAINTENANCE
-maintenance_azs: ["z5", "z6"]							# Maintenance 가용 존
-maintenance_instances: 1									# Maintenance 인스턴스 수
-maintenance_vm_type: "medium"							# Maintenance VM 종류
-maintenance_network: "default"						# Maintenance 네트워크
+maintenance_azs: ["z5", "z6"]												# Maintenance 가용 존
+maintenance_instances: 1																	# Maintenance 인스턴스 수
+maintenance_vm_type: "medium"												# Maintenance VM 종류
+maintenance_network: "default"											# Maintenance 네트워크
 
 # ELASTICSEARCH-DATA
-elasticsearch_data_azs: ["z5", "z6"]			# Elasticsearch-Data 가용 존
-elasticsearch_data_instances: 2						# Elasticsearch-Data 인스턴스 수
-elasticsearch_data_vm_type: "medium"			# Elasticsearch-Data VM 종류
-elasticsearch_data_network: "default"			# Elasticsearch-Data 네트워크
+elasticsearch_data_azs: ["z5", "z6"]					# Elasticsearch-Data 가용 존
+elasticsearch_data_instances: 2										# Elasticsearch-Data 인스턴스 수
+elasticsearch_data_vm_type: "medium"					# Elasticsearch-Data VM 종류
+elasticsearch_data_network: "default"				# Elasticsearch-Data 네트워크
 elasticsearch_data_persistent_disk_type: "30GB"		# Elasticsearch-Data 영구 Disk 종류
 
 # KIBANA
-kibana_azs: ["z5"]												# Kibana 가용 존
-kibana_instances: 1												# Kibana 인스턴스 수
-kibana_vm_type: "medium"									# Kibana VM 종류
-kibana_network: "default"									# Kibana 네트워크
-kibana_persistent_disk_type: "5GB"				# Kibana 영구 Disk 종류
+kibana_azs: ["z5"]																							# Kibana 가용 존
+kibana_instances: 1																						# Kibana 인스턴스 수
+kibana_vm_type: "medium"																	# Kibana VM 종류
+kibana_network: "default"																# Kibana 네트워크
+kibana_persistent_disk_type: "5GB"							# Kibana 영구 Disk 종류
 
 # INGESTOR
-ingestor_azs: ["z4", "z6"]								# Ingestor 가용 존
-ingestor_instances: 2											# Ingestor 인스턴스 수
-ingestor_vm_type: "medium"								# Ingestor VM 종류
-ingestor_network: "default"								# Ingestor 네트워크
-ingestor_persistent_disk_type: "10GB"			# Ingestor 영구 Disk 종류
+ingestor_azs: ["z4", "z6"]															# Ingestor 가용 존
+ingestor_instances: 2																				# Ingestor 인스턴스 수
+ingestor_vm_type: "medium"															# Ingestor VM 종류
+ingestor_network: "default"														# Ingestor 네트워크
+ingestor_persistent_disk_type: "10GB"				# Ingestor 영구 Disk 종류
 
 # LS-ROUTER
-ls_router_azs: ["z4"]			    						# LS-Router 가용 존
-ls_router_instances: 1		  							# LS-Router 인스턴스 수
-ls_router_vm_type: "small"								# LS-Router VM 종류
-ls_router_network: "default"							# LS-Router 네트워크
+ls_router_azs: ["z4"]			    													# LS-Router 가용 존
+ls_router_instances: 1		  															# LS-Router 인스턴스 수
+ls_router_vm_type: "small"															# LS-Router VM 종류
+ls_router_network: "default"													# LS-Router 네트워크
 ```
 
 
