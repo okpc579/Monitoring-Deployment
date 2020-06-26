@@ -564,7 +564,7 @@ haproxy_webui_instances: 1				# HAProxy 인스턴스 수
 haproxy_webui_vm_type: "small-highmem-16GB"		# HAProxy VM 종류
 haproxy_webui_network: "default"			# HAProxy 네트워크
 haproxy_webui_persistent_disk_type: "30GB"		# HAProxy 영구 Disk 종류
-
+```
 
 -	Pinpoint 서비스팩을 배포한다.
 
