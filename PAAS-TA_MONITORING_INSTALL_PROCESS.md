@@ -19,8 +19,7 @@ metric_url와 syslog_address를 정했다면 PaaS-TA Monitoring 옵션과 필요
 옵션과 필요한 변수는 하단의 [BOSH 설치](https://github.com/okpc579/Monitoring-Deployment/blob/master/PAAS-TA_MONITORING_INSTALL_PROCESS.md#2)를 확인하거나
 [BOSH 설치 가이드](https://github.com/okpc579/PaaS-TA-Deployment/blob/master/bosh-deployment/README.md)에서 확인할 수 있다.
 
-BOSH의 설치가 끝났으면 BOSH을 설치할때 정보와 common_vars.yml을 작성해야 한다.
-[common_vars.yml 설정](https://github.com/okpc579/Monitoring-Deployment/blob/master/PAAS-TA_MONITORING_INSTALL_PROCESS.md#12-common_varsyml-%EC%84%A4%EC%A0%95)
+BOSH의 설치가 끝났으면 BOSH을 설치할때 정보와 [common_vars.yml을 작성](https://github.com/okpc579/Monitoring-Deployment/blob/master/PAAS-TA_MONITORING_INSTALL_PROCESS.md#12-common_varsyml-%EC%84%A4%EC%A0%95)해야 한다.
 
 common_vars.yml 작성이 끝났다면 PaaS-TA Monitoring 옵션과 필요한 변수를 포함하여 BOSH을 설치한다.
 옵션과 필요한 변수는 하단의 [통합 Monitoring을 적용한 PaaS-TA 5.0 설치](https://github.com/okpc579/Monitoring-Deployment/blob/master/PAAS-TA_MONITORING_INSTALL_PROCESS.md#4)를 확인하거나
