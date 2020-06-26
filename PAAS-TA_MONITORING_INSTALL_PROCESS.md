@@ -30,15 +30,16 @@ Monitoring을 할 환경을 정하여 옵션으로 Pinpoint(SaaS), Container Ser
 
 ## <div id='2'/>1.1. BOSH 설치
 
-BOSH 설치시 SYSLOG, MONITORING-AGENT 추가하고 COMMON_VARS에 이하의 내용을 추가하는걸 언급
-옵션
-	-o syslog.yml \
-	-o use-compiled-releases-syslog.yml \
-	-o paasta-addon/paasta-monitoring-agent.yml \
-metric_url: "10.0.161.101"			# 모니터링 InfluxDB IP
-syslog_address: "10.0.121.100"            	# Logsearch의 ls-router IP
-syslog_port: "2514"                          	# Logsearch의 ls-router Port
-syslog_transport: "relp"                        # Logsearch Protocol
+deploy-openstack.sh 에 모니터링 관련 옵션인
+syslog.yml, use-compiled-releases-syslog.yml(선택), paasta-addon/paasta-monitoring-agent.yml을 추가하고
+각 {IaaS}-vars.yml에 하단의 정보를 추가해야 한다.
+metric_url:		# PaaS-TA Monitoring InfluxDB IP
+syslog_address: 	# Logsearch의 ls-router IP
+syslog_port: 		# Logsearch의 ls-router Port( e.g. "2514")
+syslog_transport: 	# Logsearch Protocol( e.g. "relp")
+
+
+
 
 ## <div id='3'/>1.2. common_vars.yml 설정
 
