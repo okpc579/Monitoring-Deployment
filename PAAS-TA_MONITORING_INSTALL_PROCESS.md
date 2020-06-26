@@ -15,10 +15,12 @@
 
 최종적으로 PaaS-TA Monitoring 설치를 위해서는 우선 PaaS-TA Monitoring 설치시에 IaaS의 네트워크에 맞춰서 후에 설치할 PaaS-TA Monitoring InfluxDB IP인 metric_url와 Logsearch의 ls-router IP인 syslog_address를 미리 정해둘 필요가 있다.
 
-metric_url와 syslog_address를 정했으면 PaaS-TA Monitoring 옵션과 필요한 변수를 포함하여 BOSH을 설치한다.
-[BOSH 설치 가이드](https://github.com/okpc579/PaaS-TA-Deployment/blob/master/bosh-deployment/README.md)
+metric_url와 syslog_address를 정했다면 PaaS-TA Monitoring 옵션과 필요한 변수를 포함하여 BOSH을 설치한다.
+옵션과 필요한 변수는 하단의 [BOSH 설치](https://github.com/okpc579/Monitoring-Deployment/blob/master/PAAS-TA_MONITORING_INSTALL_PROCESS.md#2)를 확인하거나
+[BOSH 설치 가이드](https://github.com/okpc579/PaaS-TA-Deployment/blob/master/bosh-deployment/README.md)에서 확인할 
 
-BOSH의 설치가 끝났으면 BOSH을 설치할때 정보와  common_vars.yml을 작성[common_vars.yml 설정] (https://github.com/okpc579/Monitoring-Deployment/blob/master/PAAS-TA_MONITORING_INSTALL_PROCESS.md#12-common_varsyml-%EC%84%A4%EC%A0%95)
+BOSH의 설치가 끝났으면 BOSH을 설치할때 정보와  common_vars.yml을 작성
+[common_vars.yml 설정](https://github.com/okpc579/Monitoring-Deployment/blob/master/PAAS-TA_MONITORING_INSTALL_PROCESS.md#12-common_varsyml-%EC%84%A4%EC%A0%95)
 
 그리고 파스타 설치시 옵션파일이랑 변수를 넣어서 설치를 한다(설치 가이드 링크)
 
