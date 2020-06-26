@@ -38,9 +38,9 @@ syslog.yml, use-compiled-releases-syslog.yml(선택), paasta-addon/paasta-monito
 ```
 각 {IaaS}-vars.yml에 하단의 정보를 추가해야 한다.
 ```
-metric_url:		# PaaS-TA Monitoring InfluxDB IP<br>
-syslog_address: 	# Logsearch의 ls-router IP<br>
-syslog_port: 		# Logsearch의 ls-router Port( e.g. "2514")<br>
+metric_url:		# PaaS-TA Monitoring InfluxDB IP
+syslog_address: 	# Logsearch의 ls-router IP
+syslog_port: 		# Logsearch의 ls-router Port( e.g. "2514")
 syslog_transport: 	# Logsearch Protocol( e.g. "relp")
 ```
 
