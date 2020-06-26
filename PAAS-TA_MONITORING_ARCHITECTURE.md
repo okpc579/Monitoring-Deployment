@@ -12,20 +12,6 @@
     * [SaaS Monitoring Architecture](#10)
     * [SaaS 자원정보 수집 Architecture](#11)
     * [IaaS Monitoring Architecture](#11-1) 
-3. [PaaS-TA Monitoring 설치](#12)
-    * [Pre-requsite](#13)
-    * [PaaS-TA 5.0 Monitoring 설치 파일 다운로드](#14)
-    * [PaaS-TA Monitoring 설치환경](#15)
-    * [Logsearch 설치](#16)
-        *  [logsearch-deployment.yml](#17)
-        *  [deploy.sh](#18)
-    * [PaaS-TA Pinpoint Monitoring release 설치](#19)    
-    * [PaaS-TA Container service 설치 및 Prometheus Agent 정보확인](#19-1)
-    * [PaaS-TA Monitoring 설치](#20)
-        *  [paasta-monitoring.yml](#21)
-        *  [deploy-paasta-monitoring.sh](#22)
-    * [PaaS-TA Monitoring IaaS 설치](#23)    
-    * [PaaS-TA Monitoring dashboard 접속](#24)
 
 # <div id='1'/>1.  문서 개요 
 
