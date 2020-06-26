@@ -551,19 +551,19 @@ collector_vm_type: "small-highmem-16GB"			# Collector VM 종류
 collector_network: "default"				# Collector 네트워크
 collector_persistent_disk_type: "30GB"			# Collector 영구 Disk 종류
 
-# PINPOINT
-pinpoint_web_azs: ["z3"]				# Pinpoint 가용 존
-pinpoint_web_instances: 1				# Pinpoint 인스턴스 수
-pinpoint_web_vm_type: "small-highmem-16GB"		# Pinpoint VM 종류
-pinpoint_web_network: "default"				# Pinpoint 네트워크
-pinpoint_web_persistent_disk_type: "30GB"		# Pinpoint 영구 Disk 종류
+# PINPOINT-WEB
+pinpoint_web_azs: ["z3"]				# Pinpoint-WEB 가용 존
+pinpoint_web_instances: 1				# Pinpoint-WEB 인스턴스 수
+pinpoint_web_vm_type: "small-highmem-16GB"		# Pinpoint-WEB VM 종류
+pinpoint_web_network: "default"				# Pinpoint-WEB 네트워크
+pinpoint_web_persistent_disk_type: "30GB"		# Pinpoint-WEB 영구 Disk 종류
 
-# HAPROXY
-haproxy_webui_azs: ["z7"]				# HAProxy 가용 존
-haproxy_webui_instances: 1				# HAProxy 인스턴스 수
-haproxy_webui_vm_type: "small-highmem-16GB"		# HAProxy VM 종류
-haproxy_webui_network: "default"			# HAProxy 네트워크
-haproxy_webui_persistent_disk_type: "30GB"		# HAProxy 영구 Disk 종류
+# HAPROXY-WEBUI
+haproxy_webui_azs: ["z7"]				# HAProxy-WEBUI 가용 존
+haproxy_webui_instances: 1				# HAProxy-WEBUI 인스턴스 수
+haproxy_webui_vm_type: "small-highmem-16GB"		# HAProxy-WEBUI VM 종류
+haproxy_webui_network: "default"			# HAProxy-WEBUI 네트워크
+haproxy_webui_persistent_disk_type: "30GB"		# HAProxy-WEBUI 영구 Disk 종류
 ```
 
 -	Pinpoint 서비스팩을 배포한다.
