@@ -1,4 +1,11 @@
-## <div id='16'/>1.	Logsearch 설치
+## Table of Contents
+
+1. [Logsearch 설치](#1)
+  * [logsearch-deployment.yml](#2)
+  * [deploy-logsearch.sh](#3)
+  * [logsearch-vars.yml](#4)
+
+## <div id='1'/>1.	Logsearch 설치
 
 PaaS-TA VM Log수집을 위해서는 logsearch가 설치되어야 한다. 
 
@@ -6,7 +13,7 @@ PaaS-TA VM Log수집을 위해서는 logsearch가 설치되어야 한다.
 $ cd ~/workspace/paasta-5.0/deployment/paasta-deployment-monitoring/paasta-monitoring
 ```
 
-### <div id='17'/>1.1.	logsearch-deployment.yml
+### <div id='2'/>1.1.	logsearch-deployment.yml
 logsearch-deployment.yml에는 ls-router, cluster-monitor, elasticsearch_data, elastic_master, kibana, mainternance 의 명세가 정의되어 있다. 
 
 ```
@@ -352,7 +359,7 @@ stemcells:
   version: "315.36"
 ```
 
-### <div id='18'/>1.2. deploy-logsearch.sh
+### <div id='3'/>1.2. deploy-logsearch.sh
 
 deploy.sh의 –v 의 inception_os_user_name, router_ip, system_domain 및 director_name을 시스템 상황에 맞게 설정한다.
 system_domain은 PaaS-TA 설치시 설정했던 system_domain을 입력하면 된다.
@@ -364,6 +371,67 @@ bosh –e {director_name} -d logsearch deploy logsearch-deployment.yml \
   -v router_ip=10.20.50.34 \   # 배포한 ls-router VM의 private ip
   -v system_domain={system_domain}  #PaaS-TA 설치시 설정한 System Domain
 ```
+
+### <div id='4'/>1.2. logsearch-vars.yml
+
+```
+# SERVICE VARIABLE
+inception_os_user_name: "ubuntu"					# Deployment Name
+
+# STEMCELL
+stemcell_os: "ubuntu-xenial"							# Stemcell OS
+stemcell_version: "315.36"								# Stemcell Version
+
+# ELASTICSEARCH-MASTER
+elasticsearch_master_azs: ["z5"]					# Elasticsearch-Master 가용 존
+elasticsearch_master_instances: 1					# Elasticsearch-Master 인스턴스 수
+elasticsearch_master_vm_type: "medium"		# Elasticsearch-Master VM 종류
+elasticsearch_master_network: "default"		# Elasticsearch-Master 네트워크
+elasticsearch_master_persistent_disk_type: "10GB"		# Elasticsearch-Master 영구 Disk 종류
+
+
+# CLUSTER-MONITOR
+cluster_monitor_azs: ["z6"]								# Cluster-Monitor 가용 존
+cluster_monitor_instances: 1							# Cluster-Monitor 인스턴스 수
+cluster_monitor_vm_type: "medium"					# Cluster-Monitor VM 종류
+cluster_monitor_network: "default"				# Cluster-Monitor 네트워크
+cluster_monitor_persistent_disk_type: "10GB"			# Cluster-Monitor 영구 Disk 종류
+
+
+# MAINTENANCE
+maintenance_azs: ["z5", "z6"]							# Maintenance 가용 존
+maintenance_instances: 1									# Maintenance 인스턴스 수
+maintenance_vm_type: "medium"							# Maintenance VM 종류
+maintenance_network: "default"						# Maintenance 네트워크
+
+# ELASTICSEARCH-DATA
+elasticsearch_data_azs: ["z5", "z6"]			# Elasticsearch-Data 가용 존
+elasticsearch_data_instances: 2						# Elasticsearch-Data 인스턴스 수
+elasticsearch_data_vm_type: "medium"			# Elasticsearch-Data VM 종류
+elasticsearch_data_network: "default"			# Elasticsearch-Data 네트워크
+elasticsearch_data_persistent_disk_type: "30GB"		# Elasticsearch-Data 영구 Disk 종류
+
+# KIBANA
+kibana_azs: ["z5"]												# Kibana 가용 존
+kibana_instances: 1												# Kibana 인스턴스 수
+kibana_vm_type: "medium"									# Kibana VM 종류
+kibana_network: "default"									# Kibana 네트워크
+kibana_persistent_disk_type: "5GB"				# Kibana 영구 Disk 종류
+
+# INGESTOR
+ingestor_azs: ["z4", "z6"]								# Ingestor 가용 존
+ingestor_instances: 2											# Ingestor 인스턴스 수
+ingestor_vm_type: "medium"								# Ingestor VM 종류
+ingestor_network: "default"								# Ingestor 네트워크
+ingestor_persistent_disk_type: "10GB"			# Ingestor 영구 Disk 종류
+
+# LS-ROUTER
+ls_router_azs: ["z4"]			    						# LS-Router 가용 존
+ls_router_instances: 1		  							# LS-Router 인스턴스 수
+ls_router_vm_type: "small"								# LS-Router VM 종류
+ls_router_network: "default"							# LS-Router 네트워크
+```
+
 
 deploy.sh을 실행하여 logsearch를 설치 한다.
 
