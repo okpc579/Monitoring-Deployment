@@ -27,17 +27,16 @@ update:
   update_watch_time: 5000-1200000
 instance_groups:
 - name: elasticsearch_master
-  azs:
-  - z5
-  instances: 1
-  persistent_disk_type: 10GB
-  vm_type: medium
+  azs: ((elasticsearch_master_azs))
+  instances: ((elasticsearch_master_instances))
+  persistent_disk_type: ((elasticsearch_master_persistent_disk_type))
+  vm_type: ((elasticsearch_master_vm_type))
   stemcell: default
   update:
     max_in_flight: 1
     serial: true
   networks:
-  - name: default
+  - name: ((elasticsearch_master_network))
   jobs:
   - name: elasticsearch
     release: logsearch
@@ -78,17 +77,16 @@ instance_groups:
           - "elastic.((system_domain))"
 
 - name: cluster_monitor
-  azs:
-  - z6
-  instances: 1
-  persistent_disk_type: 10GB
-  vm_type: medium
+  azs: ((cluster_monitor_azs))
+  instances: ((cluster_monitor_instances))
+  persistent_disk_type: ((cluster_monitor_persistent_disk_type))
+  vm_type: ((cluster_monitor_vm_type))
   stemcell: default
   update:
     max_in_flight: 1
     serial: true
   networks:
-  - name: default
+  - name: ((cluster_monitor_network))
   jobs:
   - name: elasticsearch
     release: logsearch
@@ -138,16 +136,14 @@ instance_groups:
         memory_limit: 30
         wait_for_templates: [shards-and-replicas]
 - name: maintenance
-  azs:
-  - z5
-  - z6
-  instances: 1
-  vm_type: medium 
+  azs: ((maintenance_azs))
+  instances: ((maintenance_instances))
+  vm_type: ((maintenance_vm_type)) 
   stemcell: default
   update:
     serial: true
   networks:
-  - name: default
+  - name: ((maintenance_network))
   jobs:
   - name: elasticsearch_config
     release: logsearch
@@ -179,18 +175,16 @@ instance_groups:
         - file: /var/vcap/sys/log/curator/curator.log
           service: curator
 - name: elasticsearch_data
-  azs:
-  - z5
-  - z6
-  instances: 2
-  persistent_disk_type: 30GB
-  vm_type: medium 
+  azs: ((elasticsearch_data_azs))
+  instances: ((elasticsearch_data_instances))
+  persistent_disk_type: ((elasticsearch_data_persistent_disk_type))
+  vm_type: ((elasticsearch_data_vm_type)) 
   stemcell: default
   update:
     max_in_flight: 1
     serial: true
   networks:
-  - name: default
+  - name: ((elasticsearch_data_network))
   jobs:
   - name: elasticsearch
     release: logsearch
@@ -216,15 +210,13 @@ instance_groups:
         - file: /var/vcap/sys/log/cerebro/cerebro.stderr.log
           service: cerebro
 - name: kibana
-  azs:
-  - z5
-  instances: 1
-  persistent_disk_type: 5GB
-  vm_type: medium 
+  azs: ((kibana_azs))
+  instances: ((kibana_instances))
+  persistent_disk_type: ((kibana_persistent_disk_type))
+  vm_type: ((kibana_vm_type)) 
   stemcell: default
   networks:
-  - name: default
-
+  - name: ((kibana_network))
   jobs:
   - name: elasticsearch
     release: logsearch
@@ -262,15 +254,13 @@ instance_groups:
         - file: /var/vcap/sys/log/cerebro/cerebro.stderr.log
           service: cerebro
 - name: ingestor
-  azs:
-  - z4
-  - z6
-  instances: 2
-  persistent_disk_type: 10GB
-  vm_type: medium 
+  azs: ((ingestor_azs))
+  instances: ((ingestor_instances))
+  persistent_disk_type: ((ingestor_persistent_disk_type))
+  vm_type: ((ingestor_vm_type)) 
   stemcell: default
   networks:
-  - name: default
+  - name: ((ingestor_network))
   jobs:
   - name: elasticsearch
     release: logsearch
@@ -307,15 +297,14 @@ instance_groups:
         - file: /var/vcap/sys/log/ingestor_syslog/ingestor_syslog.stderr.log
           service: ingestor
 - name: ls-router
-  azs:
-  - z4
-  instances: 1
-  vm_type: small
+  azs: ((ls_router_azs))
+  instances: ((ls_router_instances))
+  vm_type: ((ls_router_vm_type))
   stemcell: default
   networks:
-  - name: default
+  - name: ((ls_router_network))
     static_ips: 
-    - ((router_ip)) 
+    - ((syslog_address)) 
   jobs:
   - name: haproxy
     release: logsearch
@@ -348,15 +337,17 @@ variables:
 
 releases:
 - name: logsearch
-  url: file:///home/((inception_os_user_name))/workspace/paasta-5.0/release/paasta-monitoring/logsearch-boshrelease-209.0.1.tgz
+  url: https://bosh.io/d/github.com/cloudfoundry-community/logsearch-boshrelease?v=209.0.1
   version: "209.0.1"
+  sha1: 038b039dc30d71a4c3ed4570035867797538edef
 - name: logsearch-for-cloudfoundry
-  url: file:///home/((inception_os_user_name))/workspace/paasta-5.0/release/paasta-monitoring/logsearch-for-cloudfoundry-207.0.1.tgz
+  url: https://bosh.io/d/github.com/cloudfoundry-community/logsearch-for-cloudfoundry?v=207.0.1
   version: "207.0.1"
+  sha1: 599d238be5281f5a2ef903936b9ef868611baab1
 stemcells:
 - alias: default
-  os: ubuntu-xenial
-  version: "315.36"
+  os: ((stemcell_os)) 
+  version: ((stemcell_version)) 
 ```
 
 ### <div id='3'/>1.2. deploy-logsearch.sh
