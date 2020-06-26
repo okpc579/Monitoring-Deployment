@@ -28,16 +28,6 @@ common_vars.yml 작성이 끝났다면 PaaS-TA Monitoring 옵션과 필요한 �
 그리고 PaaS-TA VM 들을 확인하기 위한 Logsearch를 설치하고 
 Monitoring을 할 환경을 정하여 옵션으로 Pinpoint(SaaS), Container Service(CaaS), Monasca(IaaS)를 설치 후 PaaS-TA Monitoring을 설치한다.
 
-
-
-모니터링 하고싶은 환경에따라 옵셔널 릴리즈 파일을 설치후 파스타 모니터링 설치
-(각 가이드 링크)
-
-
-큰 순서는 BOSH 설치한 뒤 COMMON_VARS.YML 작성하고 PAAS-TA를 설치한뒤, LOGSEARCH를 설치하고,
-옵셔널로 PINPOINT, CONTAINER SERVICE, MONASCA 를 설치후 PAAS-TA MONITORING 설치
-
-
 ## <div id='2'/>1.1. BOSH 설치
 
 BOSH 설치시 SYSLOG, MONITORING-AGENT 추가하고 COMMON_VARS에 이하의 내용을 추가하는걸 언급
