@@ -1,4 +1,4 @@
-## <div id='16'/>3.4.	Logsearch 설치
+## <div id='16'/>1.	Logsearch 설치
 
 PaaS-TA VM Log수집을 위해서는 logsearch가 설치되어야 한다. 
 
@@ -6,7 +6,7 @@ PaaS-TA VM Log수집을 위해서는 logsearch가 설치되어야 한다.
 $ cd ~/workspace/paasta-5.0/deployment/paasta-deployment-monitoring/paasta-monitoring
 ```
 
-### <div id='17'/>3.4.1.	logsearch-deployment.yml
+### <div id='17'/>1.1.	logsearch-deployment.yml
 logsearch-deployment.yml에는 ls-router, cluster-monitor, elasticsearch_data, elastic_master, kibana, mainternance 의 명세가 정의되어 있다. 
 
 ```
@@ -352,7 +352,7 @@ stemcells:
   version: "315.36"
 ```
 
-### <div id='18'/>3.4.2. deploy-logsearch.sh
+### <div id='18'/>1.2. deploy-logsearch.sh
 
 deploy.sh의 –v 의 inception_os_user_name, router_ip, system_domain 및 director_name을 시스템 상황에 맞게 설정한다.
 system_domain은 PaaS-TA 설치시 설정했던 system_domain을 입력하면 된다.
