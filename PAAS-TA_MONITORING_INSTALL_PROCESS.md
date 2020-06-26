@@ -32,13 +32,13 @@ Monitoring을 할 환경을 정하여 옵션으로 Pinpoint(SaaS), Container Ser
 
 ## <div id='2'/>1.1. BOSH 설치
 
-deploy-openstack.sh 에 모니터링 관련 옵션을 추가하고
+deploy-openstack.sh 에 모니터링 관련 옵션을 추가한다.
 ```
 -o syslog.yml
 -o use-compiled-releases-syslog.yml(선택)
 -o paasta-addon/paasta-monitoring-agent.yml
 ```
-각 {IaaS}-vars.yml에 하단의 정보를 추가해야 한다.
+각 {IaaS}-vars.yml에 하단의 정보를 추가한다.
 ```
 metric_url:		# PaaS-TA Monitoring InfluxDB IP
 syslog_address: 	# Logsearch의 ls-router IP
