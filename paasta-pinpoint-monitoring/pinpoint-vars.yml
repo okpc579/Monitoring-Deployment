@@ -2,7 +2,7 @@
 
 ---
 ### On-Demand Bosh Deployment Name Setting ###
-deployment_name: "paasta-pinpoint-monitoring"		#On-Demand Deployment Name
+deployment_name: "paasta-pinpoint-monitoring"		# On-Demand Deployment Name
 #### Main Stemcells Setting ###
 stemcell_os: "ubuntu-xenial"				# Deployment Main Stemcell OS
 stemcell_version: "315.36"				# Main Stemcell Version
