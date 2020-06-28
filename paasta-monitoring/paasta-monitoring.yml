@@ -14,7 +14,7 @@ stemcells:
 
 releases:
 - name: paasta-monitoring-release
-  sha1: 2e66b93860d09d93b01d1eab87fa936d4c41f426 
+  sha1: 458773bc0973336447cf227828f17cce57906d14 
   version: "5.0"
   url: http://45.248.73.44/index.php/s/42RtMHzoNmpWbSZ/download
 - name: bpm
@@ -148,8 +148,8 @@ instance_groups:
         paasta:
           apiurl: http://api.((system_domain))
           uaaurl: https://uaa.((system_domain))
-          username: ((paasta_username))
-          password: ((paasta_password))
+          username: ((paasta_admin_username))
+          password: ((paasta_admin_password))
 
 - name: caas-monitoring-batch
   azs: ((caas_monitoring_batch_azs))
@@ -215,7 +215,7 @@ instance_groups:
           send: ((mail_enable))
           tls: ((mail_tls_enable))
         pinpoint:
-          url: ((pinpoint_ip)):8079
+          url: ((saas_monitoring_url)):8079
 
 - name: monitoring-web
   azs: ((monitoring_web_azs))
@@ -257,7 +257,7 @@ instance_groups:
           url: ((kubernetes_ip)):8443
           token: ((kubernetes_token))
         pinpoint:
-          url: ((pinpoint_ip)):8079
+          url: ((saas_monitoring_url)):8079
         pinpointWas:
           url: ((pinpoint_was_ip)):8080
         caasbroker:
