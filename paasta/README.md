@@ -502,10 +502,6 @@ ${HOME}/workspace/paasta-5.0/deployment/paasta-deployment-monitoring 이하 디�
 <td>VMware vSphere 환경에 PaaS-TA 설치를 위한 Shell Script 파일</td>
 </tr>
 <tr>
-<td>deploy-bosh-lite.sh</td>
-<td>BOSH-LITE 환경에 PaaS-TA 설치를 위한 Shell Script 파일</td>
-</tr>
-<tr>
 <td>common_vars.yml</td>
 <td>PaaS-TA 및 각종 Service 설치시 적용하는 공통 변수 설정 파일</td>
 </tr>
@@ -528,10 +524,6 @@ ${HOME}/workspace/paasta-5.0/deployment/paasta-deployment-monitoring 이하 디�
 <tr>
 <td>vsphere-vars.yml</td>
 <td>VMware vSphere 환경에 PaaS-TA 설치시 적용하는 변숫값 설정 파일</td>
-</tr>
-<tr>
-<td>bosh-lite-vars.yml</td>
-<td>BOSH-LITE 환경에 PaaS-TA 설치시 적용하는 변숫값 설정 파일</td>
 </tr>
 </table>
 PaaS-TA 설치 시 명령어는 deploy로 시작한다. BOSH 명령어로 설치가 가능하며, IaaS 환경에 따라 Option이 달라진다.
