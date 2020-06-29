@@ -925,39 +925,39 @@ haproxy_network: "default"		# HAProxy 네트워크
 
 
 
-### <div id='1029'/>3.7.8. PaaS-TA Variable List
+### <div id='1029'/>3.7.8. PaaS-TA 그외 Variable List
 
 1. uaa_login_logout_redirect_parameter_whitelist : 포탈 페이지 이동을 위한 uaa redirect whitelist 등록 변수
 ```
-ex) uaa_login_logout_redirect_parameter_whitelist=["포탈url","포탈url/callback"," 포탈url /login"]
+ex) uaa_login_logout_redirect_parameter_whitelist=["포탈 URL","포탈 URL/callback"," 포탈 URL/login"]
 ```
-> xip.io : 구글에서 지원해주는 임시 도메인, 기본 dns 서버가 8.8.8.8로 설정되어야 한다.
+> xip.io : 구글에서 지원해주는 임시 도메인, 기본 DNS 서버가 8.8.8.8로 설정되어야 한다.
 > 
-> xip.io를 사용하지 않고 dns를 사용할 경우, whitelist에 포탈 dns, 포탈 dns/callback, 포탈 dns/login 세 개의 항목을 등록해야 한다.
+> xip.io를 사용하지 않고 DNS를 사용할 경우, Whitelist에 포탈 DNS, 포탈 DNS/callback, 포탈 DNS/login 세 개의 항목을 등록해야 한다.
 
-2. uaa_login_links_passwd : uaa 페이지에서 Reset password 버튼 클릭 시 이동하는 링크 주소
+2. uaa_login_links_passwd : UAA 페이지에서 Reset Password 버튼 클릭 시 이동하는 링크 주소
 ![PaaSTa_UAA_LOGIN_Image]
 
-3. uaa_login_links_signup : uaa 페이지에서 Create account 버튼 클릭 시 이동하는 링크 주소
+3. uaa_login_links_signup : UAA 페이지에서 Create Account 버튼 클릭 시 이동하는 링크 주소
 ![PaaSTa_UAA_LOGIN_Image2]
 ```
 ex) uaa_login_links_signup="{PaaS-TA PORTAL URI}/createuser"
 ```
 
-4. uaa_clients_portalclient_redirect_uri : uaa portalclient의 redirect uri 지정 변수, 포탈에서 로그인 버튼 클릭 후 uaa 페이지에서 로그인 성공 시 이동하는 URI
+4. uaa_client_portal_redirect_uri : UAAC Portal Client의 Redirect URI 지정 변수, 포탈에서 로그인 버튼 클릭 후 UAA 페이지에서 로그인 성공 시 이동하는 URI
 ```
-ex) uaa_clients_portalclient_redirect_uri="{PaaS-TA PORTAL URI}, {PaaS-TA PORTAL URI}/callback"
+ex) uaa_client_portal_redirect_uri="{PaaS-TA PORTAL URI}, {PaaS-TA PORTAL URI}/callback"
 ```
 
-5. uaa_clients_portalclinet_secret : uaac portalclient에 접근하기 위한 secret 변수
+5. uaa_client_portal_secret : UAAC Portal Client에 접근하기 위한 Secret 변수
 ```
-ex) uaa_clients_portalclinet_secret="portalclient"
+ex) uaa_client_portal_secret="portalclient"
 
   paasta-portal deploy 파일 안의 portal_client_secret의 값과 일치해야 한다.
 ```
 ![PaaSTa_VALUE_Image]
 
-6. uaa_admin_client_secret : uaac adminclient에 접근하기 위한 secret 변수
+6. uaa_admin_client_secret : UAAC Admin Client에 접근하기 위한 Secret 변수
 ```
 ex) uaa_admin_client_secret="admin-secret"
 ```
@@ -972,12 +972,12 @@ ex) uaa_admin_client_secret="admin-secret"
 
     (2) 설정한 secret 값으로 admin token을 얻을 경우 아래와 같은 결과가 출력된다.
     ```
-    ubuntu@ip-10-0-0-59:~$ uaac target
+    ubuntu@inception:~$ uaac target
     
     Target: https://uaa.54.180.53.80.xip.io
     Context: admin, from client admin
     
-    ubuntu@ip-10-0-0-59:~$ uaac token client get
+    ubuntu@inception:~$ uaac token client get
     Client ID:  admin
     Client secret:  ************
     
@@ -987,7 +987,7 @@ ex) uaa_admin_client_secret="admin-secret"
     ```
 
 ## <div id='1030'/>3.8.  PaaS-TA 설치
-- PaaS-TA 설치 Shell script 파일 실행 (BOSH 로그인 필요)
+- PaaS-TA 설치 Shell Script 파일 실행 (BOSH 로그인 필요)
 
 ```
 $ cd ${HOME}/workspace/paasta-5.0/deployment/paasta-deployment-monitoring
@@ -999,7 +999,7 @@ $ ./deploy-{IaaS}-monitoring.sh
 > $ bosh -e {director_name} vms -d paasta
 
 ```
-ubuntu@ip-10-0-0-59:~$ bosh -e micro-bosh vms -d paasta
+ubuntu@inception:~$ bosh -e micro-bosh vms -d paasta
 Using environment '10.0.1.6' as client 'admin'
 
 Task 134. Done
@@ -1048,7 +1048,7 @@ Succeeded
 ## <div id='1031'/>3.9.  PaaS-TA 로그인 
 
 CF CLI를 설치하고 PaaS-TA에 로그인한다.
-CF api는 PaaS-TA 배포 시 지정했던 System Domain 명을 사용한다.
+CF API는 PaaS-TA 배포 시 지정했던 System Domain 명을 사용한다.
 
 - CF CLI 설치
 
@@ -1065,7 +1065,7 @@ $ cf --version
 > $ cf api api.{system_domain} --skip-ssl-validation
 
 ```
-ubuntu@ip-10-0-0-59:~$ cf api api.54.180.53.80.xip.io --skip-ssl-validation
+ubuntu@inception:~$ cf api api.54.180.53.80.xip.io --skip-ssl-validation
 Setting api endpoint to api.54.180.53.80.xip.io...
 OK
 
@@ -1078,7 +1078,7 @@ api version:    2.138.0
 > $ cf login
 
 ```
-ubuntu@ip-10-0-0-59:~$ cf login
+ubuntu@inception:~$ cf login
 API endpoint: https://api.54.180.53.80.xip.io
 
 Email> admin
