@@ -1,6 +1,6 @@
 ## <div id='13'/>1. Pre-requsite
 
-1. PaaS-TA 5.0 Monitoring을 설치 하기 위해서는 bosh 설치과정에서 언급한 것 처럼 관련 deployment, release , stemcell을 PaaS-TA 사이트에서 다운로드 받아 정해진 경로에 복사 해야 한다.
+1. PaaS-TA 5.0 Monitoring을 설치 하기 위해서는 bosh 설치과정에서 언급한 것 처럼 관련 deployment, release, stemcell을 PaaS-TA 사이트에서 다운로드 받아 정해진 경로에 복사 해야 한다.
 2. PaaS-TA 5.0이 설치되어 있어야 하며, monitoring Agent가 설치되어 있어야 한다.
 3. bosh login이 되어 있어야 한다.
 
