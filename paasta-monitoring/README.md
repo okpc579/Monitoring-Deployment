@@ -10,16 +10,16 @@
 
 > **[PaaS-TA Monitoring Source Github](https://github.com/PaaS-TA/PaaS-TA-Monitoring)**
 
-PaaS-TA 사이트에서 [PaaS-TA 설치 릴리즈] 파일을 다운로드 받아 ~/workspace/paasta-5.0/release 이하 디렉토리에 압축을 푼다. 압출을 풀면 아래 그림과 같이 ~/workspace/paasta-5.0/release/paasta-monitoring 이하 디렉토리가 생성되며 이하에 릴리즈 파일(tgz)이 존재한다.
+PaaS-TA 사이트에서 [PaaS-TA 설치 릴리즈] 파일을 다운로드 받아 ${HOME}/workspace/paasta-5.0/release 이하 디렉토리에 압축을 푼다. 압출을 풀면 아래 그림과 같이 ${HOME}/workspace/paasta-5.0/release/paasta-monitoring 이하 디렉토리가 생성되며 이하에 릴리즈 파일(tgz)이 존재한다.
 
 ![PaaSTa_release_dir_5.0]
 
 ## <div id='15'/>3. PaaS-TA Monitoring 설치환경
 
-~/workspace/paasta-5.0/deployment/paasta-deployment-monitoring 이하 디렉토리에는 paasta-monitoring, paasta-pinpoint-monitoring 디렉토리가 존재한다. Logsearch는 logAgent에서 발생한 Log정보를 수집하여 저장하는 Deployment이다. paasta-monitoring은 PaaS-TA VM에서 발생한 Metric 정보를 수집하여 Monitoring을 실행한다.
+${HOME}/workspace/paasta-5.0/deployment/paasta-deployment-monitoring 이하 디렉토리에는 paasta-monitoring, paasta-pinpoint-monitoring 디렉토리가 존재한다. Logsearch는 logAgent에서 발생한 Log정보를 수집하여 저장하는 Deployment이다. paasta-monitoring은 PaaS-TA VM에서 발생한 Metric 정보를 수집하여 Monitoring을 실행한다.
 
 ```
-$ cd ~/workspace/paasta-5.0/deployment/paasta-deployment-monitoring
+$ cd ${HOME}/workspace/paasta-5.0/deployment/paasta-deployment-monitoring
 ```
 
 ## <div id='20'/>4.	PaaS-TA Monitoring 설치
@@ -27,7 +27,7 @@ $ cd ~/workspace/paasta-5.0/deployment/paasta-deployment-monitoring
 PaaS Monitoring을 위해서 paasta-monitoring이 설치되어야 한다. 
 
 ```
-$ cd ~/workspace/paasta-5.0/deployment/paasta-deployment-monitoring/paasta-monitoring
+$ cd ${HOME}/workspace/paasta-5.0/deployment/paasta-deployment-monitoring/paasta-monitoring
 ```
 
 ### <div id='21'/>4.1.	paasta-monitoring.yml
@@ -380,7 +380,7 @@ admin_password: xxxxxxxxx
 
 deploy-paasta-monitoring.sh을 실행하여 PaaS-TA Monitoring을 설치 한다
 ```
-$ cd ~/workspace/paasta-5.0/deployment/paasta-deployment-monitoring/paasta-monitoring
+$ cd ${HOME}/workspace/paasta-5.0/deployment/paasta-deployment-monitoring/paasta-monitoring
 $ deploy-paasta-monitoring.sh
 ```
 
@@ -400,7 +400,7 @@ $ bosh –e {director_name} vms
  ![PaaSTa_monitoring_login_5.0]
 
 
-member_info에는 사용자가 사용할 ID/PWD를 입력하고 하단 paas-info에는 PaaS-TA admin 권한의 계정을 입력한다. PaaS-TA deploy시 입력한 admin/pwd를 입력해야 한다. 입력후 [인증수행]를 실행후 Joing버튼을 클릭하면 회원가입이 완료된다.
+member_info에는 사용자가 사용할 ID/PWD를 입력하고 하단 paas-info에는 PaaS-TA admin 권한의 계정을 입력한다. PaaS-TA deploy시 입력한 admin/pwd를 입력해야 한다. 입력후 [인증수행]를 실행후 Join버튼을 클릭하면 회원가입이 완료된다.
 
  ![PaaSTa_monitoring_join_5.0]
 
