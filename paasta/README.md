@@ -90,7 +90,7 @@ PaaS-TA 사이트에서 [PaaS-TA Release] 파일을 내려받아 ${HOME}/workspa
 압출을 풀면 아래와 같이 ${HOME}/workspace/paasta-5.0/release/paasta-monitoring 디렉터리가 생성되며 릴리즈 파일(tgz)이 존재한다.
 
 ```
-ubuntu@ip-10-0-0-59:~/workspace/paasta-5.0/release/paasta-monitoring$ ls
+ubuntu@inception:~/workspace/paasta-5.0/release/paasta-monitoring$ ls
 binary-buildpack-1.0.32-ubuntu-xenial-315.36-20190604-002102-261697356.tgz       logsearch-boshrelease-209.0.1.tgz
 bosh-dns-aliases-0.0.3-ubuntu-xenial-315.36-20190604-001210-462767884.tgz        logsearch-for-cloudfoundry-207.0.1.tgz
 bpm-1.1.0-ubuntu-xenial-315.36-20190605-202629-386782261.tgz                     monitoring-release.tgz
@@ -117,7 +117,7 @@ loggregator-agent-3.9-ubuntu-xenial-315.36-20190604-002328-413557573.tgz        
 PaaS-TA 사이트에서 [PaaS-TA Stemcell] 파일을 내려받아 ${HOME}/workspace/paasta-5.0/stemcell 이하 디렉터리에 압축을 푼다. 압출을 풀면 아래와 같이 ${HOME}/workspace/paasta-5.0/stemcell/paasta-monitoring 디렉터리가 생성되며 릴리즈 파일(tgz)이 존재한다.
 
 ```
-ubuntu@ip-10-0-0-59:~/workspace/paasta-5.0/stemcell/paasta-monitoring$ ls
+ubuntu@inception:~/workspace/paasta-5.0/stemcell/paasta-monitoring$ ls
 bosh-stemcell-315.36-alicloud-kvm-ubuntu-xenial-go_agent.tgz  bosh-stemcell-315.36-google-kvm-ubuntu-xenial-go_agent.tgz     bosh-stemcell-315.36-vsphere-esxi-ubuntu-xenial-go_agent.tgz
 bosh-stemcell-315.36-aws-xen-hvm-ubuntu-xenial-go_agent.tgz   bosh-stemcell-315.36-openstack-kvm-ubuntu-xenial-go_agent.tgz  bosh-stemcell-315.36-warden-boshlite-ubuntu-xenial-go_agent.tgz
 bosh-stemcell-315.36-azure-hyperv-ubuntu-xenial-go_agent.tgz  bosh-stemcell-315.36-vcloud-esxi-ubuntu-xenial-go_agent.tgz
