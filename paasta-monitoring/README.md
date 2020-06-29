@@ -1,3 +1,14 @@
+## Table of Contents
+1. [문서 개요](#1)
+2. [PaaS-TA 5.0 Monitoring 설치 파일 다운로드](#2)
+3. [PaaS-TA Monitoring 설치환경](#3)
+4. [PaaS-TA Monitoring 설치](#4)
+  - 4.1. [paasta-monitoring.yml](#5)
+  - 4.2. [deploy-paasta-monitoring.sh](#6)
+  - 4.3. [paasta-monitoring-vars.yml](#7)
+4. [PaaS-TA Monitoring Dashboard 접속](#8)
+
+
 ## <div id='1'/>1. Pre-requsite
 
 1. PaaS-TA 5.0 Monitoring을 설치 하기 위해서는 BOSH 설치과정에서 언급한 것 처럼 관련 deployment, release, stemcell을 PaaS-TA 사이트에서 다운로드 받아 정해진 경로에 복사 해야 한다.
@@ -370,7 +381,7 @@ $ bosh –e {director_name} vms
 ![PaaSTa_monitoring_vms_5.0]
 
 
-## <div id='7'/>5. PaaS-TA Monitoring dashboard 접속
+## <div id='7'/>5. PaaS-TA Monitoring Dashboard 접속
  
  http://{monit_public_ip}:8080/public/login.html 에 접속하여 회원 가입 후 Main Dashboard에 접속한다.
 
