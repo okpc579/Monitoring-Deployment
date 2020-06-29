@@ -586,7 +586,7 @@ bosh -e micro-bosh -d paasta -n deploy paasta-deployment-monitoring.yml \
 	-l aws-vars.yml \
 	-l ../common/common_vars.yml
 ```
-### <div id='1024'/>3.7.3. deploy-azure-monitoring.sh
+### <div id='1023'/>3.7.2. deploy-azure-monitoring.sh
 ```
 bosh -e micro-bosh -d paasta -n deploy paasta-deployment-monitoring.yml \
 	-o operations/azure.yml \
@@ -605,7 +605,7 @@ bosh -e micro-bosh -d paasta -n deploy paasta-deployment-monitoring.yml \
 	-l ../common/common_vars.yml
 ```
 
-### <div id='1025'/>3.7.4. deploy-gcp-monitoring.sh
+### <div id='1024'/>3.7.3. deploy-gcp-monitoring.sh
 ```
 bosh -e micro-bosh -d paasta -n deploy paasta-deployment-monitoring.yml \
 	-o operations/use-compiled-releases.yml \
@@ -625,7 +625,7 @@ bosh -e micro-bosh -d paasta -n deploy paasta-deployment-monitoring.yml \
 
 
 
-### <div id='1023'/>3.7.2. deploy-openstack-monitoring.sh
+### <div id='1025'/>3.7.4. deploy-openstack-monitoring.sh
 ```
 bosh -e micro-bosh -d paasta -n deploy paasta-deployment-monitoring.yml \
 	-o operations/openstack.yml \
