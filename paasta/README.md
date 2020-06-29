@@ -90,7 +90,8 @@ PaaS-TA 사이트에서 [PaaS-TA Release] 파일을 내려받아 ${HOME}/workspa
 압출을 풀면 아래와 같이 ${HOME}/workspace/paasta-5.0/release/paasta-monitoring 디렉터리가 생성되며 릴리즈 파일(tgz)이 존재한다.
 
 ```
-ubuntu@inception:~/workspace/paasta-5.0/release/paasta-monitoring$ ls
+$ cd ${HOME}/workspace/paasta-5.0/release/paasta
+$ ls
 binary-buildpack-1.0.32-ubuntu-xenial-315.36-20190604-002102-261697356.tgz       logsearch-boshrelease-209.0.1.tgz
 bosh-dns-aliases-0.0.3-ubuntu-xenial-315.36-20190604-001210-462767884.tgz        logsearch-for-cloudfoundry-207.0.1.tgz
 bpm-1.1.0-ubuntu-xenial-315.36-20190605-202629-386782261.tgz                     monitoring-release.tgz
@@ -117,7 +118,8 @@ loggregator-agent-3.9-ubuntu-xenial-315.36-20190604-002328-413557573.tgz        
 PaaS-TA 사이트에서 [PaaS-TA Stemcell] 파일을 내려받아 ${HOME}/workspace/paasta-5.0/stemcell 이하 디렉터리에 압축을 푼다. 압출을 풀면 아래와 같이 ${HOME}/workspace/paasta-5.0/stemcell/paasta-monitoring 디렉터리가 생성되며 릴리즈 파일(tgz)이 존재한다.
 
 ```
-ubuntu@inception:~/workspace/paasta-5.0/stemcell/paasta-monitoring$ ls
+$ cd ${HOME}/workspace/paasta-5.0/stemcell/paasta
+$ ls
 bosh-stemcell-315.36-alicloud-kvm-ubuntu-xenial-go_agent.tgz  bosh-stemcell-315.36-google-kvm-ubuntu-xenial-go_agent.tgz     bosh-stemcell-315.36-vsphere-esxi-ubuntu-xenial-go_agent.tgz
 bosh-stemcell-315.36-aws-xen-hvm-ubuntu-xenial-go_agent.tgz   bosh-stemcell-315.36-openstack-kvm-ubuntu-xenial-go_agent.tgz  bosh-stemcell-315.36-warden-boshlite-ubuntu-xenial-go_agent.tgz
 bosh-stemcell-315.36-azure-hyperv-ubuntu-xenial-go_agent.tgz  bosh-stemcell-315.36-vcloud-esxi-ubuntu-xenial-go_agent.tgz
@@ -132,12 +134,6 @@ BOSH 로그인 후 다음 명령어를 수행하여 Stemcell을 올린다. {dire
 $ bosh -e {director_name} upload-stemcell ${HOME}/workspace/paasta-5.0/stemcell/paasta-monitoring/bosh-stemcell-315.36-aws-xen-hvm-ubuntu-xenial-go_agent.tgz
 ```
 
-- OpenStack
-
-```
-$ bosh -e {director_name} upload-stemcell ${HOME}/workspace/paasta-5.0/stemcell/paasta-monitoring/bosh-stemcell-315.36-openstack-kvm-ubuntu-xenial-go_agent.tgz
-```
-
 - MS Azure
 
 ```
@@ -148,6 +144,12 @@ $ bosh -e {director_name} upload-stemcell ${HOME}/workspace/paasta-5.0/stemcell/
 
 ```
 $ bosh -e {director_name} upload-stemcell ${HOME}/workspace/paasta-5.0/stemcell/paasta-monitoring/bosh-stemcell-315.36-google-kvm-ubuntu-xenial-go_agent.tgz
+```
+
+- OpenStack
+
+```
+$ bosh -e {director_name} upload-stemcell ${HOME}/workspace/paasta-5.0/stemcell/paasta-monitoring/bosh-stemcell-315.36-openstack-kvm-ubuntu-xenial-go_agent.tgz
 ```
 
 - VMware vSphere
@@ -164,7 +166,7 @@ PaaS-TA 설치 파일을 내려받으면 ${HOME}/workspace/paasta-5.0/deployment
 - OpenStack을 기준으로 한 cloud-config.yml 예제
 
 ```
-## azs :: 가용 영역(availability zone)을 정의한다.
+## azs :: 가용 영역(Availability Zone)을 정의한다.
 azs:
 - name: z1
   cloud_properties:
@@ -185,7 +187,7 @@ azs:
   cloud_properties:
     availability_zone: zone3
 
-## vm type :: 가상머신 유형(vm type)을 정의한다. (OpenStack의 경우, flavor 설정)
+## vm type :: 가상머신 유형(VM Type)을 정의한다. (OpenStack의 경우, Flavor 설정)
 vm_types:
 - name: minimal
   cloud_properties:
@@ -272,7 +274,7 @@ disk_types:
 - disk_size: 102400
   name: 100GB
 - disk_size: 1048576
-  name: 1TBB
+  name: 1TB
 
 - cloud_properties:
     type: SSD1 
@@ -291,7 +293,7 @@ disk_types:
   disk_size: 50000
   name: 50GB_GP2
 
-## network :: 네트워크(network)를 정의한다. (OpenStack의 경우, subnet 및 security_group, dns, gateway 설정)
+## network :: 네트워크(Network)를 정의한다. (OpenStack의 경우, Subnet 및 Security Group, DNS, Gateway 설정)
 networks:
 - name: default
   subnets:
@@ -389,7 +391,7 @@ networks:
 - name: service_public
   type: vip
 
-## vm extentions :: 임의의 특정 IaaS 구성을 지정하는 가상머신 구성을 정의한다. (security groups 및 load balancers 등)
+## vm extentions :: 임의의 특정 IaaS 구성을 지정하는 가상머신 구성을 정의한다. (Security Groups 및 Load Balancers 등)
 vm_extensions:
 - cloud_properties:
     ports:
@@ -424,50 +426,49 @@ $ bosh –e {director_name} update-cloud-config ${HOME}/workspace/paasta-5.0/dep
 $ bosh –e {director_name} cloud-config  
 ```
 
-### <div id='1013'/>3.4.1. azs
+### <div id='1013'/>3.4.1. AZs
 
 PaaS-TA에서 제공되는 Cloud Config 예제는 z1 ~ z6까지 설정되어 있다. z1 ~ z3까지는 PaaS-TA VM이 설치되는 Zone이며, z4 ~ z6까지는 서비스가 설치되는 Zone으로 정의한다. 3개 단위로 설정하는 이유는 서비스 3중화를 위해서이다. PaaS-TA를 설치하는 환경에 따라 다르게 설정해도 된다.
 
-### <div id='1014'/>3.4.2. vm types
+### <div id='1014'/>3.4.2. VM Types
 
 vm type은 IaaS에서 정의된 VM Type이다. Openstack의 경우에는 Flavor Type이다.
 
 ※ 다음은 OpenStack에서 정의한 Flavor Type이다.
 ![PaaSTa_FLAVOR_Image]
 
-### <div id='1015'/>3.4.3. compilation
+### <div id='1015'/>3.4.3. Compilation
 PaaS-TA 및 서비스 설치 시, PaaS-TA는 Compile VM을 생성하여 소스를 컴파일하고, PaaS-TA VM을 생성하여 컴파일된 파일을 대상 VM에 설치한다. 컴파일이 끝난 VM은 삭제된다.
 
 ※ Worker 수는 Compile VM의 수로, 많을수록 컴파일 속도가 빨라진다.
 
-### <div id='1016'/>3.4.4. disk size
-PaaS-TA 및 서비스가 설치되는 VM의 Persistent disk size이다.
+### <div id='1016'/>3.4.4. Disk Size
+PaaS-TA 및 서비스가 설치되는 VM의 Persistent Disk Size이다.
 
-### <div id='1017'/>3.4.5. networks
-networks는 az zone 별 subnet network, dns, security groups, network id를 정의한다.
-보통 azs 별로 256개의 IP를 정의할 수 있도록 range cider를 정의한다.
+### <div id='1017'/>3.4.5. Networks
+networks는 AZ 별 Subnet Network, DNS, Security Groups, Network ID를 정의한다.
+보통 AZ 별로 256개의 IP를 정의할 수 있도록 Range Cider를 정의한다.
 
 ## <div id='1018'/>3.5.  Runtime Config 설정
 PaaS-TA 4.0부터 적용되는 부분으로 PaaS-TA Component에서 Consul이 대체된 Component이다. PaaS-TA Component 간의 통신을 위해 BOSH DNS 배포가 선행되어야 한다.
 
 ### <div id='1019'/>3.5.1. Runtime Config 업데이트
-- Runtime Config 업데이트 Shell script 파일 확인
+- Runtime Config 업데이트 Shell Script 파일 확인
 
 ```
 $ vi ${HOME}/workspace/paasta-5.0/deployment/bosh-deployment/update-runtime-config.sh
 
 bosh -e {director-name} update-runtime-config runtime-configs/dns.yml \
--v inception_os_user_name='ubuntu' \                            # home user name (release file path 설정 시 필요)
 -v cert_days=3650                                               # PaaS-TA 인증서 유효기간
 ```
 
-- Runtime Config 업데이트 Shell script 파일에 실행 권한 부여
+- Runtime Config 업데이트 Shell Script 파일에 실행 권한 부여
 
 ```
 $ chmod +x ${HOME}/workspace/paasta-5.0/deployment/bosh-deployment/update-runtime-config.sh
 ```
 
-- Runtime Config 업데이트 Shell script 파일 실행 (BOSH 로그인 필요)
+- Runtime Config 업데이트 Shell Script 파일 실행 (BOSH 로그인 필요)
 
 ```
 $ cd ${HOME}/workspace/paasta-5.0/deployment/bosh-deployment
@@ -476,35 +477,62 @@ $ ./update-runtime-config.sh
 
 ## <div id='1020'/>3.6.  PaaS-TA 설치 파일
 
-${HOME}/workspace/paasta-5.0/deployment/paasta-deployment-monitoring 이하 디렉터리에는 IaaS별 PaaS-TA 설치 Shell script 파일이 존재하며, 이를 실행하여 PaaS-TA를 설치한다. 파일명은 deploy-{IaaS}-monitoring.sh이다.
+${HOME}/workspace/paasta-5.0/deployment/paasta-deployment-monitoring 이하 디렉터리에는 IaaS별 PaaS-TA 설치 Shell Script 파일이 존재하며, 이를 실행하여 PaaS-TA를 설치한다. 파일명은 deploy-{IaaS}-monitoring.sh이다.
 
 <table>
 <tr>
-<td>deploy-aws-monitoring.sh</td>
-<td>AWS 환경에 PaaS-TA 설치를 위한 Shell script 파일</td>
+<td>deploy-aws.sh</td>
+<td>AWS 환경에 PaaS-TA 설치를 위한 Shell Script 파일</td>
 </tr>
 <tr>
-<td>deploy-openstack-monitoring.sh</td>
-<td>OpenStack 환경에 PaaS-TA 설치를 위한 Shell script 파일</td>
-</tr>   
-<tr>
-<td>deploy-vsphere-monitoring.sh</td>
-<td>VMware vSphere 환경에 PaaS-TA 설치를 위한 Shell script 파일</td>
+<td>deploy-azure.sh</td>
+<td>MS Azure 환경에 PaaS-TA 설치를 위한 Shell Script 파일</td>
 </tr>
 <tr>
-<td>deploy-gcp-monitoring.sh</td>
-<td>GCP(Google Cloud Platform) 환경에 PaaS-TA 설치를 위한 Shell script 파일</td>
+<td>deploy-gcp.sh</td>
+<td>GCP(Google Cloud Platform) 환경에 PaaS-TA 설치를 위한 Shell Script 파일</td>
 </tr>
 <tr>
-<td>deploy-azure-monitoring.sh</td>
-<td>MS Azure 환경에 PaaS-TA 설치를 위한 Shell script 파일</td>
+<td>deploy-openstack.sh</td>
+<td>OpenStack 환경에 PaaS-TA 설치를 위한 Shell Script 파일</td>
 </tr>
 <tr>
-<td>deploy-bosh-lite-monitoring.sh</td>
-<td>BOSH-LITE 환경에 PaaS-TA 설치를 위한 Shell script 파일</td>
+<td>deploy-vsphere.sh</td>
+<td>VMware vSphere 환경에 PaaS-TA 설치를 위한 Shell Script 파일</td>
+</tr>
+<tr>
+<td>deploy-bosh-lite.sh</td>
+<td>BOSH-LITE 환경에 PaaS-TA 설치를 위한 Shell Script 파일</td>
+</tr>
+<tr>
+<td>common_vars.yml</td>
+<td>PaaS-TA 및 각종 Service 설치시 적용하는 공통 변수 설정 파일</td>
+</tr>
+<tr>
+<td>aws-vars.yml</td>
+<td>AWS 환경에 PaaS-TA 설치시 적용하는 변숫값 설정 파일</td>
+</tr>
+<tr>
+<td>azure-vars.yml</td>
+<td>MS Azure 환경에 PaaS-TA 설치시 적용하는 변숫값 설정 파일</td>
+</tr>
+<tr>
+<td>gcp-vars.yml</td>
+<td>GCP(Google Cloud Platform) 환경에 PaaS-TA 설치시 적용하는 변숫값 설정 파일</td>
+</tr>
+<tr>
+<td>openstack-vars.yml</td>
+<td>OpenStack 환경에 PaaS-TA 설치시 적용하는 변숫값 설정 파일</td>
+</tr>
+<tr>
+<td>vsphere-vars.yml</td>
+<td>VMware vSphere 환경에 PaaS-TA 설치시 적용하는 변숫값 설정 파일</td>
+</tr>
+<tr>
+<td>bosh-lite-vars.yml</td>
+<td>BOSH-LITE 환경에 PaaS-TA 설치시 적용하는 변숫값 설정 파일</td>
 </tr>
 </table>
-
 PaaS-TA 설치 시 명령어는 deploy로 시작한다. BOSH 명령어로 설치가 가능하며, IaaS 환경에 따라 Option이 달라진다.
 
 - PaaS-TA 배포 BOSH 명령어 예시
@@ -533,11 +561,15 @@ PaaS-TA 배포 시, 설치 Option을 추가해야 한다. 설치 Option에 대�
 <td> -v </td>
 <td>PaaS-TA 설치 시 적용하는 변숫값 또는 Option 파일에 변숫값을 설정할 경우 사용한다. Option 파일 속성에 따라 필수 또는 선택 항목으로 나뉜다.</td>
 </tr>
+<tr>
+<td>-l, --var-file</td>
+<td>YAML파일에 작성한 변수를 읽어올때 사용한다.</td>
+</tr>
 </table>
 
 ## <div id='1021'/>3.7.   PaaS-TA 설치 Shell Scripts
 
-paasta-deployment-monitoring.yml 파일은 통합 Monitoring을 적용한 PaaS-TA를 배포하는 Manifest 파일이며, PaaS-TA VM에 대한 설치 정의를 하게 된다. PaaS-TA VM 중 singleton-blobstore, database의 azs(zone)을 변경하면 조직(ORG), 스페이스(SPACE), 앱(APP) 정보가 모두 삭제된다. 
+paasta-deployment-monitoring.yml 파일은 통합 Monitoring을 적용한 PaaS-TA를 배포하는 Manifest 파일이며, PaaS-TA VM에 대한 설치 정의를 하게 된다. PaaS-TA VM 중 singleton-blobstore, database의 AZs(zone)을 변경하면 조직(ORG), 스페이스(SPACE), 앱(APP) 정보가 모두 삭제된다. 
 
 이미 설치된 PaaS-TA의 재배포 시, singleton-blobstore, database의 azs(zone)을 변경하면 조직(ORG), 공간(SPACE), 앱(APP) 정보가 모두 삭제된다.
 
@@ -582,47 +614,6 @@ bosh -e {director_name} -d paasta deploy paasta-deployment-monitoring.yml \    #
    -v uaa_clients_portalclinet_secret="portalclient" \                          # uaac portalclient에 접근하기 위한 secret 변수
    -v uaa_admin_client_secret="admin-secret"                                    # uaac adminclient에 접근하기 위한 secret 변수
 ```
-
-### <div id='1023'/>3.7.2. deploy-openstack-monitoring.sh
-```
-bosh -e {director_name} -d paasta deploy paasta-deployment-monitoring.yml \    # PaaS-TA manifest file
-   -o operations/openstack.yml \                                               # openstack 설정
-   -o operations/use-compiled-releases.yml \                                   # compile된 release 파일 정보 (offline)
-   -o operations/use-haproxy.yml \                                             # haproxy 적용
-   -o operations/use-haproxy-public-network.yml \                              # haproxy public network 적용
-   -o operations/use-postgres.yml \                                            # database type 설정 (3.5버전 이하에서 migration 시 필수)
-   -o operations/rename-network-and-deployment.yml \                           # rename network and deployment
-   -o paasta-addon/paasta-monitoring.yml \                                     # [MONITORING] monitoring metric agent 적용
-   -o operations/addons/enable-component-syslog.yml \                          # [MONITORING] monitoring log agent 적용
-   -v metric_url=10.0.15.11 \                                                  # [MONITORING] monitoring metric agent에서 전송할 influxDB ip
-   -v syslog_address="10.0.10.15" \                                            # [MONITORING] PaaS-TA logging agent에서 전송할 log ip
-   -v syslog_port="2514" \                                                     # [MONITORING] PaaS-TA logging agent에서 전송할 log port
-   -v syslog_custom_rule="if ($msg contains "DEBUG") then stop" \              # [MONITORING] PaaS-TA logging agent에서 전송할 custom rule
-   -v syslog_fallback_servers=[] \                                             # [MONITORING] PaaS-TA syslog fallback servers
-   -v deployment_name=paasta \                                                 # deployment name
-   -v network_name=default \                                                   # default network name
-   -v inception_os_user_name=ubuntu \                                          # home user name (release file path 설정 시 필요)
-   -v haproxy_public_ip=52.199.190.1 \                                         # haproxy ip (public ip)
-   -v haproxy_public_network_name=vip \                                        # PaaS-TA public network name   
-   -v cf_admin_password=admin \                                                # PaaS-TA admin password
-   -v cc_db_encryption_key=db-encryption-key \                                 # database encryption key (version upgrade 시 동일 KEY 필수)
-   -v uaa_database_password=uaa_admin \                                        # uaadb database password
-   -v cc_database_password=cc_admin \                                          # ccdb database password
-   -v cert_days=3650 \                                                         # PaaS-TA 인증서 유효기간
-   -v system_domain=52.199.190.1.xip.io                                        # domain (xip.io를 사용하는 경우 haproxy public_ip와 동일)
-   -v uaa_login_logout_redirect_parameter_disable=false \           
-   -v uaa_login_logout_redirect_parameter_whitelist=["http://portal-web-user.115.68.46.190.xip.io","http://portal-web-user.115.68.46.190.xip.io/callback","http://portal-web-user.115.68.46.190.xip.io/login"] \ # 포탈 페이지 이동을 위한 uaa redirect whitelist 등록 변수
-   -v uaa_login_branding_company_name="PaaS-TA R&D" \                          # uaa 페이지 타이틀 명
-   -v uaa_login_branding_footer_legal_text="Copyright © PaaS-TA R&D Foundation, Inc. 2017. All Rights Reserved." \ # uaa 페이지 하단영역 텍스트 
-   -v uaa_login_branding_product_logo="iVBORw0KGgoAAAANSUhEUgAAAM0AAAAdCAYAAAAJguhGAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6QUNDMTA1MTZCRDNBMTFFNjkzMTVEQjMxRkE5QjkxNUMiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6QUNDMTA1MTdCRDNBMTFFNjkzMTVEQjMxRkE5QjkxNUMiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpBQ0MxMDUxNEJEM0ExMUU2OTMxNURCMzFGQTlCOTE1QyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpBQ0MxMDUxNUJEM0ExMUU2OTMxNURCMzFGQTlCOTE1QyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Piy2YkgAAA9pSURBVHja7FwJeBRF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" \ # uaa 페이지 로고 이미지 (base64)
-   -v uaa_login_branding_square_logo="iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTMyIDc5LjE1OTI4NCwgMjAxNi8wNC8xOS0xMzoxMzo0MCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6QkIwMjA5M0U5NEQ0MTFFNjk1M0FFQ0UxNkIxNEZFNjciIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6QkIwMjA5M0Q5NEQ0MTFFNjk1M0FFQ0UxNkIxNEZFNjciIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUuNSAoV2luZG93cykiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpEMzRGNDdCNTgxNEIxMUU2QjJFODk1MEQzM0EzNkMxOSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpEMzRGNDdCNjgxNEIxMUU2QjJFODk1MEQzM0EzNkMxOSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Psx4+gAAAASbSURBVHja7FZ9aFVlGP8973vOud9Tt7nl1lzNOWailKkV/iEohYn2Vx/QHxKCQkUUmEFhREXQvxJGhSFRlERFhEk1K9PUjJk0dZJzzuGc+3B3997tfp3zfvScu0X4T1AQ/nPP5eGce17e5/l9PO9zL1lrcTMvgZt8VQFUAVQBVAE4KHbDZIYWq1P7dpiJwQ7HdYxZsOyiXLzmYxGvOwJZD6ICDFxQKQeKNgEyi6A8BYcUSE0CJKCpDkExikgyBmTLQJzXhIaVSejxfsjaZtDkeaD3M9iVu6ByKbiNc+GYsUtt5R/fPIzxoSaSUZhIADM9sN5c/WG707Z2r+jc8gJFvAz0/zOyhTrf9RImBptsOQ4bSA4P0Alma8hcOLAtOPnaT7pwbQXJ2H+vQsRaRzkis8+ci5wZAHb4+EYpErBFbgdWzpYJ1p8NHQeNnVuuj7/epca6N89spH9ZOAb+vZsf9B18Juj97osgkznk9+zfY0ojbeEaFd9tT0OV55lhycwJFGOpoxbkcoSAIxZClmHiXkCdD7/qLtr6BkSa/Z74xx6gFBOwvtSXf9mp+r5+mrJDt5IRMNIB+T5MtHHUXfvyFvnKltUbbP7KbRRzoDMSxHBp9hNetnLnTaE/6d/XmdLwUjuvuRtOKiNCALpQYWopDqMcOB43q/Zggusd6rf3PjF9X26ncr5GOGyxGwUZJiq4TmkyqXOjHXLXi8/l7eCRR0WUi3gWekowKxGaMyvjXzd+z0wp27tUjZ18TFiboljdALleNlTAEjdw4MKJp2CvdW/2T+/5VEz03FmRee4S8NECpljSUqTiv5U+53N9spM/o3TsrYN06dCDSDCLPCcb4apBaAdXjhkg3OOZmYgISLfMCdiWRPN1arz7Qzm//aCNd5wIVEPeyXZvs6d2v0N+UZhIDUztWqgreYjRiywk53QjHFzD9oI6H/mIrD4Pk0svKH+zo8tJX1hqonwCmLyeZFlzrET4pVJYQ3isgxf2iOZ3mokXWBkNlWyHbX3oLBVL31P//mcpKMFG50PVb4Y+fQZycoDJJBkAd75gFeU4bFPT2ei6nRvJls9W5qEZOrYoOLHvADIXOxHzWB62RGnoosfyJhlAimW07CNHRCK0TM6tBSX4BAlen7gASp8GBQo62XLF1G4S9ujRZuQGYNkWwX1C0Qh0jeu7i5Z/7tz7xPNCmOEZAIbP3/QgjK9a/F/3vY+x7vtlCMrjQoI3Oi4XTUE5c2CcGsDlo8XKRHhC2uJViOkxBltkLdirhnu+dToff0qd6LnDz11/wHHVLcKUha5bOCXdfA9aFh7y6u46g4aFQG4QfwPI9LGsNbD5aaHT57bq/sNPYuryCjLTDEJUpLbcmCTNjC0cllvFWrYHcWbd2idvX/+2bNq0m8HY4PhRFNrXYI6bBQpp2LZVMP2HYVIJuBEe541tQP4qnBsGh1FhIeO0rN6L1pUfmNFz99HIHxtsYXCZ1qoO0taTKgs+a4xAjguZmaLaVSNINHS5NUu+Eqn6HFTAeYIQGdtRRGW6KR/w+VkrXtM3zqrq3/IqgCqAKoCbDeBPAQYAvdcfKsxKtoUAAAAASUVORK5CYII=" \ # uaa 페이지 타이틀 로고 이미지(base64)
-   -v uaa_login_links_passwd="http://portal-web-user.115.68.46.190.xip.io/resetpasswd" \        # uaa 페이지에서 Reset password 누를 시 이동하는 링크 주소
-   -v uaa_login_links_signup="http://portal-web-user.115.68.46.190.xip.io/createuser" \         # uaa 페이지에서 Create account 누를 시 이동하는 링크 주소)
-   -v uaa_clients_portalclient_redirect_uri="http://portal-web-user.115.68.46.190.xip.io,http://portal-web-user.115.68.46.190.xip.io/callback" \ # uaa portalclient의 redirect url 지정 변수, 포탈에서 로그인 버튼 클릭 후 uaa 페이지에서 성공적으로 로그인했을 경우 이동하는 uri 경로
-   -v uaa_clients_portalclinet_secret="portalclient" \                         # uaac portalclient에 접근하기 위한 secret 변수
-   -v uaa_admin_client_secret="admin-secret"                                   # uaac adminclient에 접근하기 위한 secret 변수
-```
-
 ### <div id='1024'/>3.7.3. deploy-azure-monitoring.sh
 ```
 bosh -e {director_name} -d paasta deploy paasta-deployment-monitoring.yml \    # PaaS-TA manifest file
@@ -698,6 +689,48 @@ bosh -e {director_name} -d paasta deploy paasta-deployment-monitoring.yml \    #
    -v uaa_login_links_passwd="http://portal-web-user.115.68.46.190.xip.io/resetpasswd" \        # uaa 페이지에서 Reset password 누를 시 이동하는 링크 주소
    -v uaa_login_links_signup="http://portal-web-user.115.68.46.190.xip.io/createuser" \         # uaa 페이지에서 Create account 누를 시 이동하는 링크 주소
    --v uaa_clients_portalclient_redirect_uri="http://portal-web-user.115.68.46.190.xip.io,http://portal-web-user.115.68.46.190.xip.io/callback" \ # uaa portalclient의 redirect url 지정 변수, 포탈에서 로그인 버튼 클릭 후 uaa 페이지에서 성공적으로 로그인했을 경우 이동하는 uri 경로
+   -v uaa_clients_portalclinet_secret="portalclient" \                         # uaac portalclient에 접근하기 위한 secret 변수
+   -v uaa_admin_client_secret="admin-secret"                                   # uaac adminclient에 접근하기 위한 secret 변수
+```
+
+
+
+### <div id='1023'/>3.7.2. deploy-openstack-monitoring.sh
+```
+bosh -e {director_name} -d paasta deploy paasta-deployment-monitoring.yml \    # PaaS-TA manifest file
+   -o operations/openstack.yml \                                               # openstack 설정
+   -o operations/use-compiled-releases.yml \                                   # compile된 release 파일 정보 (offline)
+   -o operations/use-haproxy.yml \                                             # haproxy 적용
+   -o operations/use-haproxy-public-network.yml \                              # haproxy public network 적용
+   -o operations/use-postgres.yml \                                            # database type 설정 (3.5버전 이하에서 migration 시 필수)
+   -o operations/rename-network-and-deployment.yml \                           # rename network and deployment
+   -o paasta-addon/paasta-monitoring.yml \                                     # [MONITORING] monitoring metric agent 적용
+   -o operations/addons/enable-component-syslog.yml \                          # [MONITORING] monitoring log agent 적용
+   -v metric_url=10.0.15.11 \                                                  # [MONITORING] monitoring metric agent에서 전송할 influxDB ip
+   -v syslog_address="10.0.10.15" \                                            # [MONITORING] PaaS-TA logging agent에서 전송할 log ip
+   -v syslog_port="2514" \                                                     # [MONITORING] PaaS-TA logging agent에서 전송할 log port
+   -v syslog_custom_rule="if ($msg contains "DEBUG") then stop" \              # [MONITORING] PaaS-TA logging agent에서 전송할 custom rule
+   -v syslog_fallback_servers=[] \                                             # [MONITORING] PaaS-TA syslog fallback servers
+   -v deployment_name=paasta \                                                 # deployment name
+   -v network_name=default \                                                   # default network name
+   -v inception_os_user_name=ubuntu \                                          # home user name (release file path 설정 시 필요)
+   -v haproxy_public_ip=52.199.190.1 \                                         # haproxy ip (public ip)
+   -v haproxy_public_network_name=vip \                                        # PaaS-TA public network name   
+   -v cf_admin_password=admin \                                                # PaaS-TA admin password
+   -v cc_db_encryption_key=db-encryption-key \                                 # database encryption key (version upgrade 시 동일 KEY 필수)
+   -v uaa_database_password=uaa_admin \                                        # uaadb database password
+   -v cc_database_password=cc_admin \                                          # ccdb database password
+   -v cert_days=3650 \                                                         # PaaS-TA 인증서 유효기간
+   -v system_domain=52.199.190.1.xip.io                                        # domain (xip.io를 사용하는 경우 haproxy public_ip와 동일)
+   -v uaa_login_logout_redirect_parameter_disable=false \           
+   -v uaa_login_logout_redirect_parameter_whitelist=["http://portal-web-user.115.68.46.190.xip.io","http://portal-web-user.115.68.46.190.xip.io/callback","http://portal-web-user.115.68.46.190.xip.io/login"] \ # 포탈 페이지 이동을 위한 uaa redirect whitelist 등록 변수
+   -v uaa_login_branding_company_name="PaaS-TA R&D" \                          # uaa 페이지 타이틀 명
+   -v uaa_login_branding_footer_legal_text="Copyright © PaaS-TA R&D Foundation, Inc. 2017. All Rights Reserved." \ # uaa 페이지 하단영역 텍스트 
+   -v uaa_login_branding_product_logo="iVBORw0KGgoAAAANSUhEUgAAAM0AAAAdCAYAAAAJguhGAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6QUNDMTA1MTZCRDNBMTFFNjkzMTVEQjMxRkE5QjkxNUMiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6QUNDMTA1MTdCRDNBMTFFNjkzMTVEQjMxRkE5QjkxNUMiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpBQ0MxMDUxNEJEM0ExMUU2OTMxNURCMzFGQTlCOTE1QyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpBQ0MxMDUxNUJEM0ExMUU2OTMxNURCMzFGQTlCOTE1QyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Piy2YkgAAA9pSURBVHja7FwJeBRF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" \ # uaa 페이지 로고 이미지 (base64)
+   -v uaa_login_branding_square_logo="iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTMyIDc5LjE1OTI4NCwgMjAxNi8wNC8xOS0xMzoxMzo0MCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6QkIwMjA5M0U5NEQ0MTFFNjk1M0FFQ0UxNkIxNEZFNjciIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6QkIwMjA5M0Q5NEQ0MTFFNjk1M0FFQ0UxNkIxNEZFNjciIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUuNSAoV2luZG93cykiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpEMzRGNDdCNTgxNEIxMUU2QjJFODk1MEQzM0EzNkMxOSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpEMzRGNDdCNjgxNEIxMUU2QjJFODk1MEQzM0EzNkMxOSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Psx4+gAAAASbSURBVHja7FZ9aFVlGP8973vOud9Tt7nl1lzNOWailKkV/iEohYn2Vx/QHxKCQkUUmEFhREXQvxJGhSFRlERFhEk1K9PUjJk0dZJzzuGc+3B3997tfp3zfvScu0X4T1AQ/nPP5eGce17e5/l9PO9zL1lrcTMvgZt8VQFUAVQBVAE4KHbDZIYWq1P7dpiJwQ7HdYxZsOyiXLzmYxGvOwJZD6ICDFxQKQeKNgEyi6A8BYcUSE0CJKCpDkExikgyBmTLQJzXhIaVSejxfsjaZtDkeaD3M9iVu6ByKbiNc+GYsUtt5R/fPIzxoSaSUZhIADM9sN5c/WG707Z2r+jc8gJFvAz0/zOyhTrf9RImBptsOQ4bSA4P0Alma8hcOLAtOPnaT7pwbQXJ2H+vQsRaRzkis8+ci5wZAHb4+EYpErBFbgdWzpYJ1p8NHQeNnVuuj7/epca6N89spH9ZOAb+vZsf9B18Juj97osgkznk9+zfY0ojbeEaFd9tT0OV55lhycwJFGOpoxbkcoSAIxZClmHiXkCdD7/qLtr6BkSa/Z74xx6gFBOwvtSXf9mp+r5+mrJDt5IRMNIB+T5MtHHUXfvyFvnKltUbbP7KbRRzoDMSxHBp9hNetnLnTaE/6d/XmdLwUjuvuRtOKiNCALpQYWopDqMcOB43q/Zggusd6rf3PjF9X26ncr5GOGyxGwUZJiq4TmkyqXOjHXLXi8/l7eCRR0WUi3gWekowKxGaMyvjXzd+z0wp27tUjZ18TFiboljdALleNlTAEjdw4MKJp2CvdW/2T+/5VEz03FmRee4S8NECpljSUqTiv5U+53N9spM/o3TsrYN06dCDSDCLPCcb4apBaAdXjhkg3OOZmYgISLfMCdiWRPN1arz7Qzm//aCNd5wIVEPeyXZvs6d2v0N+UZhIDUztWqgreYjRiywk53QjHFzD9oI6H/mIrD4Pk0svKH+zo8tJX1hqonwCmLyeZFlzrET4pVJYQ3isgxf2iOZ3mokXWBkNlWyHbX3oLBVL31P//mcpKMFG50PVb4Y+fQZycoDJJBkAd75gFeU4bFPT2ei6nRvJls9W5qEZOrYoOLHvADIXOxHzWB62RGnoosfyJhlAimW07CNHRCK0TM6tBSX4BAlen7gASp8GBQo62XLF1G4S9ujRZuQGYNkWwX1C0Qh0jeu7i5Z/7tz7xPNCmOEZAIbP3/QgjK9a/F/3vY+x7vtlCMrjQoI3Oi4XTUE5c2CcGsDlo8XKRHhC2uJViOkxBltkLdirhnu+dToff0qd6LnDz11/wHHVLcKUha5bOCXdfA9aFh7y6u46g4aFQG4QfwPI9LGsNbD5aaHT57bq/sNPYuryCjLTDEJUpLbcmCTNjC0cllvFWrYHcWbd2idvX/+2bNq0m8HY4PhRFNrXYI6bBQpp2LZVMP2HYVIJuBEe541tQP4qnBsGh1FhIeO0rN6L1pUfmNFz99HIHxtsYXCZ1qoO0taTKgs+a4xAjguZmaLaVSNINHS5NUu+Eqn6HFTAeYIQGdtRRGW6KR/w+VkrXtM3zqrq3/IqgCqAKoCbDeBPAQYAvdcfKsxKtoUAAAAASUVORK5CYII=" \ # uaa 페이지 타이틀 로고 이미지(base64)
+   -v uaa_login_links_passwd="http://portal-web-user.115.68.46.190.xip.io/resetpasswd" \        # uaa 페이지에서 Reset password 누를 시 이동하는 링크 주소
+   -v uaa_login_links_signup="http://portal-web-user.115.68.46.190.xip.io/createuser" \         # uaa 페이지에서 Create account 누를 시 이동하는 링크 주소)
+   -v uaa_clients_portalclient_redirect_uri="http://portal-web-user.115.68.46.190.xip.io,http://portal-web-user.115.68.46.190.xip.io/callback" \ # uaa portalclient의 redirect url 지정 변수, 포탈에서 로그인 버튼 클릭 후 uaa 페이지에서 성공적으로 로그인했을 경우 이동하는 uri 경로
    -v uaa_clients_portalclinet_secret="portalclient" \                         # uaac portalclient에 접근하기 위한 secret 변수
    -v uaa_admin_client_secret="admin-secret"                                   # uaac adminclient에 접근하기 위한 secret 변수
 ```
