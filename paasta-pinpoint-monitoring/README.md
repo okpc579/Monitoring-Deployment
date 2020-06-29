@@ -1003,11 +1003,11 @@ pinpoint_monitoring_service   user-provided
 
 Sample Web App은 PaaS-TA에 App으로 배포가 된다. 배포된
 App에 Pinpoint 서비스 Bind 를 통하여 초기 데이터를 생성하게 된다. 바인드
-완료 후 연결 url을 통하여 브라우저로 해당 App에 대한 Pinpoint 서비스
-모니터링을 할 수 있다.
+완료 후 연결 URL을 통하여 브라우저로 해당 App에 대한 Pinpoint 서비스
+모니터링을 할 수 0있다.
 
 -   Spring-music App을 이용하여 Pinpoint 모니터링을 테스트 하였다.
--   앱을 다운로드 후 –b 옵션을 주어 buildpack을 지정하여 push 해 놓는다.
+-   앱을 다운로드 후 –b 옵션을 주어 buildpack을 지정하여 Push 해 놓는다.
 
 ```
 $ cf push -b java_buildpack_pinpoint --no-start
@@ -1046,8 +1046,7 @@ spring-music-pinpoint   stopped           0/1         512M     1G     spring-mus
 ### <div id='32'> 3.2. Sample Web App에 서비스 바인드 신청 및 App 확인
 -------------------------------------------------
 
-Sample Web App에서 Pinpoint 서비스를 사용하기 위해서는 서비스
-신청(Provision)을 해야 한다.
+Sample Web App에서 Pinpoint 서비스를 사용하기 위해서는 서비스 신청(Provision)을 해야 한다.
 
 ```  
 $ cf bind-service {App명} {서비스명}
@@ -1061,8 +1060,6 @@ $ cf bind-service {App명} {서비스명}
 
 ```
 $ cf bind-service spring-music-pinpoint pinpoint_monitoring_service
-```
-```
 ```
 
 <br>
