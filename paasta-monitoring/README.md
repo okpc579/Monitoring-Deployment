@@ -1,10 +1,10 @@
-## <div id='13'/>1. Pre-requsite
+## <div id='1'/>1. Pre-requsite
 
 1. PaaS-TA 5.0 Monitoring을 설치 하기 위해서는 bosh 설치과정에서 언급한 것 처럼 관련 deployment, release, stemcell을 PaaS-TA 사이트에서 다운로드 받아 정해진 경로에 복사 해야 한다.
 2. PaaS-TA 5.0이 설치되어 있어야 하며, monitoring Agent가 설치되어 있어야 한다.
-3. bosh login이 되어 있어야 한다.
+3. BOSH login이 되어 있어야 한다.
 
-## <div id='14'/>2.	PaaS-TA 5.0 Monitoring 설치 파일 다운로드
+## <div id='2'/>2.	PaaS-TA 5.0 Monitoring 설치 파일 다운로드
 
 > **[설치 파일 다운로드 받기](https://paas-ta.kr/download/package)**
 
@@ -14,7 +14,7 @@ PaaS-TA 사이트에서 [PaaS-TA 설치 릴리즈] 파일을 다운로드 받아
 
 ![PaaSTa_release_dir_5.0]
 
-## <div id='15'/>3. PaaS-TA Monitoring 설치환경
+## <div id='3'/>3. PaaS-TA Monitoring 설치환경
 
 ${HOME}/workspace/paasta-5.0/deployment/paasta-deployment-monitoring 이하 디렉토리에는 paasta-monitoring, paasta-pinpoint-monitoring 디렉토리가 존재한다. Logsearch는 logAgent에서 발생한 Log정보를 수집하여 저장하는 Deployment이다. paasta-monitoring은 PaaS-TA VM에서 발생한 Metric 정보를 수집하여 Monitoring을 실행한다.
 
@@ -22,7 +22,7 @@ ${HOME}/workspace/paasta-5.0/deployment/paasta-deployment-monitoring 이하 디�
 $ cd ${HOME}/workspace/paasta-5.0/deployment/paasta-deployment-monitoring
 ```
 
-## <div id='20'/>4.	PaaS-TA Monitoring 설치
+## <div id='4'/>4.	PaaS-TA Monitoring 설치
 
 PaaS Monitoring을 위해서 paasta-monitoring이 설치되어야 한다. 
 
@@ -30,7 +30,7 @@ PaaS Monitoring을 위해서 paasta-monitoring이 설치되어야 한다.
 $ cd ${HOME}/workspace/paasta-5.0/deployment/paasta-deployment-monitoring/paasta-monitoring
 ```
 
-### <div id='21'/>4.1.	paasta-monitoring.yml
+### <div id='5'/>4.1.	paasta-monitoring.yml
 paasta-monitoring.yml에는 redis, influxdb(metric_db), mariadb, monitoring-web, monitoring-batch에 대한 명세가 있다.
 
 ```
@@ -319,7 +319,7 @@ update:
 
 ```
 
-### <div id='22'/>4.2.	deploy-paasta-monitoring.sh
+### <div id='6'/>4.2.	deploy-paasta-monitoring.sh
 deploy-paasta-monitoring.sh의 –v 의 inception_os_user_name, system_domain 및 director_name을 시스템 상황에 맞게 설정한다.
 
 ```
@@ -391,7 +391,7 @@ $ bosh –e {director_name} vms
 ![PaaSTa_monitoring_vms_5.0]
 
 
-## <div id='24'/>5. PaaS-TA Monitoring dashboard 접속
+## <div id='7'/>5. PaaS-TA Monitoring dashboard 접속
  
  http://{monit_public_ip}:8080/public/login.html 에 접속하여 회원 가입 후 Main Dashboard에 접속한다.
 
