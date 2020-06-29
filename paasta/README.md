@@ -690,6 +690,11 @@ $ chmod +x ${HOME}/workspace/paasta-5.0/deployment/paasta-deployment-monitoring/
 <td></td>
 </tr>
 <tr>
+<td>operations/use-compiled-releases-postgres.yml</td>
+<td>PaaS-TA release에서 제공하는 파일로 다운로드 및 컴파일 없이 Postgres의 빠른 설치가 가능하다.</td>
+<td></td>
+</tr>
+<tr>
 <td>operations/use-haproxy.yml</td>
 <td>Haproxy 적용 <br>
     - IaaS에서 제공하는 LB를 사용하여 PaaS-TA 설치 시, Operation 파일을 제거하고 설치한다.
@@ -710,12 +715,22 @@ $ chmod +x ${HOME}/workspace/paasta-5.0/deployment/paasta-deployment-monitoring/
 </td>
 </tr>
 <tr>
+<td>operations/use-compiled-releases-haproxy.yml</td>
+<td>PaaS-TA release에서 제공하는 파일로 다운로드 및 컴파일 없이 HAProxy의 빠른 설치가 가능하다.</td>
+<td></td>
+</tr>
+<tr>
 <td>paasta-addon/paasta-monitoring.yml</td>
 <td>PaaS-TA Monitoring Agent 적용
 </td>
 <td>Requires value :  <br>
     -v metric_url
 </td>
+</tr>
+<tr>
+<td>paasta-addon/use-compiled-releases-monitoring-agent.yml</td>
+<td>PaaS-TA release에서 제공하는 파일로 다운로드 및 컴파일 없이 PaaS-TA Monitoring-agent의 빠른 설치가 가능하다.</td>
+<td></td>
 </tr>
 <tr>
 <td>operations/addons/enable-component-syslog.yml</td>
@@ -727,6 +742,11 @@ $ chmod +x ${HOME}/workspace/paasta-5.0/deployment/paasta-deployment-monitoring/
     -v syslog_custome_rule <br>
     -v syslog_failback_servers
 </td>
+</tr>
+<tr>
+<td>operations/addons/use-compiled-releases-syslog.yml</td>
+<td>PaaS-TA release에서 제공하는 파일로 다운로드 및 컴파일 없이 Syslog의 빠른 설치가 가능하다.</td>
+<td></td>
 </tr>
 </table>
 
