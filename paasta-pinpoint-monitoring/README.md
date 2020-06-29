@@ -142,7 +142,7 @@ BOSH CLI v2 가 설치 되어 있지 않을 경우 먼저 BOSH2.0 설치 가이�
 
 - **사용 예시**
 
-		$ cd #{HOME}/workspace/paasta-5.0/release/paasta-monitoring
+		$ cd ${HOME}/workspace/paasta-5.0/release/paasta-monitoring
 		
 		$ bosh -e micro-bosh upload-release  paasta-pinpoint-monitoring-release.tgz
 
