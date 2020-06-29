@@ -235,7 +235,7 @@ BOSH CLI v2 가 설치 되어 있지 않을 경우 먼저 BOSH2.0 설치 가이�
 BOSH Deployment manifest 는 Components 요소 및 배포의 속성을 정의한 YAML 파일이다.
 Deployment manifest 에는 Software를 설치 하기 위해서 어떤 Stemcell (OS, BOSH Agent) 을 사용할것이며 Release (Software Packages, Config Templates, Scripts) 이름과 버전, VMs 용량, Jobs Params 등을 정의가 되어 있다.
 
-deployment 파일에서 사용하는 network, vm_type 등은 cloud config 를 활용하고 해당 가이드는 BOSH 2.0 가이드를 참고한다.
+deployment 파일에서 사용하는 network, vm_type 등은 cloud config 를 활용하고 해당 가이드는 PaaS-TA 가이드를 참고한다.
 
 -	cloud config 내용 조회
 
