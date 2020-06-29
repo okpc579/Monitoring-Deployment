@@ -251,7 +251,7 @@ compilation:
   vm_type: large
   workers: 5
 
-## disk type :: 디스크 유형(disk type, persistent disk)을 정의한다.
+## disk type :: 디스크 유형(Disk type, Persistent disk)을 정의한다.
 disk_types:
 - disk_size: 1024
   name: default
