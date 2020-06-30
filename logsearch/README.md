@@ -386,14 +386,12 @@ elasticsearch_master_vm_type: "medium"		# Elasticsearch-Master VM 종류
 elasticsearch_master_network: "default"		# Elasticsearch-Master 네트워크
 elasticsearch_master_persistent_disk_type: "10GB"	# Elasticsearch-Master 영구 Disk 종류
 
-
 # CLUSTER-MONITOR
 cluster_monitor_azs: ["z6"]			# Cluster-Monitor 가용 존
 cluster_monitor_instances: 1			# Cluster-Monitor 인스턴스 수
 cluster_monitor_vm_type: "medium"		# Cluster-Monitor VM 종류
 cluster_monitor_network: "default"		# Cluster-Monitor 네트워크
 cluster_monitor_persistent_disk_type: "10GB"	# Cluster-Monitor 영구 Disk 종류
-
 
 # MAINTENANCE
 maintenance_azs: ["z5", "z6"]			# Maintenance 가용 존
