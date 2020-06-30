@@ -4,6 +4,7 @@ inception_os_user_name: "ubuntu"		# Home User Name (Release File Path 설정 시
 network_name: "default"				# VM에 별도로 지정하지 않는 Default Network Name
 haproxy_public_ip: "61.252.53.246"		# HAProxy IP (Public IP)
 haproxy_public_network_name: "vip"		# PaaS-TA Public Network Name
+haproxy_private_network_name: "private"		# PaaS-TA Private Network name	
 cc_db_encryption_key: "db-encryption-key"	# Database Encryption Key (Version Upgrade 시 동일 KEY 필수)
 uaa_database_password: "uaa_admin"		# UAA Database Password
 cc_database_password: "cc_admin"		# CC Database Password
