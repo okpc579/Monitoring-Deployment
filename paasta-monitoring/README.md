@@ -27,10 +27,10 @@ PaaS-TA 사이트에서 [PaaS-TA 설치 릴리즈] 파일을 다운로드 받아
 
 ## <div id='3'/>3. PaaS-TA Monitoring 설치환경
 
-${HOME}/workspace/paasta-5.0/deployment/paasta-deployment-monitoring 이하 디렉토리에는 paasta-monitoring, paasta-pinpoint-monitoring 디렉토리가 존재한다. Logsearch는 Log agent에서 발생한 Log정보를 수집하여 저장하는 Deployment이다. paasta-monitoring은 PaaS-TA VM에서 발생한 Metric 정보를 수집하여 Monitoring을 실행한다.
+${HOME}/workspace/paasta-5.0/deployment/monitoring-deployment 이하 디렉토리에는 paasta-monitoring, paasta-pinpoint-monitoring 디렉토리가 존재한다. Logsearch는 Log agent에서 발생한 Log정보를 수집하여 저장하는 Deployment이다. paasta-monitoring은 PaaS-TA VM에서 발생한 Metric 정보를 수집하여 Monitoring을 실행한다.
 
 ```
-$ cd ${HOME}/workspace/paasta-5.0/deployment/paasta-deployment-monitoring
+$ cd ${HOME}/workspace/paasta-5.0/deployment/monitoring-deployment
 ```
 
 ## <div id='4'/>4.	PaaS-TA Monitoring 설치
@@ -38,7 +38,7 @@ $ cd ${HOME}/workspace/paasta-5.0/deployment/paasta-deployment-monitoring
 PaaS Monitoring을 위해서 paasta-monitoring이 설치되어야 한다. 
 
 ```
-$ cd ${HOME}/workspace/paasta-5.0/deployment/paasta-deployment-monitoring/paasta-monitoring
+$ cd ${HOME}/workspace/paasta-5.0/deployment/monitoring-deployment/paasta-monitoring
 ```
 
 ### <div id='5'/>4.1.	paasta-monitoring.yml
@@ -333,6 +333,30 @@ bosh -e {director_name} -n -d paasta-monitoring deploy paasta-monitoring.yml  \
 	-l paasta-monitoring-vars.yml \
 	-l ../../common/common_vars.yml
 ```
+### <div id='7'/>4.3.	common_vars.sh
+```
+# BOSH
+bosh_url: "10.0.1.6"				# BOSH URL ('bosh env' 명령어를 통해 확인 가능)
+bosh_client_admin_id: "admin"			# BOSH Client Admin ID
+bosh_client_admin_secret: "ert7na4jpewscztsxz48"	# BOSH Client Admin Secret
+
+# PAAS-TA
+system_domain: "61.252.53.246.xip.io"		# Domain (xip.io를 사용하는 경우 HAProxy Public IP와 동일)
+paasta_admin_username: "admin"			# PaaS-TA Admin Username
+paasta_admin_password: "admin"			# PaaS-TA Admin Password
+uaa_client_admin_secret: "admin-secret"		# UAAC Admin Client에 접근하기 위한 Secret 변수
+uaa_client_portal_secret: "clientsecret"	# UAAC Portal Client에 접근하기 위한 Secret 변수
+
+# MONITORING
+metric_url: "10.0.161.101"			# Monitoring InfluxDB IP
+syslog_address: "10.0.121.100"            	# Logsearch의 ls-router IP
+syslog_port: "2514"                          	# Logsearch의 ls-router Port
+syslog_transport: "relp"                        # Logsearch Protocol
+monitoring_api_url: "61.252.53.241"        	# Monitoring-WEB의 Public IP
+saas_monitoring_url: "61.252.53.248"	   	# Pinpoint HAProxy WEBUI의 Public IP
+```
+
+
 ### <div id='7'/>4.3. paasta-monitoring-vars.yml	
 deploy-paasta-monitoring.sh의 –v 의 inception_os_user_name, system_domain 및 director_name을 시스템 상황에 맞게 설정한다.
 
@@ -357,7 +381,7 @@ redis_ip: "10.0.121.101"		# Redis Private IP
 redis_password: "password"		# Redis 인증 Password
 utc_time_gap: "9"			# UTC Time Zone과 Client Time Zone과의 시간 차이
 public_network_name: "vip"		# Monitoring-WEB Public Network Name
-system_type: "PaaS,CaaS,SaaS"		# 모니터링할 환경 선택
+system_type: "PaaS,CaaS,SaaS"		# 모니터링 할 환경 선택
 prometheus_ip: "10.0.121.122"		# Kubernates의 prometheus-prometheus-prometheus-oper-prometheus-0 Pod의 Node IP
 kubernetes_ip: "10.0.0.124"		# Kubernates의 서비스 API IP
 pinpoint_was_ip: "10.0.0.122"		# Pinpoint HAProxy WEBUI Private IP
@@ -425,7 +449,7 @@ Note:
 1) MariaDB, InfluxDB, Redis VM은 사용자가 직접 IP를 지정한다. IP 지정시 paasta-monitoring.yml의 AZ와 cloud-config의 Subnet이 일치하는 IP대역내에 IP를 지정한다.
 2) bosh_url: BOSH 설치시 설정한 BOSH Private IP
 3) bosh_password: BOSH Admin Password로 BOSH Deploy시 생성되는 BOSH Admin Password를 입력해야 한다. 
-${HOME}/workspace/paasta-5.0/deployment/bosh-deployment/{iaas}/creds.yml
+${HOME}/workspace/paasta-5.0/deployment/paasta-deployment/bosh/{iaas}/creds.yml
 creds.yml
 admin_password: xxxxxxxxx 
 4) smtp_url: SMTP Server IP (PaaS-TA를 설치한 시스템에서 사용가능한 SMTP 서버 IP
@@ -444,7 +468,7 @@ admin_password: xxxxxxxxx
 
 deploy-paasta-monitoring.sh을 실행하여 PaaS-TA Monitoring을 설치 한다
 ```
-$ cd ${HOME}/workspace/paasta-5.0/deployment/paasta-deployment-monitoring/paasta-monitoring
+$ cd ${HOME}/workspace/paasta-5.0/deployment/monitoring-deployment/paasta-monitoring
 $ deploy-paasta-monitoring.sh
 ```
 
@@ -457,7 +481,7 @@ $ bosh –e {director_name} vms
 
 ## <div id='7'/>5. PaaS-TA Monitoring Dashboard 접속
  
- http://{monit_public_ip}:8080/public/login.html 에 접속하여 회원 가입 후 Main Dashboard에 접속한다.
+ http://{monitoring_api_url}:8080/public/login.html 에 접속하여 회원 가입 후 Main Dashboard에 접속한다.
 
  Login 화면에서 회원 가입 버튼을 클릭한다.
 
