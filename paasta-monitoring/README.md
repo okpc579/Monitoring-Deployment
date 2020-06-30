@@ -3,10 +3,10 @@
 - 2\. [PaaS-TA 5.0 Monitoring 설치 파일 다운로드](#2)
 - 3\. [PaaS-TA Monitoring 설치환경](#3)
 - 4\. [PaaS-TA Monitoring 설치](#4)
-  - 4.1\. [paasta-monitoring.yml](#5)
-  - 4.2\. [deploy-paasta-monitoring.sh](#6)
-  - 4.3\. [common_vars.yml](#7)
-  - 4.3\. [paasta-monitoring-vars.yml](#8)
+  - [paasta-monitoring.yml](#5)
+  - [deploy-paasta-monitoring.sh](#6)
+  - [common_vars.yml](#7)
+  - [paasta-monitoring-vars.yml](#8)
 - 5\. [PaaS-TA Monitoring Dashboard 접속](#9)
 
 
