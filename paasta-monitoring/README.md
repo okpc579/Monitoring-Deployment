@@ -7,7 +7,7 @@
   - 4.2. [deploy-paasta-monitoring.sh](#6)
   - 4.3. [common_vars.yml](#7)
   - 4.3. [paasta-monitoring-vars.yml](#8)
-4. [PaaS-TA Monitoring Dashboard 접속](#9)
+5. [PaaS-TA Monitoring Dashboard 접속](#9)
 
 
 ## <div id='1'/>1. Pre-requsite
