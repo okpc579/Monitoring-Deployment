@@ -1,7 +1,7 @@
 ## Table of Contents
 
-* 1. [Prerequisite](#1)
-* 2. [Logsearch 설치](#2)
+* 1\. [Prerequisite](#1)
+* 2\. [Logsearch 설치](#2)
   * [logsearch-deployment.yml](#3)
   * [deploy-logsearch.sh](#4)
   * [logsearch-vars.yml](#5)
