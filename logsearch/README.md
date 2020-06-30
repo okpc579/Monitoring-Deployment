@@ -1,11 +1,17 @@
 ## Table of Contents
 
-1. [Logsearch 설치](#1)
-  * [logsearch-deployment.yml](#2)
-  * [deploy-logsearch.sh](#3)
-  * [logsearch-vars.yml](#4)
+1. [Prerequisite](#1)
+2. [Logsearch 설치](#2)
+  * [logsearch-deployment.yml](#3)
+  * [deploy-logsearch.sh](#4)
+  * [logsearch-vars.yml](#5)
 
-## <div id='1'/>1. Logsearch 설치
+## <div id='1'/>1. Prerequisite
+
+1. BOSH 설치가 되어있으며, BOSH Login이 되어 있어야 한다.
+2. BOSH 설치과정에서 언급한 것 처럼 관련 deployment, release, stemcell을 PaaS-TA 사이트에서 다운로드 받아 정해진 경로에 복사 해야 한다.<br>(release, stemcell은 선택사항)
+
+## <div id='1'/>2. Logsearch 설치
 
 PaaS-TA VM Log수집을 위해서는 Logsearch가 설치되어야 한다. 
 
@@ -13,7 +19,7 @@ PaaS-TA VM Log수집을 위해서는 Logsearch가 설치되어야 한다.
 $ cd ${HOME}/workspace/paasta-5.0/deployment/monitoring-deployment/paasta-monitoring
 ```
 
-### <div id='2'/>1.1.	logsearch-deployment.yml
+### <div id='2'/>2.1.	logsearch-deployment.yml
 logsearch-deployment.yml에는 ls-router, cluster-monitor, elasticsearch_data, elastic_master, kibana, mainternance 의 명세가 정의되어 있다. 
 
 ```
@@ -350,7 +356,7 @@ stemcells:
   version: ((stemcell_version)) 
 ```
 
-### <div id='3'/>1.2. deploy-logsearch.sh
+### <div id='4'/>2.2. deploy-logsearch.sh
 
 deploy.sh의 –v 의 inception_os_user_name, router_ip, system_domain 및 director_name을 시스템 상황에 맞게 설정한다.
 system_domain은 PaaS-TA 설치시 설정했던 system_domain을 입력하면 된다.
@@ -363,7 +369,7 @@ bosh –e {director_name} -d logsearch deploy logsearch-deployment.yml \
 	-l ../../common/common_vars.yml
 ```
 
-### <div id='4'/>1.3. logsearch-vars.yml
+### <div id='5'/>2.3. logsearch-vars.yml
 
 ```
 # SERVICE VARIABLE
