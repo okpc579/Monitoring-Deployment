@@ -570,7 +570,7 @@ haproxy_webui_persistent_disk_type: "30GB"		# HAProxy-WEBUI 영구 Disk 종류
 
 - **사용 예시**
 
-		$ cd ${HOME}/workspace/paasta-5.0/deployment/paasta-deployment-monitoring/paasta-pinpoint-monitoring
+		$ cd ${HOME}/workspace/paasta-5.0/deployment/monitoring-deployment/paasta-pinpoint-monitoring
 		$ ./deploy-pinpoint.sh
 		  Using deployment 'paasta-pinpoint-monitoring'
 
