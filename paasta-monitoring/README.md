@@ -383,11 +383,11 @@ redis_password: "password"		# Redis 인증 Password
 utc_time_gap: "9"			# UTC Time Zone과 Client Time Zone과의 시간 차이
 public_network_name: "vip"		# Monitoring-WEB Public Network Name
 system_type: "PaaS,CaaS,SaaS"		# 모니터링 할 환경 선택
-prometheus_ip: "10.0.121.122"		# Kubernates의 prometheus-prometheus-prometheus-oper-prometheus-0 Pod의 Node IP
-kubernetes_ip: "10.0.0.124"		# Kubernates의 서비스 API IP
+prometheus_ip: "10.0.121.122"		# Kubernates의 prometheus-prometheus-prometheus-oper-prometheus-0 Pod의 Node IP 참조) [3.6.4. prometheus-prometheus-prometheus-oper-prometheus-0 POD의 Node IP를 확인한다.](#19-5)   
+kubernetes_ip: "10.0.0.124"		# Kubernates의 서비스 API IP 참조) [3.6.5. Kubernetes API URL serverAddress를 확인한다.](#19-6)
 pinpoint_was_ip: "10.0.0.122"		# Pinpoint HAProxy WEBUI Private IP
 cassbroker_ip: "52.141.6.113"		# CaaS 서비스 로그인 인증 처리를 위한 API IP
-kubernetes_token: "eyJhbGciOiJSUzI1NiIsImtpZCI6IiJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlLXN5c3RlbSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJtb25pdG9yaW5nLWFkbWluLXRva2VuLWQ0OXc3Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQubmFtZSI6Im1vbml0b3JpbmctYWRtaW4iLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiI4MDkwNTU5Yy0wYzE2LTExZWEtYjZiYi0wMDIyNDgwNTk4NzciLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6a3ViZS1zeXN0ZW06bW9uaXRvcmluZy1hZG1pbiJ9.ZKPWJLo0LFXY9ZpW7nGlTBLJYDNL7MFB9X1i4JoEn8jPLsCQhG3lvzTjh7420lvoP5hWdV0SpsMMfZnV2WFFUWaQkYcnKhB2qsVX_xOd45gm2IfI-f1QmxcAspoGY_r8kC-vX9L4oTLA5sJTI5m_RIiuckVGcVR0OeWB5NtUFz0-iCpQRfuy9LYH0NCEEopfDji-T0Pxta8S1n8YyxVwYKpZE0PvT9H9ZVNUUAt2Z_l4B0akP6G3O6t53Xvp_l8DXzxRFXTw3sHPvvea_Uv3QbGcFkH-gNHBeG9-F8C8NMcSlCUeyAGfxZlpsdRFMB01Wh6RZzvUqeS8Kc-8Csp_jw"	# Kubernetes 서비스 API Request 호출시 Header(Authorization) 인증을 위한 Token값
+kubernetes_token: "eyJhbGciOiJSUzI1NiIsImtpZCI6IiJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlLXN5c3RlbSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJtb25pdG9yaW5nLWFkbWluLXRva2VuLWQ0OXc3Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQubmFtZSI6Im1vbml0b3JpbmctYWRtaW4iLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiI4MDkwNTU5Yy0wYzE2LTExZWEtYjZiYi0wMDIyNDgwNTk4NzciLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6a3ViZS1zeXN0ZW06bW9uaXRvcmluZy1hZG1pbiJ9.ZKPWJLo0LFXY9ZpW7nGlTBLJYDNL7MFB9X1i4JoEn8jPLsCQhG3lvzTjh7420lvoP5hWdV0SpsMMfZnV2WFFUWaQkYcnKhB2qsVX_xOd45gm2IfI-f1QmxcAspoGY_r8kC-vX9L4oTLA5sJTI5m_RIiuckVGcVR0OeWB5NtUFz0-iCpQRfuy9LYH0NCEEopfDji-T0Pxta8S1n8YyxVwYKpZE0PvT9H9ZVNUUAt2Z_l4B0akP6G3O6t53Xvp_l8DXzxRFXTw3sHPvvea_Uv3QbGcFkH-gNHBeG9-F8C8NMcSlCUeyAGfxZlpsdRFMB01Wh6RZzvUqeS8Kc-8Csp_jw"	# Kubernetes 서비스 API Request 호출시 Header(Authorization) 인증을 위한 Token값 참조) [3.6.6. Kubernetes API Request 호출시 Header(Authorization) 인증을 위한 Token값을 확인한다.](#19-7) 
 
 # STEMCELL
 stemcell_os: "ubuntu-xenial"		# Stemcell OS
@@ -444,28 +444,6 @@ monitoring_web_instances: 1		# Monitoring-WEB 인스턴스 수
 monitoring_web_vm_type: "small"		# Monitoring-WEB VM 종류
 monitoring_web_network: "default"	# Monitoring-WEB 네트워크
 ```
-
-
-Note: 
-1) MariaDB, InfluxDB, Redis VM은 사용자가 직접 IP를 지정한다. IP 지정시 paasta-monitoring.yml의 AZ와 cloud-config의 Subnet이 일치하는 IP대역내에 IP를 지정한다.
-2) bosh_url: BOSH 설치시 설정한 BOSH Private IP
-3) bosh_password: BOSH Admin Password로 BOSH Deploy시 생성되는 BOSH Admin Password를 입력해야 한다. 
-${HOME}/workspace/paasta-5.0/deployment/paasta-deployment/bosh/{iaas}/creds.yml
-creds.yml
-admin_password: xxxxxxxxx 
-4) smtp_url: SMTP Server IP (PaaS-TA를 설치한 시스템에서 사용가능한 SMTP 서버 IP
-5) monit_public_ip: Monitoring WEB의 Public IP로 외부에서 Monitoring 화면에 접속하기 위해 필요한 외부 IP(Public IP 필요)
-6) system_domain: PaaS-TA를 설치 할때 설정한 system_domain을 입력한다.
-7) pinpoint_ip는 설지한 pinpoint_haproxy_webui Public IP를 지정한다.
-8) pinpoint_was_ip는 설치한 pinpoint_haproxy_webui 내부 IP를 지정한다
-9) prometheus_ip는 Kubernetes의 prometheus-prometheus-prometheus-oper-prometheus-0 Pod의 Node ip를 지정한다.
-    <br>
-   참조) [3.6.4. prometheus-prometheus-prometheus-oper-prometheus-0 POD의 Node IP를 확인한다.](#19-5)   
-10) kubernetes_ip는 Kubernetes의 서비스 API IP를 지정한다.   
-   참조) [3.6.5. Kubernetes API URL serverAddress를 확인한다.](#19-6)
-11) kubernetes_token는 Kubernetes 서비스 API를 Request 호출할 수 있도록 Header에 설정하는 인증 토큰값을 지정한다.
-   참조) [3.6.6. Kubernetes API Request 호출시 Header(Authorization) 인증을 위한 Token값을 확인한다.](#19-7) 
-12) cassbroker_ip는 CaaS 서비스 로그인 인증 처리를 위한 API IP를 지정한다.        
 
 deploy-paasta-monitoring.sh을 실행하여 PaaS-TA Monitoring을 설치 한다
 ```
