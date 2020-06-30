@@ -162,7 +162,7 @@ $ bosh -e {director_name} upload-stemcell ${HOME}/workspace/paasta-5.0/stemcell/
 ## <div id='1012'/>3.4.  Cloud Config 설정
 
 PaaS-TA를 설치하기 위한 IaaS 관련 Network, Storage, VM 관련 설정을 Cloud Config로 정의한다. 
-PaaS-TA 설치 파일을 내려받으면 ${HOME}/workspace/paasta-5.0/deployment/cloud-config 디렉터리 이하에 IaaS별 Cloud Config 예제를 확인할 수 있으며, 예제를 참고하여 cloud-config.yml을 IaaS에 맞게 수정한다. PaaS-TA 배포 전에 Cloud Config를 BOSH에 적용해야 한다. 
+PaaS-TA 설치 파일을 내려받으면 ${HOME}/workspace/paasta-5.0/deployment/paasta-deployment/cloud-config 디렉터리 이하에 IaaS별 Cloud Config 예제를 확인할 수 있으며, 예제를 참고하여 cloud-config.yml을 IaaS에 맞게 수정한다. PaaS-TA 배포 전에 Cloud Config를 BOSH에 적용해야 한다. 
 
 - OpenStack을 기준으로 한 cloud-config.yml 예제
 
@@ -418,7 +418,7 @@ vm_extensions:
 - Cloud Config 업데이트
 
 ```
-$ bosh –e {director_name} update-cloud-config ${HOME}/workspace/paasta-5.0/deployment/cloud-config/{iaas}_cloud_config.yml
+$ bosh –e {director_name} update-cloud-config ${HOME}/workspace/paasta-5.0/deployment/paasta-deployment/cloud-config/{iaas}-cloud-config.yml
 ```
 
 - Cloud Config 확인
@@ -433,7 +433,7 @@ PaaS-TA에서 제공되는 Cloud Config 예제는 z1 ~ z6까지 설정되어 있
 
 ### <div id='1014'/>3.4.2. VM Types
 
-vm type은 IaaS에서 정의된 VM Type이다. Openstack의 경우에는 Flavor Type이다.
+VM Type은 IaaS에서 정의된 VM Type이다. Openstack의 경우에는 Flavor Type이다.
 
 ※ 다음은 OpenStack에서 정의한 Flavor Type이다.
 ![PaaSTa_FLAVOR_Image]
@@ -447,7 +447,7 @@ PaaS-TA 및 서비스 설치 시, PaaS-TA는 Compile VM을 생성하여 소스�
 PaaS-TA 및 서비스가 설치되는 VM의 Persistent Disk Size이다.
 
 ### <div id='1017'/>3.4.5. Networks
-networks는 AZ 별 Subnet Network, DNS, Security Groups, Network ID를 정의한다.
+Networks는 AZ 별 Subnet Network, DNS, Security Groups, Network ID를 정의한다.
 보통 AZ 별로 256개의 IP를 정의할 수 있도록 Range Cider를 정의한다.
 
 ## <div id='1018'/>3.5.  Runtime Config 설정
@@ -457,7 +457,7 @@ PaaS-TA 4.0부터 적용되는 부분으로 PaaS-TA Component에서 Consul이 �
 - Runtime Config 업데이트 Shell Script 파일 확인
 
 ```
-$ vi ${HOME}/workspace/paasta-5.0/deployment/bosh-deployment/update-runtime-config.sh
+$ vi ${HOME}/workspace/paasta-5.0/deployment/paasta-deployment/bosh/update-runtime-config.sh
 
 bosh -e {director-name} update-runtime-config runtime-configs/dns.yml \
 -v cert_days=3650                                               # PaaS-TA 인증서 유효기간
@@ -466,13 +466,13 @@ bosh -e {director-name} update-runtime-config runtime-configs/dns.yml \
 - Runtime Config 업데이트 Shell Script 파일에 실행 권한 부여
 
 ```
-$ chmod +x ${HOME}/workspace/paasta-5.0/deployment/bosh-deployment/update-runtime-config.sh
+$ chmod +x ${HOME}/workspace/paasta-5.0/deployment/paasta-deployment/bosh/update-runtime-config.sh
 ```
 
 - Runtime Config 업데이트 Shell Script 파일 실행 (BOSH 로그인 필요)
 
 ```
-$ cd ${HOME}/workspace/paasta-5.0/deployment/bosh-deployment
+$ cd ${HOME}/workspace/paasta-5.0/deployment/paasta-deployment/bosh
 $ ./update-runtime-config.sh
 ```
 
@@ -623,8 +623,6 @@ bosh -e micro-bosh -d paasta -n deploy paasta-deployment-monitoring.yml \
 	-l ../common/common_vars.yml
 ```
 
-
-
 ### <div id='1025'/>3.7.4. deploy-openstack-monitoring.sh
 ```
 bosh -e micro-bosh -d paasta -n deploy paasta-deployment-monitoring.yml \
@@ -665,7 +663,7 @@ bosh -e micro-bosh -d paasta -n deploy paasta-deployment-monitoring.yml \
 - Shell script 파일에 실행 권한 부여
 
 ```
-$ chmod +x ${HOME}/workspace/paasta-5.0/deployment/paasta-deployment-monitoring/*.sh
+$ chmod +x ${HOME}/workspace/paasta-5.0/deployment/monitoring-deployment/paasta/*.sh
 ```
 
 ### <div id='1028'/>3.7.6. PaaS-TA Operation 파일
@@ -752,7 +750,7 @@ $ chmod +x ${HOME}/workspace/paasta-5.0/deployment/paasta-deployment-monitoring/
 
 Monitoring Agent는 BOSH VM의 상태 정보(Metric data)를 paasta-monitoring의 InfluxDB에 전송한다. 
 Syslog Agent는 BOSH VM의 log 정보를 logsearch의 ls-router에 전송하는 역할을 한다.
-BOSH 설치 전에 paasta-monitoring의 Influxdb IP를 metric_url로 사용하기 위해 사전에 정의해야 한다. 마찬가지로 logsearch의 ls-router IP도 syslog_address로 연동하기 위해 사전에 정의해야 한다.
+BOSH 설치 전에 paasta-monitoring의 InfluxDB IP를 metric_url로 사용하기 위해 사전에 정의해야 한다. 마찬가지로 logsearch의 ls-router IP도 syslog_address로 연동하기 위해 사전에 정의해야 한다.
 
 ### <div id='1029'/>3.7.8. common_vars.yml
 ```
@@ -990,7 +988,7 @@ ex) uaa_admin_client_secret="admin-secret"
 - PaaS-TA 설치 Shell Script 파일 실행 (BOSH 로그인 필요)
 
 ```
-$ cd ${HOME}/workspace/paasta-5.0/deployment/paasta-deployment-monitoring
+$ cd ${HOME}/workspace/paasta-5.0/deployment/monitoring-deployment
 $ ./deploy-{IaaS}-monitoring.sh
 ```
 
