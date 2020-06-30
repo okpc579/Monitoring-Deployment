@@ -5,13 +5,7 @@
   * [deploy-logsearch.sh](#3)
   * [logsearch-vars.yml](#4)
 
-## <div id='1'/>1. 문서 개요
-
-### <div id='2'/>1.1. 목적
-
-### <div id='2'/>1.2. 설치 전 준비사항
-
-## <div id='1'/>2. Logsearch 설치
+## <div id='1'/>1. Logsearch 설치
 
 PaaS-TA VM Log수집을 위해서는 Logsearch가 설치되어야 한다. 
 
@@ -369,11 +363,10 @@ bosh –e {director_name} -d logsearch deploy logsearch-deployment.yml \
 	-l ../../common/common_vars.yml
 ```
 
-### <div id='4'/>1.2. logsearch-vars.yml
+### <div id='4'/>1.3. logsearch-vars.yml
 
 ```
-# SERVIC
-E VARIABLE
+# SERVICE VARIABLE
 inception_os_user_name: "ubuntu"		# Deployment Name
 
 # STEMCELL

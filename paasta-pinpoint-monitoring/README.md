@@ -36,15 +36,15 @@ PaaS-TA 3.5 버전부터는 BOSH 2.0 기반으로 deploy를 진행하며 기존 
     <th>스펙</th>
   </tr>
   <tr>
-  <td>collector      </td><td>small-highmem-16GB</td><td>2vCPU / 2GB RAM / 8GB Disk</td>
+  <td>collector      </td><td>pinpoint_medium</td><td>2vCPU / 2GB RAM / 8GB Disk</td>
   </tr>
-  <td>h_master      </td><td>small-highmem-16GB</td><td>2vCPU / 2GB RAM / 8GB Disk</td>
-  </tr>
-  <tr>
-  <td>haproxy_webui </td><td>small-highmem-16GB</td><td>1vCPU / 1GB RAM / 4GB Disk</td>
+  <td>h_master      </td><td>pinpoint_medium</td><td>2vCPU / 2GB RAM / 8GB Disk</td>
   </tr>
   <tr>
-  <td>pinpoint_web          </0><td>small-highmem-16GB</td><td>1vCPU / 1GB RAM / 4GB Disk</td>
+  <td>haproxy_webui </td><td>services-small</td><td>1vCPU / 1GB RAM / 4GB Disk</td>
+  </tr>
+  <tr>
+  <td>pinpoint_web          </0><td>services-small	</td><td>1vCPU / 1GB RAM / 4GB Disk</td>
   </tr>
 </table>
 
@@ -142,7 +142,7 @@ BOSH CLI v2 가 설치 되어 있지 않을 경우 먼저 BOSH2.0 설치 가이�
 
 - **사용 예시**
 
-		$ cd #{HOME}/workspace/paasta-5.0/release/paasta-monitoring
+		$ cd ${HOME}/workspace/paasta-5.0/release/paasta-monitoring
 		
 		$ bosh -e micro-bosh upload-release  paasta-pinpoint-monitoring-release.tgz
 
@@ -235,7 +235,7 @@ BOSH CLI v2 가 설치 되어 있지 않을 경우 먼저 BOSH2.0 설치 가이�
 BOSH Deployment manifest 는 Components 요소 및 배포의 속성을 정의한 YAML 파일이다.
 Deployment manifest 에는 Software를 설치 하기 위해서 어떤 Stemcell (OS, BOSH Agent) 을 사용할것이며 Release (Software Packages, Config Templates, Scripts) 이름과 버전, VMs 용량, Jobs Params 등을 정의가 되어 있다.
 
-deployment 파일에서 사용하는 network, vm_type 등은 cloud config 를 활용하고 해당 가이드는 BOSH 2.0 가이드를 참고한다.
+deployment 파일에서 사용하는 network, vm_type 등은 cloud config 를 활용하고 해당 가이드는 PaaS-TA 가이드를 참고한다.
 
 -	cloud config 내용 조회
 
@@ -1003,11 +1003,11 @@ pinpoint_monitoring_service   user-provided
 
 Sample Web App은 PaaS-TA에 App으로 배포가 된다. 배포된
 App에 Pinpoint 서비스 Bind 를 통하여 초기 데이터를 생성하게 된다. 바인드
-완료 후 연결 url을 통하여 브라우저로 해당 App에 대한 Pinpoint 서비스
-모니터링을 할 수 있다.
+완료 후 연결 URL을 통하여 브라우저로 해당 App에 대한 Pinpoint 서비스
+모니터링을 할 수 0있다.
 
 -   Spring-music App을 이용하여 Pinpoint 모니터링을 테스트 하였다.
--   앱을 다운로드 후 –b 옵션을 주어 buildpack을 지정하여 push 해 놓는다.
+-   앱을 다운로드 후 –b 옵션을 주어 buildpack을 지정하여 Push 해 놓는다.
 
 ```
 $ cf push -b java_buildpack_pinpoint --no-start
@@ -1046,8 +1046,7 @@ spring-music-pinpoint   stopped           0/1         512M     1G     spring-mus
 ### <div id='32'> 3.2. Sample Web App에 서비스 바인드 신청 및 App 확인
 -------------------------------------------------
 
-Sample Web App에서 Pinpoint 서비스를 사용하기 위해서는 서비스
-신청(Provision)을 해야 한다.
+Sample Web App에서 Pinpoint 서비스를 사용하기 위해서는 서비스 신청(Provision)을 해야 한다.
 
 ```  
 $ cf bind-service {App명} {서비스명}
@@ -1061,8 +1060,6 @@ $ cf bind-service {App명} {서비스명}
 
 ```
 $ cf bind-service spring-music-pinpoint pinpoint_monitoring_service
-```
-```
 ```
 
 <br>
