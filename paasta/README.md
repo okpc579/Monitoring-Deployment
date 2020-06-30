@@ -584,7 +584,7 @@ bosh -e micro-bosh -d paasta -n deploy paasta-deployment-monitoring.yml \
 	-o operations/addons/enable-component-syslog.yml \
 	-o operations/addons/use-compiled-releases-syslog.yml \
 	-l aws-vars.yml \
-	-l ../common/common_vars.yml
+	-l ../../common/common_vars.yml
 ```
 ### <div id='1023'/>3.7.2. deploy-azure-monitoring.sh
 ```
@@ -602,7 +602,7 @@ bosh -e micro-bosh -d paasta -n deploy paasta-deployment-monitoring.yml \
 	-o operations/addons/enable-component-syslog.yml \
 	-o operations/addons/use-compiled-releases-syslog.yml \
 	-l azure-vars.yml \
-	-l ../common/common_vars.yml
+	-l ../../common/common_vars.yml
 ```
 
 ### <div id='1024'/>3.7.3. deploy-gcp-monitoring.sh
@@ -620,7 +620,7 @@ bosh -e micro-bosh -d paasta -n deploy paasta-deployment-monitoring.yml \
 	-o operations/addons/enable-component-syslog.yml \
 	-o operations/addons/use-compiled-releases-syslog.yml \
 	-l gcp-vars.yml \
-	-l ../common/common_vars.yml
+	-l ../../common/common_vars.yml
 ```
 
 ### <div id='1025'/>3.7.4. deploy-openstack-monitoring.sh
@@ -639,7 +639,7 @@ bosh -e micro-bosh -d paasta -n deploy paasta-deployment-monitoring.yml \
 	-o operations/addons/enable-component-syslog.yml \
 	-o operations/addons/use-compiled-releases-syslog.yml \
 	-l openstack-vars.yml \
-	-l ../common/common_vars.yml
+	-l ../../common/common_vars.yml
 ```
 
 ### <div id='1026'/>3.7.5. deploy-vsphere-monitoring.sh
@@ -657,7 +657,7 @@ bosh -e micro-bosh -d paasta -n deploy paasta-deployment-monitoring.yml \
 	-o operations/addons/enable-component-syslog.yml \
 	-o operations/addons/use-compiled-releases-syslog.yml \
 	-l vsphere-vars.yml \
-	-l ../common/common_vars.yml
+	-l ../../common/common_vars.yml
 ```
 
 - Shell script 파일에 실행 권한 부여
