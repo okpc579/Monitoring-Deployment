@@ -10,7 +10,7 @@
 PaaS-TA VM Log수집을 위해서는 Logsearch가 설치되어야 한다. 
 
 ```
-$ cd ${HOME}/workspace/paasta-5.0/deployment/paasta-deployment-monitoring/paasta-monitoring
+$ cd ${HOME}/workspace/paasta-5.0/deployment/monitoring-deployment/paasta-monitoring
 ```
 
 ### <div id='2'/>1.1.	logsearch-deployment.yml
@@ -427,7 +427,7 @@ ls_router_network: "default"			# LS-Router 네트워크
 deploy.sh을 실행하여 logsearch를 설치 한다.
 
 ```
-$ cd ~/workspace/paasta-5.0/deployment/paasta-deployment-monitoring/paasta-monitoring
+$ cd ~/workspace/paasta-5.0/deployment/monitoring-deployment/paasta-monitoring
 $ sh deploy-logsearch.sh
 ```
 
