@@ -5,8 +5,9 @@
 4. [PaaS-TA Monitoring 설치](#4)
   - 4.1. [paasta-monitoring.yml](#5)
   - 4.2. [deploy-paasta-monitoring.sh](#6)
-  - 4.3. [paasta-monitoring-vars.yml](#7)
-4. [PaaS-TA Monitoring Dashboard 접속](#8)
+  - 4.3. [common_vars.yml](#7)
+  - 4.3. [paasta-monitoring-vars.yml](#8)
+4. [PaaS-TA Monitoring Dashboard 접속](#9)
 
 
 ## <div id='1'/>1. Pre-requsite
@@ -333,7 +334,7 @@ bosh -e {director_name} -n -d paasta-monitoring deploy paasta-monitoring.yml  \
 	-l paasta-monitoring-vars.yml \
 	-l ../../common/common_vars.yml
 ```
-### <div id='7'/>4.3.	common_vars.sh
+### <div id='7'/>4.3.	common_vars.yml
 ```
 # BOSH
 bosh_url: "10.0.1.6"				# BOSH URL ('bosh env' 명령어를 통해 확인 가능)
@@ -357,7 +358,7 @@ saas_monitoring_url: "61.252.53.248"	   	# Pinpoint HAProxy WEBUI의 Public IP
 ```
 
 
-### <div id='7'/>4.3. paasta-monitoring-vars.yml	
+### <div id='8'/>4.3. paasta-monitoring-vars.yml	
 deploy-paasta-monitoring.sh의 –v 의 inception_os_user_name, system_domain 및 director_name을 시스템 상황에 맞게 설정한다.
 
 ```
@@ -479,7 +480,7 @@ $ bosh –e {director_name} vms
 ![PaaSTa_monitoring_vms_5.0]
 
 
-## <div id='7'/>5. PaaS-TA Monitoring Dashboard 접속
+## <div id='9'/>5. PaaS-TA Monitoring Dashboard 접속
  
  http://{monitoring_api_url}:8080/public/login.html 에 접속하여 회원 가입 후 Main Dashboard에 접속한다.
 
