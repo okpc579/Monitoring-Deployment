@@ -350,20 +350,20 @@ uaa_client_portal_secret: "clientsecret"	# UAAC Portal Client에 접근하기 �
 
 # MONITORING
 metric_url: "10.0.161.101"			# Monitoring InfluxDB IP
-syslog_address: "10.0.121.100"            	# Logsearch의 ls-router IP
-syslog_port: "2514"                          	# Logsearch의 ls-router Port
-syslog_transport: "relp"                        # Logsearch Protocol
-monitoring_api_url: "61.252.53.241"        	# Monitoring-WEB의 Public IP
-saas_monitoring_url: "61.252.53.248"	   	# Pinpoint HAProxy WEBUI의 Public IP
+syslog_address: "10.0.121.100"			# Logsearch의 ls-router IP
+syslog_port: "2514"				# Logsearch의 ls-router Port
+syslog_transport: "relp"			# Logsearch Protocol
+monitoring_api_url: "61.252.53.241"		# Monitoring-WEB의 Public IP
+saas_monitoring_url: "61.252.53.248"		# Pinpoint HAProxy WEBUI의 Public IP
 ```
 
 
-### <div id='8'/>4.3. paasta-monitoring-vars.yml	
+### <div id='8'/>4.3. paasta-monitoring-vars.yml
 deploy-paasta-monitoring.sh의 –v 의 inception_os_user_name, system_domain 및 director_name을 시스템 상황에 맞게 설정한다.
 
 ```
 # SERVICE VARIABLE
-inception_os_user_name: "ubuntu"	
+inception_os_user_name: "ubuntu"
 mariadb_ip: "10.0.161.100"		# MariaDB VM Private IP
 mariadb_port: "3306"			# MariaDB Port
 mariadb_username: "root"		# MariaDB Root 계정 Username
