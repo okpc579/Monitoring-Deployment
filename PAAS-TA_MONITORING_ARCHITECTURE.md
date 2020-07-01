@@ -45,7 +45,7 @@ PaaS-TA Monitoring dashboard는 관리자 화면으로 알람이 발생된 이�
 ## <div id='7'/>2.2. PaaS 자원정보 수집 Architecture
 PaaS는 내부적으로 메트릭스 정보를 수집 및 전달하는 Metric Agent와 로그 정보를 수집 및 전달하는 Syslog 모듈을 제공한다.  
 Metric Agent는 시스템 관련 메트릭스를 수집하여 InfluxDB에 정보를 저장한다.  
-syslog는 PaaS-TA를 Deploy 하기 위한 manfiest 파일의 설정으로도 로그 정보를 ELK 서비스에 전달할 수 있으며, 로그 정보를 전달하기 위해서는 RELP 프로토콜(Reliable Event Logging Protocol)을 사용한다.
+Syslog는 PaaS-TA를 Deploy 하기 위한 manfiest 파일의 설정으로도 로그 정보를 ELK 서비스에 전달할 수 있으며, 로그 정보를 전달하기 위해서는 RELP 프로토콜(Reliable Event Logging Protocol)을 사용한다.
 
 ![PaaSTa_Monit_collect_architecure_Image]
 
