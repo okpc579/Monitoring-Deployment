@@ -13,4 +13,4 @@ bosh -e micro-bosh -d paasta -n deploy paasta-deployment-monitoring.yml \
 	-o operations/addons/enable-component-syslog.yml \
 	-o operations/addons/use-compiled-releases-syslog.yml \
 	-l vsphere-vars.yml \
-	-l ../common/common_vars.yml
+	-l ../../common/common_vars.yml
