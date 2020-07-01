@@ -2,8 +2,7 @@
 
 - 1\. [문서개요](#1)
   * [목적](#2)
-  * [범위](#3)
-  * [참고자료](#4)
+  * [참고자료](#3)
 - 2\. [PaaS-TA Monitoring Architecture](#5)    
     * [PaaS Monitoring Architecture](#6)
     * [PaaS 자원정보 수집 Architecture](#7)
@@ -16,12 +15,9 @@
 # <div id='1'/>1.  문서 개요 
 
 ## <div id='2'/>1.1.  목적
-본 문서(설치가이드)는 PaaS-TA(5.0) 환경기준으로 PaaS-TA Monitoring 설치를 위한 가이드를 제공한다.
+본 문서(PaaS-TA Monitoring Architecture)는 PaaS-TA Monitoring의 Architecture를 제공한다.
 
-## <div id='3'/>1.2.  범위
-본 문서(설치가이드)는 PaaS-TA(5.0) 환경기준으로 PaaS-TA Monitoring 설치를 위한 가이드를 제공한다. Monitoring 중 IaaS-PaaS 통합 Monitoring은 별도 통합 Monitoring 문서를 제공하며 본문서는 PaaS, CaaS, SaaS Monitoring 설치 가이드를 제공함에 있다.
-
-## <div id='4'/>1.3.  참고자료
+## <div id='3'/>1.2.  참고자료
 
 본 문서는 Cloud Foundry의 BOSH Document와 Cloud Foundry Document를 참고로 작성하였다.
 
