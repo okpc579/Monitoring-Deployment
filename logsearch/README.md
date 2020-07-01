@@ -445,3 +445,5 @@ logsearch가 설치 완료 되었음을 확인한다.
 $ bosh –e {director_name} vms
 ```
 ![PaaSTa_logsearch_vms_5.0]
+
+[PaaSTa_logsearch_vms_5.0]:./images/logsearch_5.0.png
