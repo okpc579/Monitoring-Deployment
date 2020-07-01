@@ -1212,5 +1212,5 @@ No staging env variables have been set
 $ curl http://15.165.3.150:8079/#/main/spring-music-pinpoint@TOMCAT
 ```
 
-[pinpoint_image_01]:/images/pinpoint-image1.png
-[pinpoint_image_03]:/images/pinpoint-image3.png
+[pinpoint_image_01]:./images/pinpoint-image1.png
+[pinpoint_image_03]:./images/pinpoint-image3.png
