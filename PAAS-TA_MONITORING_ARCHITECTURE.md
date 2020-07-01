@@ -4,7 +4,7 @@
   * [목적](#2)
   * [범위](#3)
   * [참고자료](#4)
-- 2. [PaaS-TA Monitoring Architecture](#5)    
+- 2\. [PaaS-TA Monitoring Architecture](#5)    
     * [PaaS Monitoring Architecture](#6)
     * [PaaS 자원정보 수집 Architecture](#7)
     * [CaaS Monitoring Architecture](#8)
