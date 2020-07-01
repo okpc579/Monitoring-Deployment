@@ -85,3 +85,12 @@ PaaS는 PaaS-TA에 모니터링 Agent가 설치되어 InfluxDB에 전송 저장�
 Log Agent도 IaaS/PaaS에 설치되어 Log Data를 각각의 Log Repository에 전송한다.
 
 ![IaaSTa_Monit_architecure_Image]
+
+
+[IaaSTa_Monit_architecure_Image]:./images/iaas-archi.png
+[PaaSTa_Monit_architecure_Image]:./images/monit_architecture.png
+[Caas_Monit_architecure_Image]:./images/caas_monitoring_architecture.png
+[Saas_Monit_architecure_Image]:./images/saas_monitoring_architecture.png
+[PaaSTa_Monit_collect_architecure_Image]:./images/collect_architecture.png
+[CaaS_Monit_collect_architecure_Image]:./images/caas_collect_architecture.png
+[SaaS_Monit_collect_architecure_Image]:./images/saas_collect_architecture.png
