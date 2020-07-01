@@ -480,13 +480,7 @@ PaaS-TA Monitoring Main Dashboard 화면
 
  ![PaaSTa_monitoring_main_dashboard_5.0]
 
-[IaaSTa_Monit_architecure_Image]:./images/iaas-archi.png
-[PaaSTa_Monit_architecure_Image]:./images/monit_architecture.png
-[Caas_Monit_architecure_Image]:./images/caas_monitoring_architecture.png
-[Saas_Monit_architecure_Image]:./images/saas_monitoring_architecture.png
-[PaaSTa_Monit_collect_architecure_Image]:./images/collect_architecture.png
-[CaaS_Monit_collect_architecure_Image]:./images/caas_collect_architecture.png
-[SaaS_Monit_collect_architecure_Image]:./images/saas_collect_architecture.png
+
 [PaaSTa_release_dir_5.0]:./images/paasta-release_5.0.png
 [PaaSTa_logsearch_vms_5.0]:./images/logsearch_5.0.png
 [PaaSTa_monitoring_vms_5.0]:./images/paasta-monitoring_5.0.png
