@@ -9,7 +9,7 @@
 
 ## <div id='1'/>1. 개요
 
-본 문서(Logsearch 설치 가이드)는 PaaS-TA Monitoring을 설치하기 앞서 BOSH와 PaaS-TA의 VM Log 수집을 위하여 Logsearch를 설치하는 방법을 기술하였다.
+본 문서(Logsearch 설치 가이드)는 PaaS-TA Monitoring을 설치하기 앞서 BOSH와 PaaS-TA의 VM Log 수집을 위하여 BOSH 2.0Logsearch를 설치하는 방법을 기술하였다.
 
 ## <div id='1'/>1. Prerequisite
 
