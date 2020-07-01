@@ -6,6 +6,11 @@
   * [deploy-logsearch.sh](#4)
   * [logsearch-vars.yml](#5)
 
+
+## <div id='1'/>1. 개요
+
+본 문서(Logsearch 설치 가이드)는 PaaS-TA Monitoring을 설치하기 앞서 BOSH와 PaaS-TA의 VM Log 수집을 위하여 Logsearch를 설치하는 방법을 기술하였다.
+
 ## <div id='1'/>1. Prerequisite
 
 1. BOSH 설치가 되어있으며, BOSH Login이 되어 있어야 한다.
