@@ -17,7 +17,7 @@
 # <div id='1'> 1. 문서 개요
 ### <div id='11'> 1.1. 목적
 
-본 문서(SaaS Monitoring Pinpoint 서비스팩 설치 가이드)는 전자정부표준프레임워크 기반의 PaaS-TA에서 제공되는 서비스팩인 Pinpoint 서비스팩을 BOSH 2.0을 이용하여 설치 하는 방법과 PaaS-TA의 SaaS 형태로 제공하는 Application 에서 Pinpoint 서비스를 사용하는 방법을 기술하였다.
+본 문서(SaaS Monitoring Pinpoint 서비스팩 설치 가이드)는 전자정부표준프레임워크 기반의 PaaS-TA에서 제공되는 서비스팩인 Pinpoint 서비스팩을 BOSH 2.0을 이용하여 설치 하는 방법과 PaaS-TA의 SaaS 형태로 제공하는 Application 에서 Pinpoint 서비스를 사용하는 방법을 기술하였다.  
 PaaS-TA 3.5 버전부터는 BOSH 2.0 기반으로 deploy를 진행하며 기존 BOSH 1.0 기반으로 설치를 원할경우에는 PaaS-TA 3.1 이하 버전의 문서를 참고한다.
 
 ### <div id='12'> 1.2. 범위
@@ -56,9 +56,9 @@ PaaS-TA 3.5 버전부터는 BOSH 2.0 기반으로 deploy를 진행하며 기존 
 
 ### <div id='21'> 2.1. 설치전 준비사항
 
-본 설치 가이드는 Linux 환경에서 설치하는 것을 기준으로 하였다.
-서비스팩 설치를 위해서는 먼저 BOSH CLI v2 가 설치 되어 있어야 하고 BOSH 에 로그인이 되어 있어야 한다.<br>
-BOSH CLI v2 가 설치 되어 있지 않을 경우 먼저 BOSH2.0 설치 가이드 문서를 참고 하여 BOSH CLI v2를 설치를 하고 사용법을 숙지 해야 한다.<br>
+본 설치 가이드는 Linux 환경에서 설치하는 것을 기준으로 하였다.  
+서비스팩 설치를 위해서는 먼저 BOSH CLI v2 가 설치 되어 있어야 하고 BOSH 에 로그인이 되어 있어야 한다.  
+BOSH CLI v2 가 설치 되어 있지 않을 경우 먼저 BOSH2.0 설치 가이드 문서를 참고 하여 BOSH CLI v2를 설치를 하고 사용법을 숙지 해야 한다.
 
 - BOSH2.0 사용자 가이드
 >BOSH2 사용자 가이드 : **<https://github.com/PaaS-TA/Guide-4.0-ROTELLE/blob/master/PaaS-TA_BOSH2_사용자_가이드v1.0.md>**
@@ -232,7 +232,7 @@ BOSH CLI v2 가 설치 되어 있지 않을 경우 먼저 BOSH2.0 설치 가이�
 
 ### <div id='23'> 2.3. Pinpoint Deployment 파일 및 deploy-pinpoint.sh 수정 및 배포
 
-BOSH Deployment manifest 는 Components 요소 및 배포의 속성을 정의한 YAML 파일이다.
+BOSH Deployment manifest 는 Components 요소 및 배포의 속성을 정의한 YAML 파일이다.  
 Deployment manifest 에는 Software를 설치 하기 위해서 어떤 Stemcell (OS, BOSH Agent) 을 사용할것이며 Release (Software Packages, Config Templates, Scripts) 이름과 버전, VMs 용량, Jobs Params 등을 정의가 되어 있다.
 
 deployment 파일에서 사용하는 network, vm_type 등은 cloud config 를 활용하고 해당 가이드는 PaaS-TA 가이드를 참고한다.
@@ -948,13 +948,10 @@ $ cf bind-running-security-group pinpoint
 
 ### <div id='25'> 2.5. Pinpoint User-Provided service 등록
 
-Pinpoint 서비스팩 배포가 완료 되었으면 Application에서 서비스 팩을
-사용하기 위해서 먼저 Pinpoint User-Provided service를 등록해 주어야 한다.
+Pinpoint 서비스팩 배포가 완료 되었으면 Application에서 서비스 팩을 사용하기 위해서 먼저 Pinpoint User-Provided service를 등록해 주어야 한다.
 
-User-Provided service 등록시 PaaS-TA에서 서비스를 등록 할
-수 있는 사용자로 로그인이 되어 있어야 한다.
+User-Provided service 등록시 PaaS-TA에서 서비스를 등록 할 수 있는 사용자로 로그인이 되어 있어야 한다.
 
-<br>
 -   서비스 목록을 확인한다.
 
 ```
@@ -967,7 +964,6 @@ name   url
 No service brokers found
 ```
 
-<br>
 -   Pinpoint User-Provided service를 등록한다.
 
 ```
@@ -982,7 +978,6 @@ Creating user provided service pinpoint_monitoring_service in  as admin...
 OK
 ```
 
-<br>
 -   등록된 Pinpoint User-Provided service를 확인한다.
 
 ```
@@ -993,7 +988,6 @@ Getting services as admin...
 name url
 pinpoint_monitoring_service   user-provided 
 ```
-<br>
 
 #  <div id='3'> 3. Sample Web App 연동 Pinpoint 연동
 
@@ -1001,10 +995,8 @@ pinpoint_monitoring_service   user-provided
 
 ### <div id='31'> 3.1. Sample Web App 구조
 
-Sample Web App은 PaaS-TA에 App으로 배포가 된다. 배포된
-App에 Pinpoint 서비스 Bind 를 통하여 초기 데이터를 생성하게 된다. 바인드
-완료 후 연결 URL을 통하여 브라우저로 해당 App에 대한 Pinpoint 서비스
-모니터링을 할 수 0있다.
+Sample Web App은 PaaS-TA에 App으로 배포가 된다. 배포된 App에 Pinpoint 서비스 Bind 를 통하여 초기 데이터를 생성하게 된다.  
+바인드 완료 후 연결 URL을 통하여 브라우저로 해당 App에 대한 Pinpoint 서비스 모니터링을 할 수 0있다.
 
 -   Spring-music App을 이용하여 Pinpoint 모니터링을 테스트 하였다.
 -   앱을 다운로드 후 –b 옵션을 주어 buildpack을 지정하여 Push 해 놓는다.
@@ -1062,7 +1054,6 @@ $ cf bind-service {App명} {서비스명}
 $ cf bind-service spring-music-pinpoint pinpoint_monitoring_service
 ```
 
-<br>
 -   생성된 Pinpoint 서비스 인스턴스를 확인한다.
 
 ```
@@ -1075,7 +1066,6 @@ OK
 name             service         plan                bound apps               last operation
 pinpoint_monitoring_service   user-provided                       spring-music-pinpoint                                               
 ```
-<br>
 -   바인드가 적용되기 위해서 App을 restage한다.(최초 app실행시 cf start {App명})
 
 ```
@@ -1137,12 +1127,10 @@ App started
 
 OK
 ```
-<br>
 -   App이 정상적으로 Pinpoint 서비스를 사용하는지 확인한다.
 
 ![pinpoint_image_03]
 
-<br>
 -  환경변수 확인
 
 ```
@@ -1206,7 +1194,6 @@ No running env variables have been set
 No staging env variables have been set
 ```
 
-<br>
 - App 정상 구동 확인
 ```
 $ curl http://15.165.3.150:8079/#/main/spring-music-pinpoint@TOMCAT
