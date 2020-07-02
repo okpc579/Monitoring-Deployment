@@ -19,7 +19,7 @@
 1. BOSH 설치가 되어있으며, BOSH Login이 되어 있어야 한다.
 2. BOSH 설치과정에서 언급한 것 처럼 deployment, release, stemcell을 PaaS-TA 사이트에서 다운로드 받아 정해진 경로에 복사 해야 한다. (release, stemcell은 선택사항)
 3. PaaS-TA 5.0이 설치되어 있어야 하며, BOSH와 PaaS-TA를 설치하는 과정에서 Monitoring 옵션을 포함하여 설치되어 있어야 한다.
-4. PaaS(logsearch), IaaS(Monasca), SaaS(PaaS-TA Pinpoint Monitoring), CaaS(PaaS-TA CaaS Service)등 Monitoring을 할 환경에 해당되는 서비스가 설치되어 있어야 한다. (logsearch 설치 필수)
+4. PaaS(logsearch), IaaS(Monasca), SaaS(PaaS-TA Pinpoint Monitoring), CaaS(PaaS-TA CaaS Service)등 Monitoring을 하고 싶은 환경에 해당되는 서비스가 설치되어 있어야 한다. (logsearch 설치 필수)
 
 ## <div id='2'/>2. PaaS-TA 5.0 Monitoring 설치 파일 다운로드
 
