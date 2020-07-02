@@ -17,7 +17,7 @@
 ## <div id='1'/>1. Prerequisite
 
 1. BOSH 설치가 되어있으며, BOSH Login이 되어 있어야 한다.
-2. BOSH 설치과정에서 언급한 것 처럼 deployment, release, stemcell을 PaaS-TA 사이트에서 다운로드 받아 정해진 경로에 복사 해야 한다.<br>(release, stemcell은 선택사항)
+2. BOSH 설치과정에서 언급한 것 처럼 deployment, release, stemcell을 PaaS-TA 사이트에서 다운로드 받아 정해진 경로에 복사 해야 한다. (release, stemcell은 선택사항)
 3. PaaS-TA 5.0이 설치되어 있어야 하며, BOSH와 PaaS-TA를 설치하는 과정에서 Monitoring 옵션을 포함하여 설치되어 있어야 한다.
 4. PaaS(logsearch), IaaS(Monasca), SaaS(PaaS-TA Pinpoint Monitoring), CaaS(PaaS-TA CaaS 서비스)등 Monitoring을 할 환경에 해당되는 서비스가 설치되어 있어야 한다. (logsearch 설치 필수)
 
@@ -27,13 +27,16 @@
 
 > **[PaaS-TA Monitoring Source Github](https://github.com/PaaS-TA/PaaS-TA-Monitoring)**
 
-PaaS-TA 사이트에서 [PaaS-TA 설치 릴리즈] 파일을 다운로드 받아 ${HOME}/workspace/paasta-5.0/release 이하 디렉토리에 압축을 푼다. 압축을 풀면 아래 그림과 같이 ${HOME}/workspace/paasta-5.0/release/paasta-monitoring 이하 디렉토리가 생성되며 이하에 릴리즈 파일(tgz)이 존재한다.
+PaaS-TA 사이트에서 [PaaS-TA 설치 릴리즈] 파일을 다운로드 받아 ${HOME}/workspace/paasta-5.0/release 이하 디렉토리에 압축을 푼다.  
+압축을 풀면 아래 그림과 같이 ${HOME}/workspace/paasta-5.0/release/paasta-monitoring 이하 디렉토리가 생성되며 이하에 릴리즈 파일(tgz)이 존재한다.
 
 ![PaaSTa_release_dir_5.0]
 
 ## <div id='3'/>3. PaaS-TA Monitoring 설치환경
 
-${HOME}/workspace/paasta-5.0/deployment/monitoring-deployment 이하 디렉토리에는 paasta-monitoring, paasta-pinpoint-monitoring 디렉토리가 존재한다. Logsearch는 Log agent에서 발생한 Log정보를 수집하여 저장하는 Deployment이다. paasta-monitoring은 PaaS-TA VM에서 발생한 Metric 정보를 수집하여 Monitoring을 실행한다.
+${HOME}/workspace/paasta-5.0/deployment/monitoring-deployment 이하 디렉토리에는 paasta-monitoring, paasta-pinpoint-monitoring 디렉토리가 존재한다.  
+Logsearch는 Log agent에서 발생한 Log정보를 수집하여 저장하는 Deployment이다.  
+paasta-monitoring은 PaaS-TA VM에서 발생한 Metric 정보를 수집하여 Monitoring을 실행한다.
 
 ```
 $ cd ${HOME}/workspace/paasta-5.0/deployment/monitoring-deployment
@@ -450,7 +453,7 @@ monitoring_web_vm_type: "small"		# Monitoring-WEB VM 종류
 monitoring_web_network: "default"	# Monitoring-WEB 네트워크
 ```
 
-deploy-paasta-monitoring.sh을 실행하여 PaaS-TA Monitoring을 설치 한다
+deploy-paasta-monitoring.sh을 실행하여 PaaS-TA Monitoring을 설치 한다.
 ```
 $ cd ${HOME}/workspace/paasta-5.0/deployment/monitoring-deployment/paasta-monitoring
 $ deploy-paasta-monitoring.sh
@@ -472,7 +475,9 @@ $ bosh –e {director_name} vms
  ![PaaSTa_monitoring_login_5.0]
 
 
-member_info에는 사용자가 사용할 ID/PWD를 입력하고 하단 paas-info에는 PaaS-TA admin 권한의 계정을 입력한다. PaaS-TA deploy시 입력한 admin/pwd를 입력해야 한다. 입력후 [인증수행]를 실행후 Join버튼을 클릭하면 회원가입이 완료된다.
+member_info에는 사용자가 사용할 ID/PWD를 입력하고 하단 paas-info에는 PaaS-TA admin 권한의 계정을 입력한다.  
+PaaS-TA deploy시 입력한 admin/pwd를 입력해야 한다.  
+입력후 [인증수행]를 실행후 Join버튼을 클릭하면 회원가입이 완료된다.  
 
  ![PaaSTa_monitoring_join_5.0]
 
