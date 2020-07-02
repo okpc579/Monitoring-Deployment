@@ -25,7 +25,8 @@ PaaS-TA 3.5 버전부터는 BOSH 2.0 기반으로 deploy를 진행하며 기존 
 
 ### <div id='13'> 1.3. 시스템 구성도
 
-본 문서의 설치된 시스템 구성도입니다. Pinpoint Server, HBase의 HBase Master, Collector , WebUI2로 최소사항을 구성하였다. 
+본 문서의 설치된 시스템 구성도이다.  
+Pinpoint Server, HBase의 HBase Master, Collector , WebUI2로 최소사항을 구성하였다. 
 
 ![시스템구성도][pinpoint_image_01]
 
