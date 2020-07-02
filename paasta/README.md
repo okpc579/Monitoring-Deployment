@@ -44,8 +44,8 @@
 
 ## <div id='103'/>1.2.  범위
 
-본 문서는 cf-deployment v9.3.0을 기준으로 작성되었다.
-PaaS-TA는 bosh-deployment를 기반으로 한 BOSH 환경에서 설치한다. 
+본 문서는 cf-deployment v9.3.0을 기준으로 작성되었다.  
+PaaS-TA는 bosh-deployment를 기반으로 한 BOSH 환경에서 설치한다.  
 PaaS-TA 설치 시 필요한 Stemcell은 ubuntu-xenial-315.36이다.
 
 ## <div id='104'/>1.3.  참고 자료
@@ -79,15 +79,15 @@ PaaS-TA 3.1 버전까지는  PaaS-TA Container, Controller를 각각의 deployme
 
 ## <div id='109'/>3.1.    Prerequisite
 
-- PaaS-TA를 설치하기 위해 deployment, release, stemcell을 PaaS-TA 사이트에서 내려받아 정해진 경로에 복사한다.
-- Monitoring Option을 적용한 BOSH2 기반의 BOSH를 설치한다.
+- PaaS-TA를 설치하기 위해 deployment, release, stemcell을 PaaS-TA 사이트에서 내려받아 정해진 경로에 복사한다.  
+- Monitoring Option을 적용한 BOSH2 기반의 BOSH를 설치한다.  
 - PaaS-TA 설치는 BOSH를 설치한 Inception(설치 환경)에서 작업한다.
 
 ## <div id='1010'/>3.2.  설치 파일 다운로드
 
    - [설치 파일 다운로드](https://paas-ta.kr/download/package)
 
-PaaS-TA 사이트에서 [PaaS-TA Release] 파일을 내려받아 ${HOME}/workspace/paasta-5.0/release 이하 디렉터리에 압축을 푼다. 
+PaaS-TA 사이트에서 [PaaS-TA Release] 파일을 내려받아 ${HOME}/workspace/paasta-5.0/release 이하 디렉터리에 압축을 푼다.  
 압축을 풀면 아래와 같이 ${HOME}/workspace/paasta-5.0/release/paasta-monitoring 디렉터리가 생성되며 릴리즈 파일(tgz)이 존재한다.
 
 ```
@@ -116,7 +116,8 @@ loggregator-agent-3.9-ubuntu-xenial-315.36-20190604-002328-413557573.tgz        
 ```
 
 ## <div id='1011'/>3.3.  Stemcell 업로드
-PaaS-TA 사이트에서 [PaaS-TA Stemcell] 파일을 내려받아 ${HOME}/workspace/paasta-5.0/stemcell 이하 디렉터리에 압축을 푼다. 압출을 풀면 아래와 같이 ${HOME}/workspace/paasta-5.0/stemcell/paasta-monitoring 디렉터리가 생성되며 릴리즈 파일(tgz)이 존재한다.
+PaaS-TA 사이트에서 [PaaS-TA Stemcell] 파일을 내려받아 ${HOME}/workspace/paasta-5.0/stemcell 이하 디렉터리에 압축을 푼다.  
+압축을 풀면 아래와 같이 ${HOME}/workspace/paasta-5.0/stemcell/paasta-monitoring 디렉터리가 생성되며 릴리즈 파일(tgz)이 존재한다.
 
 ```
 $ cd ${HOME}/workspace/paasta-5.0/stemcell/paasta
@@ -126,8 +127,10 @@ bosh-stemcell-315.36-aws-xen-hvm-ubuntu-xenial-go_agent.tgz   bosh-stemcell-315.
 bosh-stemcell-315.36-azure-hyperv-ubuntu-xenial-go_agent.tgz  bosh-stemcell-315.36-vcloud-esxi-ubuntu-xenial-go_agent.tgz
 ```
 
-PaaS-TA는 Ubuntu xenial stemcell 315.36를 기반으로 한다. Stemcell은 배포 시 생성되는 PaaS-TA VM Base OS Image이다.
-BOSH 로그인 후 다음 명령어를 수행하여 Stemcell을 올린다. {director_name}은 BOSH 설치 시 사용한 Director 명이다.
+PaaS-TA는 Ubuntu xenial stemcell 315.36를 기반으로 한다.  
+Stemcell은 배포 시 생성되는 PaaS-TA VM Base OS Image이다.  
+BOSH 로그인 후 다음 명령어를 수행하여 Stemcell을 올린다.  
+{director_name}은 BOSH 설치 시 사용한 Director 명이다.
 
 - AWS
 
@@ -161,8 +164,9 @@ $ bosh -e {director_name} upload-stemcell ${HOME}/workspace/paasta-5.0/stemcell/
 
 ## <div id='1012'/>3.4.  Cloud Config 설정
 
-PaaS-TA를 설치하기 위한 IaaS 관련 Network, Storage, VM 관련 설정을 Cloud Config로 정의한다. 
-PaaS-TA 설치 파일을 내려받으면 ${HOME}/workspace/paasta-5.0/deployment/paasta-deployment/cloud-config 디렉터리 이하에 IaaS별 Cloud Config 예제를 확인할 수 있으며, 예제를 참고하여 cloud-config.yml을 IaaS에 맞게 수정한다. PaaS-TA 배포 전에 Cloud Config를 BOSH에 적용해야 한다. 
+PaaS-TA를 설치하기 위한 IaaS 관련 Network, Storage, VM 관련 설정을 Cloud Config로 정의한다.  
+PaaS-TA 설치 파일을 내려받으면 ${HOME}/workspace/paasta-5.0/deployment/paasta-deployment/cloud-config 디렉터리 이하에 IaaS별 Cloud Config 예제를 확인할 수 있으며, 예제를 참고하여 cloud-config.yml을 IaaS에 맞게 수정한다.  
+PaaS-TA 배포 전에 Cloud Config를 BOSH에 적용해야 한다. 
 
 - OpenStack을 기준으로 한 cloud-config.yml 예제
 
@@ -429,7 +433,10 @@ $ bosh –e {director_name} cloud-config
 
 ### <div id='1013'/>3.4.1. AZs
 
-PaaS-TA에서 제공되는 Cloud Config 예제는 z1 ~ z6까지 설정되어 있다. z1 ~ z3까지는 PaaS-TA VM이 설치되는 Zone이며, z4 ~ z6까지는 서비스가 설치되는 Zone으로 정의한다. 3개 단위로 설정하는 이유는 서비스 3중화를 위해서이다. PaaS-TA를 설치하는 환경에 따라 다르게 설정해도 된다.
+PaaS-TA에서 제공되는 Cloud Config 예제는 z1 ~ z6까지 설정되어 있다.  
+z1 ~ z3까지는 PaaS-TA VM이 설치되는 Zone이며, z4 ~ z6까지는 서비스가 설치되는 Zone으로 정의한다.  
+3개 단위로 설정하는 이유는 서비스 3중화를 위해서이다.  
+PaaS-TA를 설치하는 환경에 따라 다르게 설정해도 된다.
 
 ### <div id='1014'/>3.4.2. VM Types
 
@@ -439,7 +446,8 @@ VM Type은 IaaS에서 정의된 VM Type이다. Openstack의 경우에는 Flavor 
 ![PaaSTa_FLAVOR_Image]
 
 ### <div id='1015'/>3.4.3. Compilation
-PaaS-TA 및 서비스 설치 시, PaaS-TA는 Compile VM을 생성하여 소스를 컴파일하고, PaaS-TA VM을 생성하여 컴파일된 파일을 대상 VM에 설치한다. 컴파일이 끝난 VM은 삭제된다.
+PaaS-TA 및 서비스 설치 시, PaaS-TA는 Compile VM을 생성하여 소스를 컴파일하고, PaaS-TA VM을 생성하여 컴파일된 파일을 대상 VM에 설치한다.  
+컴파일이 끝난 VM은 삭제된다.
 
 ※ Worker 수는 Compile VM의 수로, 많을수록 컴파일 속도가 빨라진다.
 
@@ -447,11 +455,12 @@ PaaS-TA 및 서비스 설치 시, PaaS-TA는 Compile VM을 생성하여 소스�
 PaaS-TA 및 서비스가 설치되는 VM의 Persistent Disk Size이다.
 
 ### <div id='1017'/>3.4.5. Networks
-Networks는 AZ 별 Subnet Network, DNS, Security Groups, Network ID를 정의한다.
+Networks는 AZ 별 Subnet Network, DNS, Security Groups, Network ID를 정의한다.  
 보통 AZ 별로 256개의 IP를 정의할 수 있도록 Range Cider를 정의한다.
 
 ## <div id='1018'/>3.5.  Runtime Config 설정
-PaaS-TA 4.0부터 적용되는 부분으로 PaaS-TA Component에서 Consul이 대체된 Component이다. PaaS-TA Component 간의 통신을 위해 BOSH DNS 배포가 선행되어야 한다.
+PaaS-TA 4.0부터 적용되는 부분으로 PaaS-TA Component에서 Consul이 대체된 Component이다.  
+PaaS-TA Component 간의 통신을 위해 BOSH DNS 배포가 선행되어야 한다.
 
 ### <div id='1019'/>3.5.1. Runtime Config 업데이트
 - Runtime Config 업데이트 Shell Script 파일 확인
@@ -478,7 +487,8 @@ $ ./update-runtime-config.sh
 
 ## <div id='1020'/>3.6.  PaaS-TA 설치 파일
 
-${HOME}/workspace/paasta-5.0/deployment/paasta-deployment-monitoring 이하 디렉터리에는 IaaS별 PaaS-TA 설치 Shell Script 파일이 존재하며, 이를 실행하여 PaaS-TA를 설치한다. 파일명은 deploy-{IaaS}-monitoring.sh이다.
+${HOME}/workspace/paasta-5.0/deployment/paasta-deployment-monitoring 이하 디렉터리에는 IaaS별 PaaS-TA 설치 Shell Script 파일이 존재하며, 이를 실행하여 PaaS-TA를 설치한다.  
+파일명은 deploy-{IaaS}-monitoring.sh이다.
 
 <table>
 <tr>
@@ -526,7 +536,8 @@ ${HOME}/workspace/paasta-5.0/deployment/paasta-deployment-monitoring 이하 디�
 <td>VMware vSphere 환경에 PaaS-TA 설치시 적용하는 변숫값 설정 파일</td>
 </tr>
 </table>
-PaaS-TA 설치 시 명령어는 deploy로 시작한다. BOSH 명령어로 설치가 가능하며, IaaS 환경에 따라 Option이 달라진다.
+PaaS-TA 설치 시 명령어는 deploy로 시작한다.  
+BOSH 명령어로 설치가 가능하며, IaaS 환경에 따라 Option이 달라진다.
 
 - PaaS-TA 배포 BOSH 명령어 예시
 
@@ -534,7 +545,8 @@ PaaS-TA 설치 시 명령어는 deploy로 시작한다. BOSH 명령어로 설치
 $ bosh –e {director_name} –d paasta deploy {deploy.yml}
 ```
 
-PaaS-TA 배포 시, 설치 Option을 추가해야 한다. 설치 Option에 대한 설명은 아래와 같다.
+PaaS-TA 배포 시, 설치 Option을 추가해야 한다.  
+설치 Option에 대한 설명은 아래와 같다.
 
 <table>
 <tr>
@@ -552,7 +564,8 @@ PaaS-TA 배포 시, 설치 Option을 추가해야 한다. 설치 Option에 대�
 </tr>
 <tr>
 <td> -v </td>
-<td>PaaS-TA 설치 시 적용하는 변숫값 또는 Option 파일에 변숫값을 설정할 경우 사용한다. Option 파일 속성에 따라 필수 또는 선택 항목으로 나뉜다.</td>
+<td>PaaS-TA 설치 시 적용하는 변숫값 또는 Option 파일에 변숫값을 설정할 경우 사용한다.  
+	Option 파일 속성에 따라 필수 또는 선택 항목으로 나뉜다.</td>
 </tr>
 <tr>
 <td>-l, --var-file</td>
@@ -562,7 +575,8 @@ PaaS-TA 배포 시, 설치 Option을 추가해야 한다. 설치 Option에 대�
 
 ## <div id='1021'/>3.7.   PaaS-TA 설치 Shell Scripts
 
-paasta-deployment-monitoring.yml 파일은 통합 Monitoring을 적용한 PaaS-TA를 배포하는 Manifest 파일이며, PaaS-TA VM에 대한 설치 정의를 하게 된다. PaaS-TA VM 중 singleton-blobstore, database의 AZs(zone)을 변경하면 조직(ORG), 스페이스(SPACE), 앱(APP) 정보가 모두 삭제된다. 
+paasta-deployment-monitoring.yml 파일은 통합 Monitoring을 적용한 PaaS-TA를 배포하는 Manifest 파일이며, PaaS-TA VM에 대한 설치 정의를 하게 된다.  
+PaaS-TA VM 중 singleton-blobstore, database의 AZs(zone)을 변경하면 조직(ORG), 스페이스(SPACE), 앱(APP) 정보가 모두 삭제된다. 
 
 이미 설치된 PaaS-TA의 재배포 시, singleton-blobstore, database의 azs(zone)을 변경하면 조직(ORG), 공간(SPACE), 앱(APP) 정보가 모두 삭제된다.
 
@@ -748,9 +762,10 @@ $ chmod +x ${HOME}/workspace/paasta-5.0/deployment/monitoring-deployment/paasta/
 </tr>
 </table>
 
-Monitoring Agent는 BOSH VM의 상태 정보(Metric data)를 paasta-monitoring의 InfluxDB에 전송한다. 
-Syslog Agent는 BOSH VM의 log 정보를 logsearch의 ls-router에 전송하는 역할을 한다.
-BOSH 설치 전에 paasta-monitoring의 InfluxDB IP를 metric_url로 사용하기 위해 사전에 정의해야 한다. 마찬가지로 logsearch의 ls-router IP도 syslog_address로 연동하기 위해 사전에 정의해야 한다.
+Monitoring Agent는 BOSH VM의 상태 정보(Metric data)를 paasta-monitoring의 InfluxDB에 전송한다.  
+Syslog Agent는 BOSH VM의 log 정보를 logsearch의 ls-router에 전송하는 역할을 한다.  
+BOSH 설치 전에 paasta-monitoring의 InfluxDB IP를 metric_url로 사용하기 위해 사전에 정의해야 한다.  
+마찬가지로 logsearch의 ls-router IP도 syslog_address로 연동하기 위해 사전에 정의해야 한다.
 
 ### <div id='1029'/>3.7.8. common_vars.yml
 ```
@@ -925,12 +940,12 @@ haproxy_network: "default"		# HAProxy 네트워크
 
 ### <div id='1029'/>3.7.8. PaaS-TA 그외 Variable List
 
-1. uaa_login_logout_redirect_parameter_whitelist : 포탈 페이지 이동을 위한 uaa redirect whitelist 등록 변수
+1. uaa_login_logout_redirect_parameter_whitelist : 포탈 페이지 이동을 위한 UAA Redirect Whitelist 등록 변수
 ```
-ex) uaa_login_logout_redirect_parameter_whitelist=["포탈 URL","포탈 URL/callback"," 포탈 URL/login"]
+ex) uaa_login_logout_redirect_parameter_whitelist=["{PaaS-TA PORTAL URI}","{PaaS-TA PORTAL URI}/callback","{PaaS-TA PORTAL URI}/login"]
+
 ```
-> xip.io : 구글에서 지원해주는 임시 도메인, 기본 DNS 서버가 8.8.8.8로 설정되어야 한다.
-> 
+> xip.io : 구글에서 지원해주는 임시 도메인, 기본 DNS 서버가 8.8.8.8로 설정되어야 한다.  
 > xip.io를 사용하지 않고 DNS를 사용할 경우, Whitelist에 포탈 DNS, 포탈 DNS/callback, 포탈 DNS/login 세 개의 항목을 등록해야 한다.
 
 2. uaa_login_links_passwd : UAA 페이지에서 Reset Password 버튼 클릭 시 이동하는 링크 주소
@@ -1045,7 +1060,7 @@ Succeeded
 
 ## <div id='1031'/>3.9.  PaaS-TA 로그인 
 
-CF CLI를 설치하고 PaaS-TA에 로그인한다.
+CF CLI를 설치하고 PaaS-TA에 로그인한다.  
 CF API는 PaaS-TA 배포 시 지정했던 System Domain 명을 사용한다.
 
 - CF CLI 설치
