@@ -9,7 +9,7 @@
 
 ## <div id='1'/>1. 개요
 
-본 문서(Logsearch 설치 가이드)는 PaaS-TA Monitoring을 설치하기 앞서 BOSH와 PaaS-TA의 VM Log 수집을 위하여 BOSH 2.0Logsearch를 설치하는 방법을 기술하였다.
+본 문서(Logsearch 설치 가이드)는 PaaS-TA Monitoring을 설치하기 앞서 BOSH와 PaaS-TA의 VM Log 수집을 위하여 BOSH 2.0을 이용하여 Logsearch를 설치하는 방법을 기술하였다.
 
 ## <div id='1'/>1. Prerequisite
 
@@ -363,8 +363,8 @@ stemcells:
 
 ### <div id='4'/>2.2. deploy-logsearch.sh
 
-deploy.sh의 –v 의 inception_os_user_name, router_ip, system_domain 및 director_name을 시스템 상황에 맞게 설정한다.
-system_domain은 PaaS-TA 설치시 설정했던 system_domain을 입력하면 된다.
+deploy.sh의 –v 의 inception_os_user_name, router_ip, system_domain 및 director_name을 시스템 상황에 맞게 설정한다.  
+system_domain은 PaaS-TA 설치시 설정했던 system_domain을 입력하면 된다.  
 router_ip는 ls-router가 설치된 azs에서 정의한 cider값의 적당한 IP를 지정한다.
 
 ```
