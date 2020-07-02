@@ -35,7 +35,7 @@ PaaS-TA 사이트에서 [PaaS-TA 설치 릴리즈] 파일을 다운로드 받아
 ## <div id='3'/>3. PaaS-TA Monitoring 설치환경
 
 ${HOME}/workspace/paasta-5.0/deployment/monitoring-deployment 이하 디렉토리에는 paasta-monitoring, paasta-pinpoint-monitoring 디렉토리가 존재한다.  
-Logsearch는 Log Agent에서 발생한 Log정보를 수집하여 저장하는 Deployment이다.  
+Logsearch는 Log Agent에서 발생한 Log 정보를 수집하여 저장하는 Deployment이다.  
 paasta-monitoring은 PaaS-TA VM에서 발생한 Metric 정보를 수집하여 Monitoring을 실행한다.
 
 ```
