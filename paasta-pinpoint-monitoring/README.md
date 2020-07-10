@@ -82,21 +82,6 @@ $ git clone https://github.com/okpc579/Common-Deployment.git common
 $ git clone https://github.com/okpc579/Monitoring-Deployment.git monitoring-deployment
 ```
 
--	Deploy시 사용할 Stemcell을 확인한다.
-
-- **사용 예시**
-
-		$ bosh -e micro-bosh stemcells
-		Using environment '10.0.1.6' as client 'admin'
-
-		Name                                     Version  OS             CPI  CID  
-		bosh-aws-xen-hvm-ubuntu-xenial-go_agent  315.41*  ubuntu-xenial  -    ami-0b518d9f77a3c1e5e  
-		~                                        315.36*  ubuntu-xenial  -    ami-008187a18d65e29b1  
-
-		(*) Currently deployed
-
-		2 stemcells
-
 
 
 ### <div id='23'> 2.3. Pinpoint Deployment 파일 및 deploy-pinpoint.sh 수정 및 배포
