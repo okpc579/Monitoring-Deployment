@@ -21,28 +21,37 @@
 ### <div id='3'/>2.1. Prerequisite
 
 1. BOSH 설치가 되어있으며, BOSH Login이 되어 있어야 한다.
-2. BOSH 설치과정에서 언급한 것 처럼 deployment, release, stemcell을 PaaS-TA 사이트에서 다운로드 받아 정해진 경로에 복사 해야 한다. (release, stemcell은 선택사항)
-3. PaaS-TA 5.0이 설치되어 있어야 하며, BOSH와 PaaS-TA를 설치하는 과정에서 Monitoring 옵션을 포함하여 설치되어 있어야 한다.
-4. PaaS(logsearch), IaaS(Monasca), SaaS(PaaS-TA Pinpoint Monitoring), CaaS(PaaS-TA CaaS Service)등 Monitoring을 하고 싶은 환경에 해당되는 서비스가 설치되어 있어야 한다. (logsearch 설치 필수)
+2. cloud-config와 runtime-config가 업데이트 되어있는지 확인한다.
+3. Stemcell 목록을 확인하여 서비스 설치에 필요한 Stemcell(ubuntu xenial 315.36)이 업로드 되어 있는 것을 확인한다.
+4. PaaS-TA 5.0이 설치되어 있어야 하며, BOSH와 PaaS-TA를 설치하는 과정에서 Monitoring 옵션을 포함하여 설치되어 있어야 한다.
+5. PaaS(logsearch), IaaS(Monasca), SaaS(PaaS-TA Pinpoint Monitoring), CaaS(PaaS-TA CaaS Service)등 Monitoring을 하고 싶은 환경에 해당되는 서비스가 설치되어 있어야 한다. (logsearch 설치 필수)
+
+> cloud-config 확인  
+> $ bosh -e {director-name} cloud-config  
+
+> runtime-config 확인  
+> $ bosh -e {director-name} runtime-config  
+
+> stemcell 확인  
+> $ bosh -e {director-name} stemcells  
+
 
 ### <div id='3'/>2.2. 설치 파일 다운로드
 
-> **[설치 파일 다운로드 받기](https://paas-ta.kr/download/package)**
-
-> **[PaaS-TA Monitoring Source Github](https://github.com/PaaS-TA/PaaS-TA-Monitoring)**
-
-PaaS-TA 사이트에서 [PaaS-TA 설치 릴리즈] 파일을 다운로드 받아 ${HOME}/workspace/paasta-5.0/release 이하 디렉토리에 압축을 푼다.  
-압축을 풀면 아래 그림과 같이 ${HOME}/workspace/paasta-5.0/release/paasta-monitoring 이하 디렉토리가 생성되며 이하에 릴리즈 파일(tgz)이 존재한다.
+- PaaS-TA Monitoring을 설치하기 위한 deployment가 존재하지 않는다면 다운로드 받는다
+```
+$ cd ${HOME}/workspace/paasta-5.0/deployment
+$ git clone https://github.com/PaaS-TA/Common-Deployment.git common
+$ git clone https://github.com/PaaS-TA/PaaS-TA-Deployment.git paasta-deployment
+```
 
 ![PaaSTa_release_dir_5.0]
 
 ### <div id='3'/>2.3. PaaS-TA Monitoring 설치 환경설정
 
-${HOME}/workspace/paasta-5.0/deployment/monitoring-deployment 이하 디렉토리에는 paasta-monitoring, paasta-pinpoint-monitoring 디렉토리가 존재한다.  
-Logsearch는 Log Agent에서 발생한 Log 정보를 수집하여 저장하는 Deployment이다.  
-paasta-monitoring은 PaaS-TA VM에서 발생한 Metric 정보를 수집하여 Monitoring을 실행한다.
 
-### <div id='7'/>4.3.	common_vars.yml
+
+### <div id='7'/>● common_vars.yml
 ```
 # BOSH
 bosh_url: "10.0.1.6"				# BOSH URL ('bosh env' 명령어를 통해 확인 가능)
@@ -65,7 +74,7 @@ monitoring_api_url: "61.252.53.241"		# Monitoring-WEB의 Public IP
 saas_monitoring_url: "61.252.53.248"		# Pinpoint HAProxy WEBUI의 Public IP
 ```
 
-### <div id='8'/>4.3. paasta-monitoring-vars.yml
+### <div id='8'/>● paasta-monitoring-vars.yml
 deploy-paasta-monitoring.sh의 –v 의 inception_os_user_name, system_domain 및 director_name을 시스템 상황에 맞게 설정한다.
 
 ```
@@ -152,7 +161,7 @@ monitoring_web_vm_type: "small"		# Monitoring-WEB VM 종류
 monitoring_web_network: "default"	# Monitoring-WEB 네트워크
 ```
 
-#### <div id='6'/>4.2.	deploy-paasta-monitoring.sh
+#### <div id='6'/>●	deploy-paasta-monitoring.sh
 ```
 bosh -e {director_name} -n -d paasta-monitoring deploy paasta-monitoring.yml  \
 	-o use-public-network-openstack.yml \
