@@ -57,9 +57,17 @@ Pinpoint Server, HBase의 HBase Master, Collector , WebUI2로 최소사항을 �
 
 ### <div id='21'> 2.1. Prerequisite
 
-본 설치 가이드는 Linux 환경에서 설치하는 것을 기준으로 하였다.  
-서비스팩 설치를 위해서는 먼저 BOSH CLI v2 가 설치 되어 있어야 하고 BOSH 에 로그인이 되어 있어야 한다.  
-BOSH CLI v2 가 설치 되어 있지 않을 경우 먼저 BOSH2.0 설치 가이드 문서를 참고 하여 BOSH CLI v2를 설치를 하고 사용법을 숙지 해야 한다.
+1. BOSH 설치가 되어있으며, BOSH Login이 되어 있어야 한다.
+2. cloud-config와 runtime-config가 업데이트 되어있는지 확인한다.
+3. Stemcell 목록을 확인하여 서비스 설치에 필요한 Stemcell(ubuntu xenial 315.36)이 업로드 되어 있는 것을 확인한다.
+
+
+> cloud-config 확인  
+> $ bosh -e {director-name} cloud-config  
+> runtime-config 확인  
+> $ bosh -e {director-name} runtime-config  
+> stemcell 확인  
+> $ bosh -e {director-name} stemcells  
 
 
 ## <div id='1010'/>3.2.  설치 파일 다운로드
