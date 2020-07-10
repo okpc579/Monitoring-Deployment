@@ -144,7 +144,7 @@ echo 'y' | bosh -e micro-bosh -d paasta-pinpoint-monitoring deploy paasta-pinpoi
 	-l pem.yml
 ```
 
-## <div id='233'>● deploy-pinpoint-vsphere.sh
+### <div id='233'>● deploy-pinpoint-vsphere.sh
 ```
 echo 'y' | bosh -e micro-bosh -d paasta-pinpoint-monitoring deploy paasta-pinpoint.yml \
 	-o use-public-network-vsphere.yml \
