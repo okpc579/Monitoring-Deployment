@@ -86,12 +86,8 @@ $ git clone https://github.com/okpc579/Monitoring-Deployment.git monitoring-depl
 
 ### <div id='23'> 2.3. Pinpoint Monitoring 설치 환경설정
 	
-	
--	Deployment 파일을 서버 환경에 맞게 수정한다.
-
-```yaml
-# pinpoint-vars.yml 설정 파일 내용
----
+#### <div id='23'> 2.3. pinpoint-vars.yml
+```
 ### On-Demand Bosh Deployment Name Setting ###
 deployment_name: "paasta-pinpoint-monitoring"		# On-Demand Deployment Name
 #### Main Stemcells Setting ###
@@ -132,6 +128,50 @@ haproxy_webui_vm_type: "small-highmem-16GB"		# HAProxy-WEBUI VM 종류
 haproxy_webui_network: "default"			# HAProxy-WEBUI 네트워크
 haproxy_webui_persistent_disk_type: "30GB"		# HAProxy-WEBUI 영구 Disk 종류
 ```
+
+#### <div id='23'> 2.3. pinpoint-vars.yml
+```
+### On-Demand Bosh Deployment Name Setting ###
+deployment_name: "paasta-pinpoint-monitoring"		# On-Demand Deployment Name
+#### Main Stemcells Setting ###
+stemcell_os: "ubuntu-xenial"				# Deployment Main Stemcell OS
+stemcell_version: "315.36"				# Main Stemcell Version
+stemcell_alias: "default"   				# Main Stemcell Alias
+#### On-Demand Release Deployment Setting ### 
+releases_name:  "paasta-pinpoint-monitoring-release"	# On-Demand Release Name
+public_networks_name: "vip"				# Pinpoint Public Network Name
+PemSSH: "true"						# h_master에서 모니터링 하려는 VM에 SSH접근시 사용하는 Key File 지정 여부(default:false) 
+
+
+# H-Master
+h_master_azs: ["z3"]					# H-Master 가용 존
+h_master_instances: 1					# H-Master 인스턴스 수
+h_master_vm_type: "small-highmem-16GB"			# H-Master VM 종류
+h_master_network: "default"				# H-Master 네트워크
+h_master_persistent_disk_type: "30GB"			# H-Master 영구 Disk 종류
+
+# COLLECTOR
+collector_azs: ["z3"]					# Collector 가용 존
+collector_instances: 1					# Collector 인스턴스 수
+collector_vm_type: "small-highmem-16GB"			# Collector VM 종류
+collector_network: "default"				# Collector 네트워크
+collector_persistent_disk_type: "30GB"			# Collector 영구 Disk 종류
+
+# PINPOINT-WEB
+pinpoint_web_azs: ["z3"]				# Pinpoint-WEB 가용 존
+pinpoint_web_instances: 1				# Pinpoint-WEB 인스턴스 수
+pinpoint_web_vm_type: "small-highmem-16GB"		# Pinpoint-WEB VM 종류
+pinpoint_web_network: "default"				# Pinpoint-WEB 네트워크
+pinpoint_web_persistent_disk_type: "30GB"		# Pinpoint-WEB 영구 Disk 종류
+
+# HAPROXY-WEBUI
+haproxy_webui_azs: ["z7"]				# HAProxy-WEBUI 가용 존
+haproxy_webui_instances: 1				# HAProxy-WEBUI 인스턴스 수
+haproxy_webui_vm_type: "small-highmem-16GB"		# HAProxy-WEBUI VM 종류
+haproxy_webui_network: "default"			# HAProxy-WEBUI 네트워크
+haproxy_webui_persistent_disk_type: "30GB"		# HAProxy-WEBUI 영구 Disk 종류
+```
+
 
 -	Pinpoint 서비스팩을 배포한다.
 
