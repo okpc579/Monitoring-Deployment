@@ -26,8 +26,10 @@
 
 > cloud-config 확인  
 > $ bosh -e {director-name} cloud-config  
+
 > runtime-config 확인  
 > $ bosh -e {director-name} runtime-config  
+
 > stemcell 확인  
 > $ bosh -e {director-name} stemcells  
 
