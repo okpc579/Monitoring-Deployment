@@ -1,22 +1,25 @@
 ## Table of Contents
 1\. [개요](#1)  
-2\. [PaaS-TA Monitoring 설치](#1)  
-　2.1\. [설치 파일 다운로드](#2)  
-　2.2\. [PaaS-TA Monitoring 설치 환경설정](#3)  
-　　● [common_vars.yml](#4)  
-　　● [paasta-monitoring-vars.yml](#5)  
-　　● [deploy-paasta-monitoring.sh](#6)  
-　2.3\. [PaaS-TA Monitoring 설치](#7)  
-　2.4\. [PaaS-TA Monitoring 설치 - 다운로드 된 Relases 파일 이용 방식](#8)  
-　2.5\. [서비스 설치 확인](#9)  
-3\. [PaaS-TA Monitoring Dashboard 접속](#10)  
+2\. [PaaS-TA Monitoring 설치](#2)  
+　2.1\. [Prerequisite](#3)  
+　2.2\. [설치 파일 다운로드](#4)  
+　2.3\. [PaaS-TA Monitoring 설치 환경설정](#5)  
+　　● [common_vars.yml](#6)  
+　　● [paasta-monitoring-vars.yml](#7)  
+　　● [deploy-paasta-monitoring.sh](#8)  
+　2.4\. [PaaS-TA Monitoring 설치](#9)  
+　2.5\. [PaaS-TA Monitoring 설치 - 다운로드 된 Relases 파일 이용 방식](#10)  
+　2.6\. [서비스 설치 확인](#11)  
+3\. [PaaS-TA Monitoring Dashboard 접속](#12)  
 
 
 ## <div id='1'/>1. 개요
 
 본 문서(PaaS-TA Monitoring 설치 가이드)는 전자정부프레임워크 기반의 PaaS-TA 5.0 환경 기준으로 BOSH 2.0을 이용하여 PaaS-TA Monitoring 설치를 위한 가이드를 제공한다.
 
-## <div id='1'/>1. Prerequisite
+## <div id='2'/>2. PaaS-TA Monitoring 설치
+### <div id='3'/>2.1. PaaS-TA Monitoring 설치
+
 
 1. BOSH 설치가 되어있으며, BOSH Login이 되어 있어야 한다.
 2. BOSH 설치과정에서 언급한 것 처럼 deployment, release, stemcell을 PaaS-TA 사이트에서 다운로드 받아 정해진 경로에 복사 해야 한다. (release, stemcell은 선택사항)
