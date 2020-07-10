@@ -121,14 +121,14 @@ bosh –e {director_name} -d logsearch deploy logsearch-deployment.yml \
 	-l ../../common/common_vars.yml
 ```
 
-### <div id='9'/>2.3. Logsearch 설치
+### <div id='9'/>2.4. Logsearch 설치
 deploy.sh을 실행하여 logsearch를 설치 한다.
 
 ```
 $ cd ~/workspace/paasta-5.0/deployment/monitoring-deployment/paasta-monitoring
 $ sh deploy-logsearch.sh
 ```
-### <div id='10'/>2.3. Logsearch 설치 - 다운로드 된 Release 파일 이용 방식
+### <div id='10'/>2.5. Logsearch 설치 - 다운로드 된 Release 파일 이용 방식
 deploy.sh을 실행하여 logsearch를 설치 한다.
 
 ```
@@ -136,7 +136,7 @@ $ cd ~/workspace/paasta-5.0/deployment/monitoring-deployment/paasta-monitoring
 $ sh deploy-logsearch.sh
 ```
 
-### <div id='11'/>2.7. 서비스 설치 확인
+### <div id='11'/>2.6. 서비스 설치 확인
 logsearch가 설치 완료 되었음을 확인한다.
 ```
 $ bosh –e {director_name} vms
