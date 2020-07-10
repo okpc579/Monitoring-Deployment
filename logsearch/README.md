@@ -10,7 +10,7 @@
 　　● [deploy-logsearch.sh](#8)  
 　2.4. [Logsearch 설치](#9)  
 　2.5. [Logsearch 설치 - 다운로드 된 PaaS-TA Release 파일 이용 방식](#10)  
-　2.6. [서비스 설치 확인](#10)
+　2.6. [서비스 설치 확인](#11)
 
 
 ## <div id='1'/>1. 개요
@@ -405,7 +405,7 @@ stemcells:
   version: ((stemcell_version)) 
 ```
 
-### <div id='8'/>● logsearch-vars.yml
+### <div id='7'/>● logsearch-vars.yml
 
 ```
 # SERVICE VARIABLE
@@ -463,7 +463,7 @@ ls_router_vm_type: "small"			# LS-Router VM 종류
 ls_router_network: "default"			# LS-Router 네트워크
 ```
 
-### <div id='7'/>● deploy-logsearch.sh
+### <div id='8'/>● deploy-logsearch.sh
 
 deploy.sh의 –v 의 inception_os_user_name, router_ip, system_domain 및 director_name을 시스템 상황에 맞게 설정한다.  
 system_domain은 PaaS-TA 설치시 설정했던 system_domain을 입력하면 된다.  
@@ -476,14 +476,14 @@ bosh –e {director_name} -d logsearch deploy logsearch-deployment.yml \
 	-l ../../common/common_vars.yml
 ```
 
-### <div id='5'/>2.3. Logsearch 설치
+### <div id='9'/>2.3. Logsearch 설치
 deploy.sh을 실행하여 logsearch를 설치 한다.
 
 ```
 $ cd ~/workspace/paasta-5.0/deployment/monitoring-deployment/paasta-monitoring
 $ sh deploy-logsearch.sh
 ```
-### <div id='5'/>2.3. Logsearch 설치 - 다운로드 된 PaaS-TA Release 파일 이용 방식
+### <div id='10'/>2.3. Logsearch 설치 - 다운로드 된 PaaS-TA Release 파일 이용 방식
 deploy.sh을 실행하여 logsearch를 설치 한다.
 
 ```
@@ -491,7 +491,7 @@ $ cd ~/workspace/paasta-5.0/deployment/monitoring-deployment/paasta-monitoring
 $ sh deploy-logsearch.sh
 ```
 
-### <div id='5'/>2.7. 서비스 설치 확인
+### <div id='11'/>2.7. 서비스 설치 확인
 logsearch가 설치 완료 되었음을 확인한다.
 ```
 $ bosh –e {director_name} vms
