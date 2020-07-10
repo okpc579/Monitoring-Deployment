@@ -144,7 +144,7 @@ echo 'y' | bosh -e micro-bosh -d paasta-pinpoint-monitoring deploy paasta-pinpoi
 	-l pem.yml
 ```
 
-### <div id='233'>● deploy-pinpoint-vsphere.sh
+## <div id='233'>● deploy-pinpoint-vsphere.sh
 ```
 echo 'y' | bosh -e micro-bosh -d paasta-pinpoint-monitoring deploy paasta-pinpoint.yml \
 	-o use-public-network-vsphere.yml \
@@ -153,7 +153,7 @@ echo 'y' | bosh -e micro-bosh -d paasta-pinpoint-monitoring deploy paasta-pinpoi
 	-l pem.yml
 ```
 
-### <div id='24'> 2.4. Pinpoint Monitoring 설치
+## <div id='24'> 2.4. Pinpoint Monitoring 설치
 deploy.sh을 실행하여 logsearch를 설치 한다.
 
 ```
@@ -161,7 +161,7 @@ $ cd ~/workspace/paasta-5.0/deployment/monitoring-deployment/paasta-monitoring
 $ sh deploy-logsearch.sh
 ```
 
-### <div id='25'/>2.5. Pinpoint Monitoring 설치 - 다운로드 된 Release 파일 이용 방식
+## <div id='25'/>2.5. Pinpoint Monitoring 설치 - 다운로드 된 Release 파일 이용 방식
 deploy.sh을 실행하여 logsearch를 설치 한다.
 
 ```
