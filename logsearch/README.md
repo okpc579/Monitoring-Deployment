@@ -4,7 +4,7 @@
 2. [Logsearch 설치]()  
   2.1. [Prerequisite](#2)  
   2.2. [설치 파일 다운로드](#3)  
-  2.3. [Logsearch 설치](#4)  
+  2.3. [Logsearch 설치 환경설정](#4)  
   * [logsearch-deployment.yml](#5)  
   * [deploy-logsearch.sh](#6)  
   * [logsearch-vars.yml](#7)  
@@ -57,19 +57,17 @@ $ cd ${HOME}/workspace/paasta-5.0/deployment
 $ git clone https://github.com/PaaS-TA/Common-Deployment.git common
 $ git clone https://github.com/PaaS-TA/PaaS-TA-Deployment.git paasta-deployment
 ```
-- release, stemcell을 [PaaS-TA 다운로드](https://paas-ta.kr/download/package)에서 내려받아 정해진 경로에 복사한다.(선택) 
-- PaaS-TA 사이트에서 [PaaS-TA Release] 파일을 다운로드해 ${HOME}/workspace/paasta-5.0/release 이하 디렉터리에 압축을 푼다.
-- PaaS-TA 사이트에서 [PaaS-TA Stemcell] 파일을 다운로드해 ${HOME}/workspace/paasta-5.0/stemcell 이하 디렉터리에 압축을 푼다.
 
 
-
-## <div id='3'/>2. Logsearch 설치
+## <div id='3'/>2.3. Logsearch 설치 환경설정
 
 PaaS-TA VM Log수집을 위해서는 Logsearch가 설치되어야 한다. 
 
 ```
 $ cd ${HOME}/workspace/paasta-5.0/deployment/monitoring-deployment/paasta-monitoring
 ```
+
+
 
 ### <div id='4'/>2.1.	logsearch-deployment.yml
 logsearch-deployment.yml에는 ls-router, cluster-monitor, elasticsearch_data, elastic_master, kibana, mainternance 의 명세가 정의되어 있다. 
