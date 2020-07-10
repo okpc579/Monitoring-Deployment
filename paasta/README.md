@@ -71,13 +71,20 @@ PaaS-TA 3.1 버전까지는  PaaS-TA Container, Controller를 각각의 deployme
 
 ## <div id='109'/>3.1.    Prerequisite
 
-- PaaS-TA를 설치하기 위해 deployment, release, stemcell을 PaaS-TA 사이트에서 내려받아 정해진 경로에 복사한다.  
 - Monitoring Option을 적용한 BOSH2 기반의 BOSH를 설치한다.  
 - PaaS-TA 설치는 BOSH를 설치한 Inception(설치 환경)에서 작업한다.
 
 ## <div id='1010'/>3.2.  설치 파일 다운로드
 
-   - [설치 파일 다운로드](https://paas-ta.kr/download/package)
+- PaaS-TA를 설치하기 위한 deployment가 존재하지 않는다면 다운로드 받는다
+```
+$ cd ${HOME}/workspace/paasta-5.0/deployment
+$ git clone https://github.com/okpc579/Common-Deployment.git common
+$ git clone https://github.com/okpc579/Monitoring-Deployment.git monitoring-deployment
+```
+- release, stemcell을 [PaaS-TA 다운로드](https://paas-ta.kr/download/package)에서 내려받아 정해진 경로에 복사한다.(선택)
+- PaaS-TA 사이트에서 [PaaS-TA Release] 파일을 다운로드해 ${HOME}/workspace/paasta-5.0/release 이하 디렉터리에 압축을 푼다.
+- PaaS-TA 사이트에서 [PaaS-TA Stemcell] 파일을 다운로드해 ${HOME}/workspace/paasta-5.0/stemcell 이하 디렉터리에 압축을 푼다.
 
 PaaS-TA 사이트에서 [PaaS-TA Release] 파일을 내려받아 ${HOME}/workspace/paasta-5.0/release 이하 디렉터리에 압축을 푼다.  
 압축을 풀면 아래와 같이 ${HOME}/workspace/paasta-5.0/release/paasta-monitoring 디렉터리가 생성되며 릴리즈 파일(tgz)이 존재한다.
@@ -119,39 +126,58 @@ bosh-stemcell-315.36-aws-xen-hvm-ubuntu-xenial-go_agent.tgz   bosh-stemcell-315.
 bosh-stemcell-315.36-azure-hyperv-ubuntu-xenial-go_agent.tgz  bosh-stemcell-315.36-vcloud-esxi-ubuntu-xenial-go_agent.tgz
 ```
 
-PaaS-TA는 Ubuntu xenial stemcell 315.36를 기반으로 한다.  
-Stemcell은 배포 시 생성되는 PaaS-TA VM Base OS Image이다.  
-BOSH 로그인 후 다음 명령어를 수행하여 Stemcell을 올린다.  
+Stemcell은 배포 시 생성되는 PaaS-TA VM Base OS Image이며, 통합 Monitoring을 적용한 PaaS-TA 5.0는 Ubuntu xenial stemcell 315.36를 기반으로 한다.  
+BOSH 로그인 후 다음 명령어를 수행하여 Stemcell을 올린다.(Stemcell은 로컬 파일과 URL 두가지 방법으로 올릴 수 있으니 확인 후 명령어를 수행한다.)  
 {director_name}은 BOSH 설치 시 사용한 Director 명이다.
 
 - AWS
 
 ```
+(로컬파일)
 $ bosh -e {director_name} upload-stemcell ${HOME}/workspace/paasta-5.0/stemcell/paasta-monitoring/bosh-stemcell-315.36-aws-xen-hvm-ubuntu-xenial-go_agent.tgz
+
+(URL)
+$ bosh -e {director_name} upload-stemcell https://s3.amazonaws.com/bosh-core-stemcells/315.36/bosh-stemcell-315.36-aws-xen-hvm-ubuntu-xenial-go_agent.tgz
 ```
 
 - MS Azure
 
 ```
+(로컬파일)
 $ bosh -e {director_name} upload-stemcell ${HOME}/workspace/paasta-5.0/stemcell/paasta-monitoring/bosh-stemcell-315.36-azure-hyperv-ubuntu-xenial-go_agent.tgz
+
+(URL)
+$ bosh -e {director_name} upload-stemcell https://bosh-core-stemcells.s3-accelerate.amazonaws.com/315.36/bosh-stemcell-315.36-azure-hyperv-ubuntu-xenial-go_agent.tgz
 ```
 
 - Google Cloud Platform
 
 ```
+(로컬파일)
 $ bosh -e {director_name} upload-stemcell ${HOME}/workspace/paasta-5.0/stemcell/paasta-monitoring/bosh-stemcell-315.36-google-kvm-ubuntu-xenial-go_agent.tgz
+
+(URL)
+$ bosh -e {director_name} upload-stemcell https://bosh-core-stemcells.s3-accelerate.amazonaws.com/315.36/bosh-stemcell-315.36-google-kvm-ubuntu-xenial-go_agent.tgz
 ```
 
 - OpenStack
 
 ```
+(로컬파일)
 $ bosh -e {director_name} upload-stemcell ${HOME}/workspace/paasta-5.0/stemcell/paasta-monitoring/bosh-stemcell-315.36-openstack-kvm-ubuntu-xenial-go_agent.tgz
+
+(URL)
+$ bosh -e {director_name} upload-stemcell https://s3.amazonaws.com/bosh-core-stemcells/315.36/bosh-stemcell-315.36-openstack-kvm-ubuntu-xenial-go_agent.tgz
 ```
 
 - VMware vSphere
 
 ```
+(로컬파일)
 $ bosh -e {director_name} upload-stemcell ${HOME}/workspace/paasta-5.0/stemcell/paasta-monitoring/bosh-stemcell-315.36-vsphere-esxi-ubuntu-xenial-go_agent.tgz
+
+(URL)
+$ bosh -e {director_name} upload-stemcell https://s3.amazonaws.com/bosh-core-stemcells/315.36/bosh-stemcell-315.36-vsphere-esxi-ubuntu-xenial-go_agent.tgz
 ```
 
 ## <div id='1012'/>3.4.  Cloud Config 설정
@@ -423,86 +449,56 @@ $ bosh –e {director_name} update-cloud-config ${HOME}/workspace/paasta-5.0/dep
 $ bosh –e {director_name} cloud-config  
 ```
 
-### <div id='1013'/>3.4.1. AZs
+### <div id='1013'/>● AZs
 
 PaaS-TA에서 제공되는 Cloud Config 예제는 z1 ~ z6까지 설정되어 있다.  
 z1 ~ z3까지는 PaaS-TA VM이 설치되는 Zone이며, z4 ~ z6까지는 서비스가 설치되는 Zone으로 정의한다.  
 3개 단위로 설정하는 이유는 서비스 3중화를 위해서이다.  
 PaaS-TA를 설치하는 환경에 따라 다르게 설정해도 된다.
 
-### <div id='1014'/>3.4.2. VM Types
+### <div id='1014'/>● VM Types
 
 VM Type은 IaaS에서 정의된 VM Type이다. Openstack의 경우에는 Flavor Type이다.
 
 ※ 다음은 OpenStack에서 정의한 Flavor Type이다.
 ![PaaSTa_FLAVOR_Image](https://github.com/PaaS-TA/Guide-5.0-Ravioli/blob/master/install-guide/paasta-monitoring/images/flavor.png)
 
-### <div id='1015'/>3.4.3. Compilation
+### <div id='1015'/>● Compilation
 PaaS-TA 및 서비스 설치 시, PaaS-TA는 Compile VM을 생성하여 소스를 컴파일하고, PaaS-TA VM을 생성하여 컴파일된 파일을 대상 VM에 설치한다.  
 컴파일이 끝난 VM은 삭제된다.
 
 ※ Worker 수는 Compile VM의 수로, 많을수록 컴파일 속도가 빨라진다.
 
-### <div id='1016'/>3.4.4. Disk Size
+### <div id='1016'/>● Disk Size
 PaaS-TA 및 서비스가 설치되는 VM의 Persistent Disk Size이다.
 
-### <div id='1017'/>3.4.5. Networks
+### <div id='1017'/>● Networks
 Networks는 AZ 별 Subnet Network, DNS, Security Groups, Network ID를 정의한다.  
 보통 AZ 별로 256개의 IP를 정의할 수 있도록 Range Cider를 정의한다.
 
 ## <div id='1018'/>3.5.  Runtime Config 설정
 PaaS-TA 4.0부터 적용되는 부분으로 PaaS-TA Component에서 Consul이 대체된 Component이다.  
 PaaS-TA Component 간의 통신을 위해 BOSH DNS 배포가 선행되어야 한다.
-
-### <div id='1019'/>3.5.1. Runtime Config 업데이트
-- Runtime Config 업데이트 Shell Script 파일 확인
+- Runtime Config 업데이트
 
 ```
-$ vi ${HOME}/workspace/paasta-5.0/deployment/paasta-deployment/bosh/update-runtime-config.sh
-
-bosh -e {director-name} update-runtime-config runtime-configs/dns.yml \
--v cert_days=3650                                               # PaaS-TA 인증서 유효기간
+$ cd ~/workspace/paasta-5.0/deployment/paasta-deployment/bosh
+$ bosh -e {director_name} update-runtime-config -n runtime-configs/dns.yml
 ```
 
-- Runtime Config 업데이트 Shell Script 파일에 실행 권한 부여
+- Runtime Config 확인
 
 ```
-$ chmod +x ${HOME}/workspace/paasta-5.0/deployment/paasta-deployment/bosh/update-runtime-config.sh
-```
-
-- Runtime Config 업데이트 Shell Script 파일 실행 (BOSH 로그인 필요)
-
-```
-$ cd ${HOME}/workspace/paasta-5.0/deployment/paasta-deployment/bosh
-$ ./update-runtime-config.sh
+$ bosh –e {director_name} runtime-config  
 ```
 
 ## <div id='1020'/>3.6.  PaaS-TA 설치 파일
 
-${HOME}/workspace/paasta-5.0/deployment/paasta-deployment-monitoring 이하 디렉터리에는 IaaS별 PaaS-TA 설치 Shell Script 파일이 존재하며, 이를 실행하여 PaaS-TA를 설치한다.  
-파일명은 deploy-{IaaS}-monitoring.sh이다.
+${HOME}/workspace/paasta-5.0/deployment/monitoring-deployment 이하 디렉터리에는 IaaS별 PaaS-TA 설치 Shell Script 파일이 존재하며, 이를 실행하여 PaaS-TA를 설치한다.  
+파일명은 deploy-{IaaS}-monitoring.sh이다.  
+또한 common_vars.yml파일과 {IaaS}-vars.yml을 수정하여 BOSH 설치시 적용하는 변숫값을 변경할 수 있다.
 
 <table>
-<tr>
-<td>deploy-aws.sh</td>
-<td>AWS 환경에 PaaS-TA 설치를 위한 Shell Script 파일</td>
-</tr>
-<tr>
-<td>deploy-azure.sh</td>
-<td>MS Azure 환경에 PaaS-TA 설치를 위한 Shell Script 파일</td>
-</tr>
-<tr>
-<td>deploy-gcp.sh</td>
-<td>GCP(Google Cloud Platform) 환경에 PaaS-TA 설치를 위한 Shell Script 파일</td>
-</tr>
-<tr>
-<td>deploy-openstack.sh</td>
-<td>OpenStack 환경에 PaaS-TA 설치를 위한 Shell Script 파일</td>
-</tr>
-<tr>
-<td>deploy-vsphere.sh</td>
-<td>VMware vSphere 환경에 PaaS-TA 설치를 위한 Shell Script 파일</td>
-</tr>
 <tr>
 <td>common_vars.yml</td>
 <td>PaaS-TA 및 각종 Service 설치시 적용하는 공통 변수 설정 파일</td>
@@ -527,6 +523,26 @@ ${HOME}/workspace/paasta-5.0/deployment/paasta-deployment-monitoring 이하 디�
 <td>vsphere-vars.yml</td>
 <td>VMware vSphere 환경에 PaaS-TA 설치시 적용하는 변숫값 설정 파일</td>
 </tr>
+<tr>
+<td>deploy-aws.sh</td>
+<td>AWS 환경에 PaaS-TA 설치를 위한 Shell Script 파일</td>
+</tr>
+<tr>
+<td>deploy-azure.sh</td>
+<td>MS Azure 환경에 PaaS-TA 설치를 위한 Shell Script 파일</td>
+</tr>
+<tr>
+<td>deploy-gcp.sh</td>
+<td>GCP(Google Cloud Platform) 환경에 PaaS-TA 설치를 위한 Shell Script 파일</td>
+</tr>
+<tr>
+<td>deploy-openstack.sh</td>
+<td>OpenStack 환경에 PaaS-TA 설치를 위한 Shell Script 파일</td>
+</tr>
+<tr>
+<td>deploy-vsphere.sh</td>
+<td>VMware vSphere 환경에 PaaS-TA 설치를 위한 Shell Script 파일</td>
+</tr>
 </table>
 PaaS-TA 설치 시 명령어는 deploy로 시작한다.  
 BOSH 명령어로 설치가 가능하며, IaaS 환경에 따라 Option이 달라진다.
@@ -537,7 +553,7 @@ BOSH 명령어로 설치가 가능하며, IaaS 환경에 따라 Option이 달라
 $ bosh –e {director_name} –d paasta deploy {deploy.yml}
 ```
 
-PaaS-TA 배포 시, 설치 Option을 추가해야 한다.  
+PaaS-TA 배포 시, 설치 Option을 추가해야 한다.
 설치 Option에 대한 설명은 아래와 같다.
 
 <table>
@@ -565,199 +581,9 @@ PaaS-TA 배포 시, 설치 Option을 추가해야 한다.
 </tr>
 </table>
 
-## <div id='1021'/>3.7.   PaaS-TA 설치 Shell Scripts
+### <div id='1018'/>3.6.1. PaaS-TA 설치 Variable File
 
-paasta-deployment-monitoring.yml 파일은 통합 Monitoring을 적용한 PaaS-TA를 배포하는 Manifest 파일이며, PaaS-TA VM에 대한 설치 정의를 하게 된다.  
-PaaS-TA VM 중 singleton-blobstore, database의 AZs(zone)을 변경하면 조직(ORG), 스페이스(SPACE), 앱(APP) 정보가 모두 삭제된다. 
 
-이미 설치된 PaaS-TA의 재배포 시, singleton-blobstore, database의 azs(zone)을 변경하면 조직(ORG), 공간(SPACE), 앱(APP) 정보가 모두 삭제된다.
-
-다음은 PaaS-TA 배포 시 필수 옵션이며, cf_admin_password, cc_db_encryption_key, uaa_database_password, cc_database_password는 –v 옵션이 없는 경우 BOSH에서 자동 생성하여 BOSH CredHub에 저장한다.
-
-### <div id='1022'/>3.7.1. deploy-aws-monitoring.sh
-```
-bosh -e micro-bosh -d paasta -n deploy paasta-deployment-monitoring.yml \
-	-o operations/aws.yml \
-	-o operations/use-compiled-releases.yml \
-	-o operations/use-haproxy.yml \
-	-o operations/use-haproxy-public-network.yml \
-	-o operations/use-compiled-releases-haproxy.yml \
-	-o operations/use-postgres.yml \
-	-o operations/use-compiled-releases-postgres.yml \
-	-o operations/rename-network-and-deployment.yml \
-	-o paasta-addon/paasta-monitoring.yml \
-	-o paasta-addon/use-compiled-releases-monitoring-agent.yml \
-	-o operations/addons/enable-component-syslog.yml \
-	-o operations/addons/use-compiled-releases-syslog.yml \
-	-l aws-vars.yml \
-	-l ../../common/common_vars.yml
-```
-### <div id='1023'/>3.7.2. deploy-azure-monitoring.sh
-```
-bosh -e micro-bosh -d paasta -n deploy paasta-deployment-monitoring.yml \
-	-o operations/azure.yml \
-	-o operations/use-compiled-releases.yml \
-	-o operations/use-haproxy.yml \
-	-o operations/use-haproxy-public-network.yml \
-	-o operations/use-compiled-releases-haproxy.yml \
-	-o operations/use-postgres.yml \
-	-o operations/use-compiled-releases-postgres.yml \
-	-o operations/rename-network-and-deployment.yml \
-	-o paasta-addon/paasta-monitoring.yml \
-	-o paasta-addon/use-compiled-releases-monitoring-agent.yml \
-	-o operations/addons/enable-component-syslog.yml \
-	-o operations/addons/use-compiled-releases-syslog.yml \
-	-l azure-vars.yml \
-	-l ../../common/common_vars.yml
-```
-
-### <div id='1024'/>3.7.3. deploy-gcp-monitoring.sh
-```
-bosh -e micro-bosh -d paasta -n deploy paasta-deployment-monitoring.yml \
-	-o operations/use-compiled-releases.yml \
-	-o operations/use-haproxy.yml \
-	-o operations/use-haproxy-public-network.yml \
-	-o operations/use-compiled-releases-haproxy.yml \
-	-o operations/use-postgres.yml \
-	-o operations/use-compiled-releases-postgres.yml \
-	-o operations/rename-network-and-deployment.yml \
-	-o paasta-addon/paasta-monitoring.yml \
-	-o paasta-addon/use-compiled-releases-monitoring-agent.yml \
-	-o operations/addons/enable-component-syslog.yml \
-	-o operations/addons/use-compiled-releases-syslog.yml \
-	-l gcp-vars.yml \
-	-l ../../common/common_vars.yml
-```
-
-### <div id='1025'/>3.7.4. deploy-openstack-monitoring.sh
-```
-bosh -e micro-bosh -d paasta -n deploy paasta-deployment-monitoring.yml \
-	-o operations/openstack.yml \
-	-o operations/use-compiled-releases.yml \
-	-o operations/use-haproxy.yml \
-	-o operations/use-haproxy-public-network.yml \
-	-o operations/use-compiled-releases-haproxy.yml \
-	-o operations/use-postgres.yml \
-	-o operations/use-compiled-releases-postgres.yml \
-	-o operations/rename-network-and-deployment.yml \
-	-o paasta-addon/paasta-monitoring.yml \
-	-o paasta-addon/use-compiled-releases-monitoring-agent.yml \
-	-o operations/addons/enable-component-syslog.yml \
-	-o operations/addons/use-compiled-releases-syslog.yml \
-	-l openstack-vars.yml \
-	-l ../../common/common_vars.yml
-```
-
-### <div id='1026'/>3.7.5. deploy-vsphere-monitoring.sh
-```
-bosh -e micro-bosh -d paasta -n deploy paasta-deployment-monitoring.yml \
-	-o operations/use-compiled-releases.yml \
-	-o operations/use-haproxy.yml \
-	-o operations/use-haproxy-public-network-vsphere.yml \
-	-o operations/use-compiled-releases-haproxy.yml \
-	-o operations/use-postgres.yml \
-	-o operations/use-compiled-releases-postgres.yml \
-	-o operations/rename-network-and-deployment.yml \
-	-o paasta-addon/paasta-monitoring.yml \
-	-o paasta-addon/use-compiled-releases-monitoring-agent.yml \
-	-o operations/addons/enable-component-syslog.yml \
-	-o operations/addons/use-compiled-releases-syslog.yml \
-	-l vsphere-vars.yml \
-	-l ../../common/common_vars.yml
-```
-
-- Shell script 파일에 실행 권한 부여
-
-```
-$ chmod +x ${HOME}/workspace/paasta-5.0/deployment/monitoring-deployment/paasta/*.sh
-```
-
-### <div id='1028'/>3.7.6. PaaS-TA Operation 파일
-
-<table>
-<tr>
-<td>파일명</td>
-<td>설명</td>
-<td>요구사항</td>
-</tr>
-<tr>
-<td>operations/use-compiled-releases.yml</td>
-<td>PaaS-TA release에서 제공하는 파일로 다운로드 및 컴파일 없이 빠른 설치가 가능하다.</td>
-<td></td>
-</tr>
-<tr>
-<td>operations/use-postgres.yml</td>
-<td>Database를 postgres로 설치 <br> 
-    - use-postgres.yml 미적용 시 MySQL 설치  <br>
-    - 3.5 이전 버전에서 migration 시 필수  
-</td>
-<td></td>
-</tr>
-<tr>
-<td>operations/use-compiled-releases-postgres.yml</td>
-<td>PaaS-TA release에서 제공하는 파일로 다운로드 및 컴파일 없이 Postgres의 빠른 설치가 가능하다.</td>
-<td></td>
-</tr>
-<tr>
-<td>operations/use-haproxy.yml</td>
-<td>Haproxy 적용 <br>
-    - IaaS에서 제공하는 LB를 사용하여 PaaS-TA 설치 시, Operation 파일을 제거하고 설치한다.
-</td>
-<td>Requires operation file: use-haproxy-public-network.ym <br>
-    Requires value :  -v haproxy_private_ip
-</td>
-</tr>
-<tr>
-<td>operations/use-haproxy-public-network.yml</td>
-<td>Haproxy Public Network 설정 <br>
-    - IaaS에서 제공하는 LB를 사용하여 PaaS-TA 설치 시, Operation 파일을 제거하고 설치한다.
-</td>
-<td>Requires: use-haproxy.yml <br>
-    Requires value :  <br>
-    -v haproxy_public_ip <br>
-    -v haproxy_public_network_name
-</td>
-</tr>
-<tr>
-<td>operations/use-compiled-releases-haproxy.yml</td>
-<td>PaaS-TA release에서 제공하는 파일로 다운로드 및 컴파일 없이 HAProxy의 빠른 설치가 가능하다.</td>
-<td></td>
-</tr>
-<tr>
-<td>paasta-addon/paasta-monitoring.yml</td>
-<td>PaaS-TA Monitoring Agent 적용
-</td>
-<td>Requires value :  <br>
-    -v metric_url
-</td>
-</tr>
-<tr>
-<td>paasta-addon/use-compiled-releases-monitoring-agent.yml</td>
-<td>PaaS-TA release에서 제공하는 파일로 다운로드 및 컴파일 없이 PaaS-TA Monitoring-agent의 빠른 설치가 가능하다.</td>
-<td></td>
-</tr>
-<tr>
-<td>operations/addons/enable-component-syslog.yml</td>
-<td>PaaS-TA Monitoring Log Agent 적용(PaaS-TA VM Log 전송)
-</td>
-<td>Requires value :  <br>
-    -v syslog_address <br>
-    -v syslog_port <br>
-    -v syslog_custome_rule <br>
-    -v syslog_failback_servers
-</td>
-</tr>
-<tr>
-<td>operations/addons/use-compiled-releases-syslog.yml</td>
-<td>PaaS-TA release에서 제공하는 파일로 다운로드 및 컴파일 없이 Syslog의 빠른 설치가 가능하다.</td>
-<td></td>
-</tr>
-</table>
-
-Monitoring Agent는 BOSH VM의 상태 정보(Metric data)를 paasta-monitoring의 InfluxDB에 전송한다.  
-Syslog Agent는 BOSH VM의 log 정보를 logsearch의 ls-router에 전송하는 역할을 한다.  
-BOSH 설치 전에 paasta-monitoring의 InfluxDB IP를 metric_url로 사용하기 위해 사전에 정의해야 한다.  
-마찬가지로 logsearch의 ls-router IP도 syslog_address로 연동하기 위해 사전에 정의해야 한다.
 
 ### <div id='1029'/>3.7.8. common_vars.yml
 ```
@@ -990,6 +816,204 @@ ex) uaa_admin_client_secret="admin-secret"
     Target: https://uaa.54.180.53.80.xip.io
     Context: admin, from client admin
     ```
+
+### <div id='1028'/>3.7.6. PaaS-TA Operation 파일
+
+<table>
+<tr>
+<td>파일명</td>
+<td>설명</td>
+<td>요구사항</td>
+</tr>
+<tr>
+<td>operations/use-compiled-releases.yml</td>
+<td>PaaS-TA release에서 제공하는 파일로 다운로드 및 컴파일 없이 빠른 설치가 가능하다.</td>
+<td></td>
+</tr>
+<tr>
+<td>operations/use-postgres.yml</td>
+<td>Database를 postgres로 설치 <br> 
+    - use-postgres.yml 미적용 시 MySQL 설치  <br>
+    - 3.5 이전 버전에서 migration 시 필수  
+</td>
+<td></td>
+</tr>
+<tr>
+<td>operations/use-compiled-releases-postgres.yml</td>
+<td>PaaS-TA release에서 제공하는 파일로 다운로드 및 컴파일 없이 Postgres의 빠른 설치가 가능하다.</td>
+<td></td>
+</tr>
+<tr>
+<td>operations/use-haproxy.yml</td>
+<td>Haproxy 적용 <br>
+    - IaaS에서 제공하는 LB를 사용하여 PaaS-TA 설치 시, Operation 파일을 제거하고 설치한다.
+</td>
+<td>Requires operation file: use-haproxy-public-network.ym <br>
+    Requires value :  -v haproxy_private_ip
+</td>
+</tr>
+<tr>
+<td>operations/use-haproxy-public-network.yml</td>
+<td>Haproxy Public Network 설정 <br>
+    - IaaS에서 제공하는 LB를 사용하여 PaaS-TA 설치 시, Operation 파일을 제거하고 설치한다.
+</td>
+<td>Requires: use-haproxy.yml <br>
+    Requires value :  <br>
+    -v haproxy_public_ip <br>
+    -v haproxy_public_network_name
+</td>
+</tr>
+<tr>
+<td>operations/use-compiled-releases-haproxy.yml</td>
+<td>PaaS-TA release에서 제공하는 파일로 다운로드 및 컴파일 없이 HAProxy의 빠른 설치가 가능하다.</td>
+<td></td>
+</tr>
+<tr>
+<td>paasta-addon/paasta-monitoring.yml</td>
+<td>PaaS-TA Monitoring Agent 적용
+</td>
+<td>Requires value :  <br>
+    -v metric_url
+</td>
+</tr>
+<tr>
+<td>paasta-addon/use-compiled-releases-monitoring-agent.yml</td>
+<td>PaaS-TA release에서 제공하는 파일로 다운로드 및 컴파일 없이 PaaS-TA Monitoring-agent의 빠른 설치가 가능하다.</td>
+<td></td>
+</tr>
+<tr>
+<td>operations/addons/enable-component-syslog.yml</td>
+<td>PaaS-TA Monitoring Log Agent 적용(PaaS-TA VM Log 전송)
+</td>
+<td>Requires value :  <br>
+    -v syslog_address <br>
+    -v syslog_port <br>
+    -v syslog_custome_rule <br>
+    -v syslog_failback_servers
+</td>
+</tr>
+<tr>
+<td>operations/addons/use-compiled-releases-syslog.yml</td>
+<td>PaaS-TA release에서 제공하는 파일로 다운로드 및 컴파일 없이 Syslog의 빠른 설치가 가능하다.</td>
+<td></td>
+</tr>
+</table>
+
+Monitoring Agent는 BOSH VM의 상태 정보(Metric data)를 paasta-monitoring의 InfluxDB에 전송한다.  
+Syslog Agent는 BOSH VM의 log 정보를 logsearch의 ls-router에 전송하는 역할을 한다.  
+BOSH 설치 전에 paasta-monitoring의 InfluxDB IP를 metric_url로 사용하기 위해 사전에 정의해야 한다.  
+마찬가지로 logsearch의 ls-router IP도 syslog_address로 연동하기 위해 사전에 정의해야 한다.
+
+
+
+
+
+## <div id='1021'/>3.7.   PaaS-TA 설치 Shell Scripts
+
+paasta-deployment-monitoring.yml 파일은 통합 Monitoring을 적용한 PaaS-TA를 배포하는 Manifest 파일이며, PaaS-TA VM에 대한 설치 정의를 하게 된다.  
+PaaS-TA VM 중 singleton-blobstore, database의 AZs(zone)을 변경하면 조직(ORG), 스페이스(SPACE), 앱(APP) 정보가 모두 삭제된다. 
+
+이미 설치된 PaaS-TA의 재배포 시, singleton-blobstore, database의 azs(zone)을 변경하면 조직(ORG), 공간(SPACE), 앱(APP) 정보가 모두 삭제된다.
+
+다음은 PaaS-TA 배포 시 필수 옵션이며, cf_admin_password, cc_db_encryption_key, uaa_database_password, cc_database_password는 –v 옵션이 없는 경우 BOSH에서 자동 생성하여 BOSH CredHub에 저장한다.
+
+### <div id='1022'/>3.7.1. deploy-aws-monitoring.sh
+```
+bosh -e micro-bosh -d paasta -n deploy paasta-deployment-monitoring.yml \
+	-o operations/aws.yml \
+	-o operations/use-compiled-releases.yml \
+	-o operations/use-haproxy.yml \
+	-o operations/use-haproxy-public-network.yml \
+	-o operations/use-compiled-releases-haproxy.yml \
+	-o operations/use-postgres.yml \
+	-o operations/use-compiled-releases-postgres.yml \
+	-o operations/rename-network-and-deployment.yml \
+	-o paasta-addon/paasta-monitoring.yml \
+	-o paasta-addon/use-compiled-releases-monitoring-agent.yml \
+	-o operations/addons/enable-component-syslog.yml \
+	-o operations/addons/use-compiled-releases-syslog.yml \
+	-l aws-vars.yml \
+	-l ../../common/common_vars.yml
+```
+### <div id='1023'/>3.7.2. deploy-azure-monitoring.sh
+```
+bosh -e micro-bosh -d paasta -n deploy paasta-deployment-monitoring.yml \
+	-o operations/azure.yml \
+	-o operations/use-compiled-releases.yml \
+	-o operations/use-haproxy.yml \
+	-o operations/use-haproxy-public-network.yml \
+	-o operations/use-compiled-releases-haproxy.yml \
+	-o operations/use-postgres.yml \
+	-o operations/use-compiled-releases-postgres.yml \
+	-o operations/rename-network-and-deployment.yml \
+	-o paasta-addon/paasta-monitoring.yml \
+	-o paasta-addon/use-compiled-releases-monitoring-agent.yml \
+	-o operations/addons/enable-component-syslog.yml \
+	-o operations/addons/use-compiled-releases-syslog.yml \
+	-l azure-vars.yml \
+	-l ../../common/common_vars.yml
+```
+
+### <div id='1024'/>3.7.3. deploy-gcp-monitoring.sh
+```
+bosh -e micro-bosh -d paasta -n deploy paasta-deployment-monitoring.yml \
+	-o operations/use-compiled-releases.yml \
+	-o operations/use-haproxy.yml \
+	-o operations/use-haproxy-public-network.yml \
+	-o operations/use-compiled-releases-haproxy.yml \
+	-o operations/use-postgres.yml \
+	-o operations/use-compiled-releases-postgres.yml \
+	-o operations/rename-network-and-deployment.yml \
+	-o paasta-addon/paasta-monitoring.yml \
+	-o paasta-addon/use-compiled-releases-monitoring-agent.yml \
+	-o operations/addons/enable-component-syslog.yml \
+	-o operations/addons/use-compiled-releases-syslog.yml \
+	-l gcp-vars.yml \
+	-l ../../common/common_vars.yml
+```
+
+### <div id='1025'/>3.7.4. deploy-openstack-monitoring.sh
+```
+bosh -e micro-bosh -d paasta -n deploy paasta-deployment-monitoring.yml \
+	-o operations/openstack.yml \
+	-o operations/use-compiled-releases.yml \
+	-o operations/use-haproxy.yml \
+	-o operations/use-haproxy-public-network.yml \
+	-o operations/use-compiled-releases-haproxy.yml \
+	-o operations/use-postgres.yml \
+	-o operations/use-compiled-releases-postgres.yml \
+	-o operations/rename-network-and-deployment.yml \
+	-o paasta-addon/paasta-monitoring.yml \
+	-o paasta-addon/use-compiled-releases-monitoring-agent.yml \
+	-o operations/addons/enable-component-syslog.yml \
+	-o operations/addons/use-compiled-releases-syslog.yml \
+	-l openstack-vars.yml \
+	-l ../../common/common_vars.yml
+```
+
+### <div id='1026'/>3.7.5. deploy-vsphere-monitoring.sh
+```
+bosh -e micro-bosh -d paasta -n deploy paasta-deployment-monitoring.yml \
+	-o operations/use-compiled-releases.yml \
+	-o operations/use-haproxy.yml \
+	-o operations/use-haproxy-public-network-vsphere.yml \
+	-o operations/use-compiled-releases-haproxy.yml \
+	-o operations/use-postgres.yml \
+	-o operations/use-compiled-releases-postgres.yml \
+	-o operations/rename-network-and-deployment.yml \
+	-o paasta-addon/paasta-monitoring.yml \
+	-o paasta-addon/use-compiled-releases-monitoring-agent.yml \
+	-o operations/addons/enable-component-syslog.yml \
+	-o operations/addons/use-compiled-releases-syslog.yml \
+	-l vsphere-vars.yml \
+	-l ../../common/common_vars.yml
+```
+
+- Shell script 파일에 실행 권한 부여
+
+```
+$ chmod +x ${HOME}/workspace/paasta-5.0/deployment/monitoring-deployment/paasta/*.sh
+```
 
 ## <div id='1030'/>3.8.  PaaS-TA 설치
 - PaaS-TA 설치 Shell Script 파일 실행 (BOSH 로그인 필요)
