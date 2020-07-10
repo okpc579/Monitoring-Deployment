@@ -8,7 +8,7 @@
 　　● [logsearch-vars.yml](#7)  
 　　● [deploy-logsearch.sh](#8)  
 　2.4. [Logsearch 설치](#9)  
-　2.5. [Logsearch 설치 - 다운로드 된 PaaS-TA Release 파일 이용 방식](#10)  
+　2.5. [Logsearch 설치 - 다운로드 된 Release 파일 이용 방식](#10)  
 　2.6. [서비스 설치 확인](#11)
 
 
@@ -128,7 +128,7 @@ deploy.sh을 실행하여 logsearch를 설치 한다.
 $ cd ~/workspace/paasta-5.0/deployment/monitoring-deployment/paasta-monitoring
 $ sh deploy-logsearch.sh
 ```
-### <div id='10'/>2.3. Logsearch 설치 - 다운로드 된 PaaS-TA Release 파일 이용 방식
+### <div id='10'/>2.3. Logsearch 설치 - 다운로드 된 Release 파일 이용 방식
 deploy.sh을 실행하여 logsearch를 설치 한다.
 
 ```
