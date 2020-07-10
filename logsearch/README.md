@@ -21,31 +21,16 @@
 ### <div id='3'/>2.1 Prerequisite
 
 1. BOSH 설치가 되어있으며, BOSH Login이 되어 있어야 한다.
-2. Stemcell 목록을 확인하여 서비스 설치에 필요한 Stemcell이 업로드 되어 있는 것을 확인한다.
-3. cloud-config와 runtime-config가 업데이트 되어있는지 확인한다.
+2. cloud-config와 runtime-config가 업데이트 되어있는지 확인한다.
+3. Stemcell 목록을 확인하여 서비스 설치에 필요한 Stemcell(ubuntu xenial 315.36)이 업로드 되어 있는 것을 확인한다.
 
-
-> stemcell 확인  
-> $ bosh -e {director-name} stemcells
-
-```
-Using environment '10.0.1.6' as client 'admin'
-
-Name                                     Version  OS             CPI  CID  
-bosh-aws-xen-hvm-ubuntu-xenial-go_agent  315.36*  ubuntu-xenial  -    ami-0297ff649e8eea21b  
-
-(*) Currently deployed
-
-1 stemcells
-
-Succeeded
-```
 
 > cloud-config 확인  
 > $ bosh -e {director-name} cloud-config
-
 > runtime-config 확인  
 > $ bosh -e {director-name} runtime-config
+> stemcell 확인  
+> $ bosh -e {director-name} stemcells
 
 
 ### <div id='4'/>2.2. 설치 파일 다운로드
