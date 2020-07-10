@@ -29,7 +29,7 @@
 　　　●  [deploy-openstack-monitoring.sh](#1027)  
 　　　●  [deploy-vsphere-monitoring.sh](#1028)  
 　3.7. [PaaS-TA 설치](#1029)  
-　3.8. [PaaS-TA 설치](#1030)  
+　3.8. [PaaS-TA 설치 - 다운로드 된 Release 파일 이용 방식](#1030)  
 　3.9. [PaaS-TA 로그인](#1031)  
 
 ## Executive Summary
@@ -488,7 +488,7 @@ $ bosh -e {director_name} update-runtime-config -n runtime-configs/dns.yml
 $ bosh –e {director_name} runtime-config  
 ```
 
-## <div id='1020'/>3.6.  PaaS-TA 설치 파일
+## <div id='1020'/>3.6.  PaaS-TA 
 
 ${HOME}/workspace/paasta-5.0/deployment/monitoring-deployment 이하 디렉터리에는 IaaS별 PaaS-TA 설치 Shell Script 파일이 존재하며, 이를 실행하여 PaaS-TA를 설치한다.  
 파일명은 deploy-{IaaS}-monitoring.sh이다.  
@@ -581,7 +581,7 @@ PaaS-TA 배포 시, 설치 Option을 추가해야 한다.
 
 
 
-### <div id='1029'/>3.7.8. common_vars.yml
+### <div id='1029'/>● common_vars.yml
 common_vars.yml PaaS-TA 및 각종 Service 설치시 적용하는 공통 변수 설정 파일이 존재한다.  
 PaaS-TA를 설치할 때는 system_domain, paasta_admin_username, paasta_admin_password, uaa_client_admin_secret, uaa_client_portal_secret의 값을 변경 하여 설치 할 수 있다.  
 또한 Monitoring 정보인 metric_url, syslog_address, syslog_port,syslog_transport,saas_monitoring_url, monitoring_api_url 을 수정 할 수 있다.
@@ -634,7 +634,7 @@ portal_web_user_url: "http://portal-web-user.52.78.88.252.xip.io"
 abacus_url: "http://abacus.61.252.53.248.xip.io"	# Abacus URL (e.g. "http://abacus.xxx.xxx.xxx.xxx.xip.io")
 ```
 
-### <div id='1030'/>3.7.9. {IaaS}-vars.yml
+### <div id='1030'/>● {IaaS}-vars.yml
 
 PaaS-TA를 설치 할 때 적용되는 각종 변수값이나 배포 될 VM의 설정을 변경할 수 있다.
 
@@ -788,7 +788,7 @@ haproxy_network: "default"		# HAProxy 네트워크
 
 
 
-### <div id='1029'/>3.7.8. PaaS-TA 그외 Variable List
+### <div id='1029'/>● PaaS-TA 그외 Variable List
 
 1. uaa_login_logout_redirect_parameter_whitelist : 포탈 페이지 이동을 위한 UAA Redirect Whitelist 등록 변수
 ```
@@ -849,7 +849,7 @@ ex) uaa_admin_client_secret="admin-secret"
     Context: admin, from client admin
     ```
 
-### <div id='1028'/>3.7.6. PaaS-TA Operation 파일
+### <div id='1028'/>3.6.2. PaaS-TA Operation 파일
 
 <table>
 <tr>
@@ -940,14 +940,14 @@ BOSH 설치 전에 paasta-monitoring의 InfluxDB IP를 metric_url로 사용하�
 
 
 
-## <div id='1021'/>3.7.   PaaS-TA 설치 Shell Scripts
+## <div id='1021'/>3.6.3.   PaaS-TA 설치 Shell Scripts
 
 paasta-deployment-monitoring.yml 파일은 통합 Monitoring을 적용한 PaaS-TA를 배포하는 Manifest 파일이며, PaaS-TA VM에 대한 설치 정의를 하게 된다.  
 PaaS-TA VM 중 singleton-blobstore, database의 AZs(zone)을 변경하면 조직(ORG), 스페이스(SPACE), 앱(APP) 정보가 모두 삭제된다. 
 
 이미 설치된 PaaS-TA의 재배포 시, singleton-blobstore, database의 azs(zone)을 변경하면 조직(ORG), 공간(SPACE), 앱(APP) 정보가 모두 삭제된다.
 
-### <div id='1022'/>3.7.1. deploy-aws-monitoring.sh
+### <div id='1022'/>● deploy-aws-monitoring.sh
 ```
 bosh -e micro-bosh -d paasta -n deploy paasta-deployment-monitoring.yml \
 	-o operations/aws.yml \
@@ -965,7 +965,7 @@ bosh -e micro-bosh -d paasta -n deploy paasta-deployment-monitoring.yml \
 	-l aws-vars.yml \
 	-l ../../common/common_vars.yml
 ```
-### <div id='1023'/>3.7.2. deploy-azure-monitoring.sh
+### <div id='1023'/>● deploy-azure-monitoring.sh
 ```
 bosh -e micro-bosh -d paasta -n deploy paasta-deployment-monitoring.yml \
 	-o operations/azure.yml \
@@ -984,7 +984,7 @@ bosh -e micro-bosh -d paasta -n deploy paasta-deployment-monitoring.yml \
 	-l ../../common/common_vars.yml
 ```
 
-### <div id='1024'/>3.7.3. deploy-gcp-monitoring.sh
+### <div id='1024'/>● deploy-gcp-monitoring.sh
 ```
 bosh -e micro-bosh -d paasta -n deploy paasta-deployment-monitoring.yml \
 	-o operations/use-compiled-releases.yml \
@@ -1002,7 +1002,7 @@ bosh -e micro-bosh -d paasta -n deploy paasta-deployment-monitoring.yml \
 	-l ../../common/common_vars.yml
 ```
 
-### <div id='1025'/>3.7.4. deploy-openstack-monitoring.sh
+### <div id='1025'/>● deploy-openstack-monitoring.sh
 ```
 bosh -e micro-bosh -d paasta -n deploy paasta-deployment-monitoring.yml \
 	-o operations/openstack.yml \
@@ -1021,7 +1021,7 @@ bosh -e micro-bosh -d paasta -n deploy paasta-deployment-monitoring.yml \
 	-l ../../common/common_vars.yml
 ```
 
-### <div id='1026'/>3.7.5. deploy-vsphere-monitoring.sh
+### <div id='1026'/>● deploy-vsphere-monitoring.sh
 ```
 bosh -e micro-bosh -d paasta -n deploy paasta-deployment-monitoring.yml \
 	-o operations/use-compiled-releases.yml \
@@ -1045,7 +1045,7 @@ bosh -e micro-bosh -d paasta -n deploy paasta-deployment-monitoring.yml \
 $ chmod +x ${HOME}/workspace/paasta-5.0/deployment/monitoring-deployment/paasta/*.sh
 ```
 
-## <div id='1030'/>3.8.  PaaS-TA 설치
+## <div id='1030'/>3.7.  PaaS-TA 설치
 
 - 서버 환경에 맞추어 Deploy 스크립트 파일의 설정을 수정한다. 
 
