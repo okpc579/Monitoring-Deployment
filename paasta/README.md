@@ -38,16 +38,16 @@
 
 # <div id='101'/>1.  문서 개요 
 
-## <div id='102'/>1.1.  목적
-본 문서는 Inception 환경(설치환경)에서 BOSH2(이하 BOSH) 설치 후, BOSH를 기반으로 PaaS-TA를 설치하기 위한 가이드를 제공하는 데 그 목적이 있다.
+## <div id='102'/>● 목적
+본 문서는 Inception 환경(설치환경)에서 BOSH2(이하 BOSH) 설치 후, BOSH를 기반으로 통합 Monitoring을 적용한 PaaS-TA를 설치하기 위한 가이드를 제공하는 데 그 목적이 있다.
 
-## <div id='103'/>1.2.  범위
+## <div id='103'/>● 범위
 
 본 문서는 cf-deployment v9.3.0을 기준으로 작성되었다.  
 PaaS-TA는 bosh-deployment를 기반으로 한 BOSH 환경에서 설치한다.  
 PaaS-TA 설치 시 필요한 Stemcell은 ubuntu-xenial-315.36이다.
 
-## <div id='104'/>1.3.  참고 자료
+## <div id='104'/>●  참고 자료
 
 본 문서는 Cloud Foundry의 BOSH Document와 Cloud Foundry Document를 참고로 작성하였다.
 
@@ -60,19 +60,12 @@ BOSH Deployment: [https://github.com/cloudfoundry/bosh-deployment](https://githu
 CF Deployment: [https://github.com/cloudfoundry/cf-deployment](https://github.com/cloudfoundry/cf-deployment)
 
 # <div id='105'/>2. PaaS-TA 5.0
-## <div id='106'/>2.1.    PaaS-TA 3.1
-
-PaaS-TA 3.1까지는 bosh-init을 통하여 BOSH1을 생성하고, BOSH CLI를 통하여 PaaS-TA Controller, Container를 생성하였다. 
-
-![PaaSTa_BOSH_Use_Guide_Image1]
-
-## <div id='107'/>2.2.    PaaS-TA 5.0
 
 PaaS-TA는 BOSH를 기반으로 설치된다. BOSH CLI를 사용하여 BOSH를 생성한 후, paasta-deployment로 PaaS-TA를 배포한다. 
 
 PaaS-TA 3.1 버전까지는  PaaS-TA Container, Controller를 각각의 deployment로 설치했지만, PaaS-TA 3.5 버전부터 paasta-deployment 하나로 통합되었으며, 한 번에 PaaS-TA를 설치한다. 
 
-![PaaSTa_BOSH_Use_Guide_Image2]
+![PaaSTa_BOSH_Use_Guide_Image2](https://github.com/PaaS-TA/Guide-5.0-Ravioli/blob/master/install-guide/paasta-monitoring/images/bosh2.png)
 
 # <div id='108'/>3.   PaaS-TA 5.0 설치
 
@@ -442,7 +435,7 @@ PaaS-TA를 설치하는 환경에 따라 다르게 설정해도 된다.
 VM Type은 IaaS에서 정의된 VM Type이다. Openstack의 경우에는 Flavor Type이다.
 
 ※ 다음은 OpenStack에서 정의한 Flavor Type이다.
-![PaaSTa_FLAVOR_Image]
+![PaaSTa_FLAVOR_Image](https://github.com/PaaS-TA/Guide-5.0-Ravioli/blob/master/install-guide/paasta-monitoring/images/flavor.png)
 
 ### <div id='1015'/>3.4.3. Compilation
 PaaS-TA 및 서비스 설치 시, PaaS-TA는 Compile VM을 생성하여 소스를 컴파일하고, PaaS-TA VM을 생성하여 컴파일된 파일을 대상 VM에 설치한다.  
@@ -948,10 +941,10 @@ ex) uaa_login_logout_redirect_parameter_whitelist=["{PaaS-TA PORTAL URI}","{PaaS
 > xip.io를 사용하지 않고 DNS를 사용할 경우, Whitelist에 포탈 DNS, 포탈 DNS/callback, 포탈 DNS/login 세 개의 항목을 등록해야 한다.
 
 2. uaa_login_links_passwd : UAA 페이지에서 Reset Password 버튼 클릭 시 이동하는 링크 주소
-![PaaSTa_UAA_LOGIN_Image]
+<img src="https://github.com/PaaS-TA/Guide-5.0-Ravioli/blob/master/install-guide/paasta-monitoring/images/uaa-login.png" width="663px">
 
 3. uaa_login_links_signup : UAA 페이지에서 Create Account 버튼 클릭 시 이동하는 링크 주소
-![PaaSTa_UAA_LOGIN_Image2]
+<img src="https://github.com/PaaS-TA/Guide-5.0-Ravioli/blob/master/install-guide/paasta-monitoring/images/uaa-login-2.png">
 ```
 ex) uaa_login_links_signup="{PaaS-TA PORTAL URI}/createuser"
 ```
@@ -967,7 +960,7 @@ ex) uaa_client_portal_secret="portalclient"
 
   paasta-portal deploy 파일 안의 portal_client_secret의 값과 일치해야 한다.
 ```
-![PaaSTa_VALUE_Image]
+![PaaSTa_VALUE_Image](https://github.com/PaaS-TA/Guide-5.0-Ravioli/blob/master/install-guide/paasta-monitoring/images/paasta-value.png)
 
 6. uaa_admin_client_secret : UAAC Admin Client에 접근하기 위한 Secret 변수
 ```
