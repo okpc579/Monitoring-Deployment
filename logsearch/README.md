@@ -26,11 +26,11 @@
 
 
 > cloud-config 확인  
-> $ bosh -e {director-name} cloud-config
+> $ bosh -e {director-name} cloud-config  
 > runtime-config 확인  
-> $ bosh -e {director-name} runtime-config
+> $ bosh -e {director-name} runtime-config  
 > stemcell 확인  
-> $ bosh -e {director-name} stemcells
+> $ bosh -e {director-name} stemcells  
 
 
 ### <div id='4'/>2.2. 설치 파일 다운로드
