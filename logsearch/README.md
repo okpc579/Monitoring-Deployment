@@ -1,15 +1,15 @@
 ## Table of Contents
 
-1. [개요](#1)  
-2. [Logsearch 설치](#2)  
+1\. [개요](#1)  
+2\. [Logsearch 설치](#2)  
 　2.1. [Prerequisite](#3)  
 　2.2. [설치 파일 다운로드](#4)  
 　2.3. [Logsearch 설치 환경설정](#5)  
 　　● [logsearch-deployment.yml](#6)  
 　　● [logsearch-vars.yml](#7)  
 　　● [deploy-logsearch.sh](#8)  
-  2.4. [Logsearch 설치](#9)  
-  2.5. [Logsearch 설치 - 다운로드 된 PaaS-TA Release 파일 이용 방식](#10)
+　2.4. [Logsearch 설치](#9)  
+　2.5. [Logsearch 설치 - 다운로드 된 PaaS-TA Release 파일 이용 방식](#10)
 
 
 ## <div id='1'/>1. 개요
