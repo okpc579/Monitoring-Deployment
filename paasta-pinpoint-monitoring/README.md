@@ -5,14 +5,14 @@
   ● [시스템 구성도](#13)  
   ● [참고자료](#14)  
 2\. [Pinpoint 서비스팩 설치](#2)  
-  2.1 [설치전 준비사항](#21)
-  2.2 [Pinpoint 서비스 릴리즈 업로드](#22)
-  2.3 [Pinpoint 서비스 Deployment 파일 수정 및 배포](#23)
-  2.4 [Pinpoint security-group 등록](#24)
-  2.5 [Pinpoint 서비스 브로커 등록](#25)
-- 3\. [Sample Web App 연동 Pinpoint 연동](#3)
-  - [Sample Web App 구조](#31)
-  - [Sample Web App에 서비스 바인드 신청 및 App 확인](#32)
+  2.1 [설치전 준비사항](#21)  
+  2.2 [Pinpoint 서비스 릴리즈 업로드](#22)  
+  2.3 [Pinpoint 서비스 Deployment 파일 수정 및 배포](#23)  
+  2.4 [Pinpoint security-group 등록](#24)  
+  2.5 [Pinpoint 서비스 브로커 등록](#25)  
+- 3\. [Sample Web App 연동 Pinpoint 연동](#3)  
+  - [Sample Web App 구조](#31)  
+  - [Sample Web App에 서비스 바인드 신청 및 App 확인](#32)  
 
 # <div id='1'> 1. 문서 개요
 ### <div id='11'> 1.1. 목적
