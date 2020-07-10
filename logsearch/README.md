@@ -46,9 +46,6 @@ Succeeded
 > $ bosh -e {director-name} runtime-config
 
 
-3. 
-
-
 ### <div id='1013'/>2.2. 설치 파일 다운로드
 
 - Logsearch를 설치하기 위한 deployment가 존재하지 않는다면 다운로드 받는다
@@ -59,7 +56,7 @@ $ git clone https://github.com/PaaS-TA/PaaS-TA-Deployment.git paasta-deployment
 ```
 
 
-## <div id='3'/>2.3. Logsearch 설치 환경설정
+### <div id='3'/>2.3. Logsearch 설치 환경설정
 
 PaaS-TA VM Log수집을 위해서는 Logsearch가 설치되어야 한다. 
 
@@ -69,7 +66,7 @@ $ cd ${HOME}/workspace/paasta-5.0/deployment/monitoring-deployment/paasta-monito
 
 
 
-### <div id='4'/>2.1.	logsearch-deployment.yml
+#### <div id='4'/>● logsearch-deployment.yml
 logsearch-deployment.yml에는 ls-router, cluster-monitor, elasticsearch_data, elastic_master, kibana, mainternance 의 명세가 정의되어 있다. 
 
 ```
@@ -406,7 +403,7 @@ stemcells:
   version: ((stemcell_version)) 
 ```
 
-### <div id='4'/>2.2. deploy-logsearch.sh
+### <div id='4'/>● deploy-logsearch.sh
 
 deploy.sh의 –v 의 inception_os_user_name, router_ip, system_domain 및 director_name을 시스템 상황에 맞게 설정한다.  
 system_domain은 PaaS-TA 설치시 설정했던 system_domain을 입력하면 된다.  
@@ -419,7 +416,7 @@ bosh –e {director_name} -d logsearch deploy logsearch-deployment.yml \
 	-l ../../common/common_vars.yml
 ```
 
-### <div id='5'/>2.3. logsearch-vars.yml
+### <div id='5'/>● logsearch-vars.yml
 
 ```
 # SERVICE VARIABLE
