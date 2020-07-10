@@ -55,164 +55,21 @@ Pinpoint Server, HBase의 HBase Master, Collector , WebUI2로 최소사항을 �
 
 # <div id='2'> 2. Pinpoint 서비스팩 설치
 
-### <div id='21'> 2.1. 설치전 준비사항
+### <div id='21'> 2.1. Prerequisite
 
 본 설치 가이드는 Linux 환경에서 설치하는 것을 기준으로 하였다.  
 서비스팩 설치를 위해서는 먼저 BOSH CLI v2 가 설치 되어 있어야 하고 BOSH 에 로그인이 되어 있어야 한다.  
 BOSH CLI v2 가 설치 되어 있지 않을 경우 먼저 BOSH2.0 설치 가이드 문서를 참고 하여 BOSH CLI v2를 설치를 하고 사용법을 숙지 해야 한다.
 
-- BOSH2.0 사용자 가이드
->BOSH2 사용자 가이드 : **<https://github.com/PaaS-TA/Guide-4.0-ROTELLE/blob/master/PaaS-TA_BOSH2_사용자_가이드v1.0.md>**
 
->BOSH CLI V2 사용자 가이드 : **<https://github.com/PaaS-TA/Guide-4.0-ROTELLE/blob/master/Use-Guide/Bosh/PaaS-TA_BOSH_CLI_V2_사용자_가이드v1.0.md>**
+## <div id='1010'/>3.2.  설치 파일 다운로드
 
-- PaaS-TA에서 제공하는 압축된 릴리즈 파일들을 다운받는다. (PaaSTA-Deployment.zip, PaaSTA-Sample-Apps.zip, PaaSTA-Services.zip)
-
-- 다운로드 위치
->Download : **<https://paas-ta.kr/download/package>**
-
-### <div id='22'> 2.2. paasta-pinpoint-monitoring-release 서비스 릴리즈 업로드
-
--	업로드 되어 있는 릴리즈 목록을 확인한다.
-
-- **사용 예시**
-
-		$ bosh -e micro-bosh releases
-		Using environment '10.0.1.6' as client 'admin'
-
-		Name                                       Version    Commit Hash  
-		binary-buildpack                           1.0.32*    2399a07  
-		bosh-dns                                   1.12.0*    5d607ed  
-		bosh-dns-aliases                           0.0.3*     eca9c5a  
-		bpm                                        1.1.0*     27e1c8f  
-		~                                          1.0.4*     420dc51  
-		capi                                       1.82.0*    123bb4c  
-		cf-cli                                     1.16.0*    05d9348  
-		cf-networking                              2.22.0*    b6e87aeb  
-		cf-smoke-tests                             40.0.108*  22ec7a9  
-		cf-syslog-drain                            10.2*      684147e  
-		cfcr-etcd                                  1.11.1*    d398cd0  
-		cflinuxfs3                                 0.96.0*    c6d6f88  
-		credhub                                    2.4.0*     7d6110b+  
-		diego                                      2.31.0*    728880441+  
-		docker                                     35.2.1*    0b69b44  
-		dotnet-core-buildpack                      2.2.11*    6a746c2  
-		empty-java-release                         1.0*       e8c1477+  
-		garden-runc                                1.19.2*    9d00b9d+  
-		go-buildpack                               1.8.39*    11a1d25  
-		haproxy                                    9.6.0*     3a9b189  
-		influxdb                                   1.5.1*     non-git  
-		java-buildpack                             4.19*      d6a7949  
-		kubo                                       0.34.1*    non-git  
-		log-cache                                  2.2.2*     0a03032  
-		loggregator                                105.5*     d5153da3  
-		loggregator-agent                          3.9*       d344140  
-		logsearch                                  209.0.1*   b7bb8e7  
-		logsearch-for-cloudfoundry                 207.0.1*   8598207  
-		nats                                       27*        bf8cb86  
-		nginx-buildpack                            1.0.11*    1c7d690  
-		nodejs-buildpack                           1.6.49*    d013a42  
-		paasta-container-service-projects-release  1.0*       ced4610+  
-		paasta-monitoring                          4.0*       non-git  
-		paasta-monitoring-agent                    4.0*       non-git  
-		php-buildpack                              4.3.76*    c98344f  
-		postgres                                   37*        98ed910  
-		pxc                                        0.17.0*    d673b2a  
-		python-buildpack                           1.6.32*    af43eb3  
-		r-buildpack                                1.0.9*     9145ed1  
-		redis                                      14.0.1*    96f111b  
-		routing                                    0.188.0*   db449e4  
-		ruby-buildpack                             1.7.38*    36a39f1  
-		silk                                       2.22.0*    4691b7b  
-		staticfile-buildpack                       1.4.42*    22e3fc4  
-		statsd-injector                            1.10.0*    b81ab23  
-		syslog                                     11.4.0*    feedfa7  
-		uaa                                        72.0*      804589c  
-
-		(*) Currently deployed
-		(+) Uncommitted changes
-
-		48 releases
-
-		Succeeded
-
-
--	Pinpoint 서비스 릴리즈가 업로드 되어 있지 않은 것을 확인
-
--	Pinpoint 서비스 릴리즈 파일을 업로드한다.
-
-- **사용 예시**
-
-		$ cd ${HOME}/workspace/paasta-5.0/release/paasta-monitoring
-		
-		$ bosh -e micro-bosh upload-release  paasta-pinpoint-monitoring-release.tgz
-
--	업로드 된 Pinpoint 릴리즈를 확인한다.
-
-- **사용 예시**
-
-		$ bosh -e micro-bosh releases
-		Using environment '10.0.1.6' as client 'admin'
-
-		Name                                       Version    Commit Hash  
-		binary-buildpack                           1.0.32*    2399a07  
-		bosh-dns                                   1.12.0*    5d607ed  
-		bosh-dns-aliases                           0.0.3*     eca9c5a  
-		bpm                                        1.1.0*     27e1c8f  
-		~                                          1.0.4*     420dc51  
-		capi                                       1.82.0*    123bb4c  
-		cf-cli                                     1.16.0*    05d9348  
-		cf-networking                              2.22.0*    b6e87aeb  
-		cf-smoke-tests                             40.0.108*  22ec7a9  
-		cf-syslog-drain                            10.2*      684147e  
-		cfcr-etcd                                  1.11.1*    d398cd0  
-		cflinuxfs3                                 0.96.0*    c6d6f88  
-		credhub                                    2.4.0*     7d6110b+  
-		diego                                      2.31.0*    728880441+  
-		docker                                     35.2.1*    0b69b44  
-		dotnet-core-buildpack                      2.2.11*    6a746c2  
-		empty-java-release                         1.0*       e8c1477+  
-		garden-runc                                1.19.2*    9d00b9d+  
-		go-buildpack                               1.8.39*    11a1d25  
-		haproxy                                    9.6.0*     3a9b189  
-		influxdb                                   1.5.1*     non-git  
-		java-buildpack                             4.19*      d6a7949  
-		kubo                                       0.34.1*    non-git  
-		log-cache                                  2.2.2*     0a03032  
-		loggregator                                105.5*     d5153da3  
-		loggregator-agent                          3.9*       d344140  
-		logsearch                                  209.0.1*   b7bb8e7  
-		logsearch-for-cloudfoundry                 207.0.1*   8598207  
-		nats                                       27*        bf8cb86  
-		nginx-buildpack                            1.0.11*    1c7d690  
-		nodejs-buildpack                           1.6.49*    d013a42  
-		paasta-container-service-projects-release  1.0*       ced4610+  
-		paasta-monitoring                          4.0*       non-git  
-		paasta-monitoring-agent                    4.0*       non-git  
-		paasta-pinpoint-monitoring-release         1.1*       12caa47+  
-		php-buildpack                              4.3.76*    c98344f  
-		postgres                                   37*        98ed910  
-		pxc                                        0.17.0*    d673b2a  
-		python-buildpack                           1.6.32*    af43eb3  
-		r-buildpack                                1.0.9*     9145ed1  
-		redis                                      14.0.1*    96f111b  
-		routing                                    0.188.0*   db449e4  
-		ruby-buildpack                             1.7.38*    36a39f1  
-		silk                                       2.22.0*    4691b7b  
-		staticfile-buildpack                       1.4.42*    22e3fc4  
-		statsd-injector                            1.10.0*    b81ab23  
-		syslog                                     11.4.0*    feedfa7  
-		uaa                                        72.0*      804589c  
-
-		(*) Currently deployed
-		(+) Uncommitted changes
-
-		48 releases
-
-		Succeeded
-
-		
--	Pinpoint 서비스 릴리즈가 업로드 되어 있는 것을 확인
+- PaaS-TA를 설치하기 위한 deployment가 존재하지 않는다면 다운로드 받는다
+```
+$ cd ${HOME}/workspace/paasta-5.0/deployment
+$ git clone https://github.com/okpc579/Common-Deployment.git common
+$ git clone https://github.com/okpc579/Monitoring-Deployment.git monitoring-deployment
+```
 
 -	Deploy시 사용할 Stemcell을 확인한다.
 
