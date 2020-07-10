@@ -39,10 +39,10 @@ bosh-aws-xen-hvm-ubuntu-xenial-go_agent  315.36*  ubuntu-xenial  -    ami-0297ff
 Succeeded
 ```
 
-> cloud-config 확인
+> cloud-config 확인  
 > $ bosh -e {director-name} cloud-config
 
-> runtime-config 확인
+> runtime-config 확인  
 > $ bosh -e {director-name} runtime-config
 
 
