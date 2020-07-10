@@ -9,7 +9,7 @@
 　　● [logsearch-vars.yml](#7)  
 　　● [deploy-logsearch.sh](#8)  
 　2.4. [Logsearch 설치](#9)  
-　2.5. [Logsearch 설치 - 다운로드 된 PaaS-TA Release 파일 이용 방식](#10)
+　2.5. [Logsearch 설치 - 다운로드 된 PaaS-TA Release 파일 이용 방식](#10)  
 　2.6. [서비스 설치 확인](#10)
 
 
