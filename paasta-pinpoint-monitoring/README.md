@@ -73,7 +73,7 @@ Pinpoint Server, HBase의 HBase Master, Collector , WebUI2로 최소사항을 �
 
 
 
-## <div id='1010'/>3.2.  설치 파일 다운로드
+## <div id='1010'/>2.2.  설치 파일 다운로드
 
 - PaaS-TA를 설치하기 위한 deployment가 존재하지 않는다면 다운로드 받는다
 ```
@@ -86,7 +86,7 @@ $ git clone https://github.com/okpc579/Monitoring-Deployment.git monitoring-depl
 
 ### <div id='23'> 2.3. Pinpoint Monitoring 설치 환경설정
 	
-#### <div id='23'> 2.3. pinpoint-vars.yml
+#### <div id='23'>● pinpoint-vars.yml
 ```
 ### On-Demand Bosh Deployment Name Setting ###
 deployment_name: "paasta-pinpoint-monitoring"		# On-Demand Deployment Name
@@ -129,55 +129,45 @@ haproxy_webui_network: "default"			# HAProxy-WEBUI 네트워크
 haproxy_webui_persistent_disk_type: "30GB"		# HAProxy-WEBUI 영구 Disk 종류
 ```
 
-#### <div id='23'> 2.3. pinpoint-vars.yml
+#### <div id='23'>● deploy-pinpoint.sh
 ```
-### On-Demand Bosh Deployment Name Setting ###
-deployment_name: "paasta-pinpoint-monitoring"		# On-Demand Deployment Name
-#### Main Stemcells Setting ###
-stemcell_os: "ubuntu-xenial"				# Deployment Main Stemcell OS
-stemcell_version: "315.36"				# Main Stemcell Version
-stemcell_alias: "default"   				# Main Stemcell Alias
-#### On-Demand Release Deployment Setting ### 
-releases_name:  "paasta-pinpoint-monitoring-release"	# On-Demand Release Name
-public_networks_name: "vip"				# Pinpoint Public Network Name
-PemSSH: "true"						# h_master에서 모니터링 하려는 VM에 SSH접근시 사용하는 Key File 지정 여부(default:false) 
-
-
-# H-Master
-h_master_azs: ["z3"]					# H-Master 가용 존
-h_master_instances: 1					# H-Master 인스턴스 수
-h_master_vm_type: "small-highmem-16GB"			# H-Master VM 종류
-h_master_network: "default"				# H-Master 네트워크
-h_master_persistent_disk_type: "30GB"			# H-Master 영구 Disk 종류
-
-# COLLECTOR
-collector_azs: ["z3"]					# Collector 가용 존
-collector_instances: 1					# Collector 인스턴스 수
-collector_vm_type: "small-highmem-16GB"			# Collector VM 종류
-collector_network: "default"				# Collector 네트워크
-collector_persistent_disk_type: "30GB"			# Collector 영구 Disk 종류
-
-# PINPOINT-WEB
-pinpoint_web_azs: ["z3"]				# Pinpoint-WEB 가용 존
-pinpoint_web_instances: 1				# Pinpoint-WEB 인스턴스 수
-pinpoint_web_vm_type: "small-highmem-16GB"		# Pinpoint-WEB VM 종류
-pinpoint_web_network: "default"				# Pinpoint-WEB 네트워크
-pinpoint_web_persistent_disk_type: "30GB"		# Pinpoint-WEB 영구 Disk 종류
-
-# HAPROXY-WEBUI
-haproxy_webui_azs: ["z7"]				# HAProxy-WEBUI 가용 존
-haproxy_webui_instances: 1				# HAProxy-WEBUI 인스턴스 수
-haproxy_webui_vm_type: "small-highmem-16GB"		# HAProxy-WEBUI VM 종류
-haproxy_webui_network: "default"			# HAProxy-WEBUI 네트워크
-haproxy_webui_persistent_disk_type: "30GB"		# HAProxy-WEBUI 영구 Disk 종류
+echo 'y' | bosh -e micro-bosh -d paasta-pinpoint-monitoring deploy paasta-pinpoint.yml \
+	-o use-public-network.yml \
+	-l pinpoint-vars.yml \
+	-l ../../common/common_vars.yml \
+	-l pem.yml
 ```
 
+#### <div id='23'>● deploy-pinpoint-vsphere.sh
+```
+echo 'y' | bosh -e micro-bosh -d paasta-pinpoint-monitoring deploy paasta-pinpoint.yml \
+	-o use-public-network-vsphere.yml \
+	-l pinpoint-vars.yml \
+	-l ../../common/common_vars.yml \
+	-l pem.yml
+```
 
--	Pinpoint 서비스팩을 배포한다.
+### <div id='23'> 2.4. Pinpoint Monitoring 설치
+deploy.sh을 실행하여 logsearch를 설치 한다.
 
--	배포된 Pinpoint 서비스팩을 확인한다.
+```
+$ cd ~/workspace/paasta-5.0/deployment/monitoring-deployment/paasta-monitoring
+$ sh deploy-logsearch.sh
+```
 
-- **사용 예시**
+## <div id='10'/>2.3. Logsearch 설치 - 다운로드 된 PaaS-TA Release 파일 이용 방식
+deploy.sh을 실행하여 logsearch를 설치 한다.
+
+```
+$ cd ~/workspace/paasta-5.0/deployment/monitoring-deployment/paasta-monitoring
+$ sh deploy-logsearch.sh
+```
+
+### <div id='11'/>2.7. 서비스 설치 확인
+logsearch가 설치 완료 되었음을 확인한다.
+```
+$ bosh –e {director_name} vms
+```
 
 		$ bosh -e micro-bosh -d paasta-pinpoint-monitoring vms
 		Deployment 'paasta-pinpoint-monitoring'
@@ -189,6 +179,8 @@ haproxy_webui_persistent_disk_type: "30GB"		# HAProxy-WEBUI 영구 Disk 종류
 										       15.165.3.150                                             
 		pinpoint_web/c23b79cf-ef55-42f5-9c2a-b8102b6e5ca8   running        z3  10.0.81.123   i-02a82ab6f02784317  caas_small_highmem  true 
 
+
+-
 
 ### <div id='24'> 2.4. security-group 등록
 Pinpoint collector와 배포 app간 통신을 위한  처리.
