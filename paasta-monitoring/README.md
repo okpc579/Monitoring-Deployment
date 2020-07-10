@@ -1,15 +1,15 @@
 ## Table of Contents
 1\. [개요](#1)  
 2\. [PaaS-TA Monitoring 설치](#1)  
-  2.1\. [설치 파일 다운로드](#2)  
-  2.2\. [PaaS-TA Monitoring 설치 환경설정](#3)  
-    ● [common_vars.yml](#4)  
-    ● [paasta-monitoring-vars.yml](#5)  
-    ● [deploy-paasta-monitoring.sh](#6)  
-  2.3\. [PaaS-TA Monitoring 설치](#7)  
-  2.4\. [PaaS-TA Monitoring 설치 - 다운로드 된 Relases 파일 이용 방식](#8)  
-  2.5\. [서비스 설치 확인](#9)  
-3. [PaaS-TA Monitoring Dashboard 접속](#10)  
+　2.1\. [설치 파일 다운로드](#2)  
+　2.2\. [PaaS-TA Monitoring 설치 환경설정](#3)  
+　　● [common_vars.yml](#4)  
+　　● [paasta-monitoring-vars.yml](#5)  
+　　● [deploy-paasta-monitoring.sh](#6)  
+　2.3\. [PaaS-TA Monitoring 설치](#7)  
+　2.4\. [PaaS-TA Monitoring 설치 - 다운로드 된 Relases 파일 이용 방식](#8)  
+　2.5\. [서비스 설치 확인](#9)  
+3\. [PaaS-TA Monitoring Dashboard 접속](#10)  
 
 
 ## <div id='1'/>1. 개요
