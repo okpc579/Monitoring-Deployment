@@ -5,6 +5,7 @@
 　2.1. [Prerequisite](#3)  
 　2.2. [설치 파일 다운로드](#4)  
 　2.3. [Logsearch 설치 환경설정](#5)   
+　　● [common_vars.yml](#6)  
 　　● [logsearch-vars.yml](#7)  
 　　● [deploy-logsearch.sh](#8)  
 　2.4. [Logsearch 설치](#9)  
@@ -51,6 +52,61 @@ PaaS-TA VM Log수집을 위해서는 Logsearch가 설치되어야 한다.
 ```
 $ cd ${HOME}/workspace/paasta-5.0/deployment/monitoring-deployment/paasta-monitoring
 ```
+
+### <div id='6'/>● common_vars.yml
+common_vars.yml PaaS-TA 및 각종 Service 설치시 적용하는 공통 변수 설정 파일이 존재한다.  
+PaaS-TA를 설치할 때는 system_domain, paasta_admin_username, paasta_admin_password, uaa_client_admin_secret, uaa_client_portal_secret의 값을 변경 하여 설치 할 수 있다.  
+또한 Monitoring 정보인 metric_url, syslog_address, syslog_port,syslog_transport,saas_monitoring_url, monitoring_api_url 을 수정 할 수 있다.
+metric_url, syslog_address, saas_monitoring_url, monitoring_api_url는 향후 설치할 모니터링 VM의 주소이니 Monitoring 옵션을 포함한 BOSH의 변수값과 같은 값을 주어 설치를 한다.
+
+```
+# BOSH INFO
+bosh_url: "http://10.0.1.6"			# BOSH URL (e.g. "https://00.000.0.0")
+bosh_client_admin_id: "admin"			# BOSH Client Admin ID
+bosh_client_admin_secret: "ert7na4jpewscztsxz48"	# BOSH Client Admin Secret('echo $(bosh int ~/workspace/paasta-5.0/deployment/paasta-deployment/bosh/{iaas}/creds.yml --path /admin_password)' 명령어를 통해 확인 가능)
+bosh_director_port: 25555			# BOSH Director Port
+bosh_oauth_port: 8443				# BOSH OAuth Port
+
+# PAAS-TA INFO
+system_domain: "61.252.53.246.xip.io"		# Domain (xip.io를 사용하는 경우 HAProxy Public IP와 동일)
+paasta_admin_username: "admin"			# PaaS-TA Admin Username
+paasta_admin_password: "admin"			# PaaS-TA Admin Password
+paasta_nats_ip: "10.0.1.121"
+paasta_nats_port: 4222
+paasta_nats_user: "nats"
+paasta_nats_password: "7EZB5ZkMLMqT73h2JtxPv1fvh3UsqO"	# PaaS-TA Nats Password (CredHub 로그인후 'credhub get -n /micro-bosh/paasta/nats_password' 명령어를 통해 확인 가능)
+paasta_nats_private_networks_name: "default"	# PaaS-TA Nats 의 Network 이름
+paasta_database_ips: "10.0.1.123"		# PaaS-TA Database IP(e.g. "10.0.1.123")
+paasta_database_port: 5524			# PaaS-TA Database Port(e.g. 5524)
+paasta_cc_db_id: "cloud_controller"		# CCDB ID(e.g. "cloud_controller")
+paasta_cc_db_password: "cc_admin"		# CCDB Password(e.g. "cc_admin")
+paasta_uaa_db_id: "uaa"				# UAADB ID(e.g. "uaa")
+paasta_uaa_db_password: "uaa_admin"		# UAADB Password(e.g. "uaa_admin")
+paasta_api_version: "v3"
+
+
+# UAAC INFO
+uaa_client_admin_id: "admin"			# UAAC Admin Client Admin ID
+uaa_client_admin_secret: "admin-secret"		# UAAC Admin Client에 접근하기 위한 Secret 변수
+uaa_client_portal_secret: "clientsecret"	# UAAC Portal Client에 접근하기 위한 Secret 변수
+
+# Monitoring INFO
+metric_url: "10.0.161.101"			# Monitoring InfluxDB IP
+syslog_address: "10.0.121.100"            	# Logsearch의 ls-router IP
+syslog_port: "2514"                          	# Logsearch의 ls-router Port
+syslog_transport: "relp"                        # Logsearch Protocol
+saas_monitoring_url: "61.252.53.248"	   	# Pinpoint HAProxy WEBUI의 Public IP
+monitoring_api_url: "61.252.53.241"        	# Monitoring-WEB의 Public IP
+
+### Portal INFO
+portal_web_user_ip: "52.78.88.252"
+portal_web_user_url: "http://portal-web-user.52.78.88.252.xip.io" 
+
+### ETC INFO
+abacus_url: "http://abacus.61.252.53.248.xip.io"	# Abacus URL (e.g. "http://abacus.xxx.xxx.xxx.xxx.xip.io")
+```
+
+
 
 ### <div id='7'/>● logsearch-vars.yml
 
