@@ -64,10 +64,13 @@ Pinpoint Server, HBase의 HBase Master, Collector , WebUI2로 최소사항을 �
 
 > cloud-config 확인  
 > $ bosh -e {director-name} cloud-config  
+
 > runtime-config 확인  
 > $ bosh -e {director-name} runtime-config  
+
 > stemcell 확인  
 > $ bosh -e {director-name} stemcells  
+
 
 
 ## <div id='1010'/>3.2.  설치 파일 다운로드
