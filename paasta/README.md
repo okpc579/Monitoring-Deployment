@@ -67,14 +67,14 @@ PaaS-TA 3.1 버전까지는  PaaS-TA Container, Controller를 각각의 deployme
 
 ![PaaSTa_BOSH_Use_Guide_Image2](https://github.com/PaaS-TA/Guide-5.0-Ravioli/blob/master/install-guide/paasta-monitoring/images/bosh2.png)
 
-# <div id='108'/>3.   PaaS-TA 5.0 설치
+# <div id='106'/>3.   PaaS-TA 5.0 설치
 
-## <div id='109'/>3.1.    Prerequisite
+## <div id='107'/>3.1.    Prerequisite
 
 - Monitoring Option을 적용한 BOSH2 기반의 BOSH를 설치한다.  
 - PaaS-TA 설치는 BOSH를 설치한 Inception(설치 환경)에서 작업한다.
 
-## <div id='1010'/>3.2.  설치 파일 다운로드
+## <div id='108'/>3.2.  설치 파일 다운로드
 
 - PaaS-TA를 설치하기 위한 deployment가 존재하지 않는다면 다운로드 받는다
 ```
@@ -109,7 +109,7 @@ loggregator-105.5-ubuntu-xenial-315.36-20190604-002934-907477475.tgz            
 loggregator-agent-3.9-ubuntu-xenial-315.36-20190604-002328-413557573.tgz         uaa-72.0-ubuntu-xenial-315.36-20190604-003150-361425493.tgz
 ```
 
-## <div id='1011'/>3.3.  Stemcell 업로드
+## <div id='109'/>3.3.  Stemcell 업로드
 VM을 배포할 때 사용되는 Stemcell을 BOSH에 업로드할 경우 로컬 파일과 URL을 직접 입력하여 업로드, 두가지 방법을 사용할 수 있다.  
 로컬 파일을 사용할 경우 PaaS-TA 사이트에서 [PaaS-TA Stemcell](https://paas-ta.kr/download/package) 파일을 내려받아 ${HOME}/workspace/paasta-5.0/stemcell 이하 디렉터리에 압축을 푼다.   
 압축을 풀면 아래와 같이 ${HOME}/workspace/paasta-5.0/stemcell/paasta-monitoring 디렉터리가 생성되며 릴리즈 파일(tgz)이 존재한다.
@@ -176,7 +176,7 @@ $ bosh -e {director_name} upload-stemcell ${HOME}/workspace/paasta-5.0/stemcell/
 $ bosh -e {director_name} upload-stemcell https://s3.amazonaws.com/bosh-core-stemcells/315.36/bosh-stemcell-315.36-vsphere-esxi-ubuntu-xenial-go_agent.tgz
 ```
 
-## <div id='1012'/>3.4.  Cloud Config 설정
+## <div id='1010'/>3.4.  Cloud Config 설정
 
 PaaS-TA를 설치하기 위한 IaaS 관련 Network, Storage, VM 관련 설정을 Cloud Config로 정의한다.  
 PaaS-TA 설치 파일을 내려받으면 ${HOME}/workspace/paasta-5.0/deployment/paasta-deployment/cloud-config 디렉터리 이하에 IaaS별 Cloud Config 예제를 확인할 수 있으며, 예제를 참고하여 cloud-config.yml을 IaaS에 맞게 수정한다.  
@@ -445,34 +445,34 @@ $ bosh –e {director_name} update-cloud-config ${HOME}/workspace/paasta-5.0/dep
 $ bosh –e {director_name} cloud-config  
 ```
 
-### <div id='1013'/>● AZs
+### <div id='1011'/>● AZs
 
 PaaS-TA에서 제공되는 Cloud Config 예제는 z1 ~ z6까지 설정되어 있다.  
 z1 ~ z3까지는 PaaS-TA VM이 설치되는 Zone이며, z4 ~ z6까지는 서비스가 설치되는 Zone으로 정의한다.  
 3개 단위로 설정하는 이유는 서비스 3중화를 위해서이다.  
 PaaS-TA를 설치하는 환경에 따라 다르게 설정해도 된다.
 
-### <div id='1014'/>● VM Types
+### <div id='1012'/>● VM Types
 
 VM Type은 IaaS에서 정의된 VM Type이다. Openstack의 경우에는 Flavor Type이다.
 
 ※ 다음은 OpenStack에서 정의한 Flavor Type이다.
 ![PaaSTa_FLAVOR_Image](https://github.com/PaaS-TA/Guide-5.0-Ravioli/blob/master/install-guide/paasta-monitoring/images/flavor.png)
 
-### <div id='1015'/>● Compilation
+### <div id='1013'/>● Compilation
 PaaS-TA 및 서비스 설치 시, PaaS-TA는 Compile VM을 생성하여 소스를 컴파일하고, PaaS-TA VM을 생성하여 컴파일된 파일을 대상 VM에 설치한다.  
 컴파일이 끝난 VM은 삭제된다.
 
 ※ Worker 수는 Compile VM의 수로, 많을수록 컴파일 속도가 빨라진다.
 
-### <div id='1016'/>● Disk Size
+### <div id='1014'/>● Disk Size
 PaaS-TA 및 서비스가 설치되는 VM의 Persistent Disk Size이다.
 
-### <div id='1017'/>● Networks
+### <div id='1015'/>● Networks
 Networks는 AZ 별 Subnet Network, DNS, Security Groups, Network ID를 정의한다.  
 보통 AZ 별로 256개의 IP를 정의할 수 있도록 Range Cider를 정의한다.
 
-## <div id='1018'/>3.5.  Runtime Config 설정
+## <div id='1016'/>3.5.  Runtime Config 설정
 PaaS-TA 4.0부터 적용되는 부분으로 PaaS-TA Component에서 Consul이 대체된 Component이다.  
 PaaS-TA Component 간의 통신을 위해 BOSH DNS 배포가 선행되어야 한다.
 - Runtime Config 업데이트
@@ -488,7 +488,7 @@ $ bosh -e {director_name} update-runtime-config -n runtime-configs/dns.yml
 $ bosh –e {director_name} runtime-config  
 ```
 
-## <div id='1020'/>3.6.  PaaS-TA 
+## <div id='1017'/>3.6.  PaaS-TA 
 
 ${HOME}/workspace/paasta-5.0/deployment/monitoring-deployment 이하 디렉터리에는 IaaS별 PaaS-TA 설치 Shell Script 파일이 존재하며, 이를 실행하여 PaaS-TA를 설치한다.  
 파일명은 deploy-{IaaS}-monitoring.sh이다.  
@@ -581,7 +581,7 @@ PaaS-TA 배포 시, 설치 Option을 추가해야 한다.
 
 
 
-### <div id='1029'/>● common_vars.yml
+### <div id='1019'/>● common_vars.yml
 common_vars.yml PaaS-TA 및 각종 Service 설치시 적용하는 공통 변수 설정 파일이 존재한다.  
 PaaS-TA를 설치할 때는 system_domain, paasta_admin_username, paasta_admin_password, uaa_client_admin_secret, uaa_client_portal_secret의 값을 변경 하여 설치 할 수 있다.  
 또한 Monitoring 정보인 metric_url, syslog_address, syslog_port,syslog_transport,saas_monitoring_url, monitoring_api_url 을 수정 할 수 있다.
@@ -634,7 +634,7 @@ portal_web_user_url: "http://portal-web-user.52.78.88.252.xip.io"
 abacus_url: "http://abacus.61.252.53.248.xip.io"	# Abacus URL (e.g. "http://abacus.xxx.xxx.xxx.xxx.xip.io")
 ```
 
-### <div id='1030'/>● {IaaS}-vars.yml
+### <div id='1020'/>● {IaaS}-vars.yml
 
 PaaS-TA를 설치 할 때 적용되는 각종 변수값이나 배포 될 VM의 설정을 변경할 수 있다.
 
@@ -788,7 +788,7 @@ haproxy_network: "default"		# HAProxy 네트워크
 
 
 
-### <div id='1029'/>● PaaS-TA 그외 Variable List
+### <div id='1021'/>● PaaS-TA 그외 Variable List
 
 1. uaa_login_logout_redirect_parameter_whitelist : 포탈 페이지 이동을 위한 UAA Redirect Whitelist 등록 변수
 ```
@@ -849,7 +849,7 @@ ex) uaa_admin_client_secret="admin-secret"
     Context: admin, from client admin
     ```
 
-### <div id='1028'/>3.6.2. PaaS-TA Operation 파일
+### <div id='1022'/>3.6.2. PaaS-TA Operation 파일
 
 <table>
 <tr>
@@ -940,14 +940,14 @@ BOSH 설치 전에 paasta-monitoring의 InfluxDB IP를 metric_url로 사용하�
 
 
 
-## <div id='1021'/>3.6.3.   PaaS-TA 설치 Shell Scripts
+## <div id='1023'/>3.6.3.   PaaS-TA 설치 Shell Scripts
 
 paasta-deployment-monitoring.yml 파일은 통합 Monitoring을 적용한 PaaS-TA를 배포하는 Manifest 파일이며, PaaS-TA VM에 대한 설치 정의를 하게 된다.  
 PaaS-TA VM 중 singleton-blobstore, database의 AZs(zone)을 변경하면 조직(ORG), 스페이스(SPACE), 앱(APP) 정보가 모두 삭제된다. 
 
 이미 설치된 PaaS-TA의 재배포 시, singleton-blobstore, database의 azs(zone)을 변경하면 조직(ORG), 공간(SPACE), 앱(APP) 정보가 모두 삭제된다.
 
-### <div id='1022'/>● deploy-aws-monitoring.sh
+### <div id='1024'/>● deploy-aws-monitoring.sh
 ```
 bosh -e micro-bosh -d paasta -n deploy paasta-deployment-monitoring.yml \
 	-o operations/aws.yml \
@@ -965,7 +965,7 @@ bosh -e micro-bosh -d paasta -n deploy paasta-deployment-monitoring.yml \
 	-l aws-vars.yml \
 	-l ../../common/common_vars.yml
 ```
-### <div id='1023'/>● deploy-azure-monitoring.sh
+### <div id='1025'/>● deploy-azure-monitoring.sh
 ```
 bosh -e micro-bosh -d paasta -n deploy paasta-deployment-monitoring.yml \
 	-o operations/azure.yml \
@@ -984,7 +984,7 @@ bosh -e micro-bosh -d paasta -n deploy paasta-deployment-monitoring.yml \
 	-l ../../common/common_vars.yml
 ```
 
-### <div id='1024'/>● deploy-gcp-monitoring.sh
+### <div id='1026'/>● deploy-gcp-monitoring.sh
 ```
 bosh -e micro-bosh -d paasta -n deploy paasta-deployment-monitoring.yml \
 	-o operations/use-compiled-releases.yml \
@@ -1002,7 +1002,7 @@ bosh -e micro-bosh -d paasta -n deploy paasta-deployment-monitoring.yml \
 	-l ../../common/common_vars.yml
 ```
 
-### <div id='1025'/>● deploy-openstack-monitoring.sh
+### <div id='1027'/>● deploy-openstack-monitoring.sh
 ```
 bosh -e micro-bosh -d paasta -n deploy paasta-deployment-monitoring.yml \
 	-o operations/openstack.yml \
@@ -1021,7 +1021,7 @@ bosh -e micro-bosh -d paasta -n deploy paasta-deployment-monitoring.yml \
 	-l ../../common/common_vars.yml
 ```
 
-### <div id='1026'/>● deploy-vsphere-monitoring.sh
+### <div id='1028'/>● deploy-vsphere-monitoring.sh
 ```
 bosh -e micro-bosh -d paasta -n deploy paasta-deployment-monitoring.yml \
 	-o operations/use-compiled-releases.yml \
@@ -1045,7 +1045,7 @@ bosh -e micro-bosh -d paasta -n deploy paasta-deployment-monitoring.yml \
 $ chmod +x ${HOME}/workspace/paasta-5.0/deployment/monitoring-deployment/paasta/*.sh
 ```
 
-## <div id='1030'/>3.7.  PaaS-TA 설치
+## <div id='1029'/>3.7.  PaaS-TA 설치
 
 - 서버 환경에 맞추어 Deploy 스크립트 파일의 설정을 수정한다. 
 
@@ -1124,7 +1124,7 @@ Succeeded
 
 
 
-## <div id='1031'/>3.8.  PaaS-TA 설치 - 다운로드 된 Release 파일 이용 방식
+## <div id='1030'/>3.8.  PaaS-TA 설치 - 다운로드 된 Release 파일 이용 방식
 
 
 - 서비스 설치에 필요한 릴리즈 파일을 다운로드 받아 Local machine의 작업 경로로 위치시킨다.  
