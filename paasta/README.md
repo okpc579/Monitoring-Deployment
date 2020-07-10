@@ -23,14 +23,14 @@
 　　　●  [PaaS-TA 그외 Variable List](#1021)  
 　　3.6.2. [PaaS-TA Operation 파일](#1022)  
 　　3.6.3. [PaaS-TA 설치 Shell Scripts](#1023)  
-　　　●  [deploy-aws.sh](#1024)  
-　　　●  [deploy-azure.sh](#1025)  
-　　　●  [deploy-gcp.sh](#1026)  
-　　　●  [deploy-openstack.sh](#1027)  
-　　　●  [deploy-vsphere.sh](#1028)  
-　　　●  [deploy-bosh-lite.sh](#1029)  
-　3.7. [PaaS-TA 설치](#1030)  
-　3.8. [PaaS-TA 로그인](#1031)  
+　　　●  [deploy-aws-monitoring.sh](#1024)  
+　　　●  [deploy-azure-monitoring.sh](#1025)  
+　　　●  [deploy-gcp-monitoring.sh](#1026)  
+　　　●  [deploy-openstack-monitoring.sh](#1027)  
+　　　●  [deploy-vsphere-monitoring.sh](#1028)  
+　3.7. [PaaS-TA 설치](#1029)  
+　3.8. [PaaS-TA 설치](#1030)  
+　3.9. [PaaS-TA 로그인](#1031)  
 
 ## Executive Summary
 
@@ -79,15 +79,10 @@ PaaS-TA 3.1 버전까지는  PaaS-TA Container, Controller를 각각의 deployme
 - PaaS-TA를 설치하기 위한 deployment가 존재하지 않는다면 다운로드 받는다
 ```
 $ cd ${HOME}/workspace/paasta-5.0/deployment
-$ git clone https://github.com/okpc579/Common-Deployment.git common
-$ git clone https://github.com/okpc579/Monitoring-Deployment.git monitoring-deployment
+$ git clone https://github.com/paas-ta/common-deployment.git
+$ git clone https://github.com/paas-ta/paasta-deployment.git
+$ git clone https://github.com/paas-ta/monitoring-deployment.git
 ```
-- release, stemcell을 [PaaS-TA 다운로드](https://paas-ta.kr/download/package)에서 내려받아 정해진 경로에 복사한다.(선택)
-- PaaS-TA 사이트에서 [PaaS-TA Release] 파일을 다운로드해 ${HOME}/workspace/paasta-5.0/release 이하 디렉터리에 압축을 푼다.
-- PaaS-TA 사이트에서 [PaaS-TA Stemcell] 파일을 다운로드해 ${HOME}/workspace/paasta-5.0/stemcell 이하 디렉터리에 압축을 푼다.
-
-PaaS-TA 사이트에서 [PaaS-TA Release] 파일을 내려받아 ${HOME}/workspace/paasta-5.0/release 이하 디렉터리에 압축을 푼다.  
-압축을 풀면 아래와 같이 ${HOME}/workspace/paasta-5.0/release/paasta-monitoring 디렉터리가 생성되며 릴리즈 파일(tgz)이 존재한다.
 
 ```
 $ cd ${HOME}/workspace/paasta-5.0/release/paasta
@@ -115,7 +110,8 @@ loggregator-agent-3.9-ubuntu-xenial-315.36-20190604-002328-413557573.tgz        
 ```
 
 ## <div id='1011'/>3.3.  Stemcell 업로드
-PaaS-TA 사이트에서 [PaaS-TA Stemcell] 파일을 내려받아 ${HOME}/workspace/paasta-5.0/stemcell 이하 디렉터리에 압축을 푼다.  
+VM을 배포할 때 사용되는 Stemcell을 BOSH에 업로드할 경우 로컬 파일과 URL을 직접 입력하여 업로드, 두가지 방법을 사용할 수 있다.  
+로컬 파일을 사용할 경우 PaaS-TA 사이트에서 [PaaS-TA Stemcell](https://paas-ta.kr/download/package) 파일을 내려받아 ${HOME}/workspace/paasta-5.0/stemcell 이하 디렉터리에 압축을 푼다.   
 압축을 풀면 아래와 같이 ${HOME}/workspace/paasta-5.0/stemcell/paasta-monitoring 디렉터리가 생성되며 릴리즈 파일(tgz)이 존재한다.
 
 ```
@@ -127,7 +123,7 @@ bosh-stemcell-315.36-azure-hyperv-ubuntu-xenial-go_agent.tgz  bosh-stemcell-315.
 ```
 
 Stemcell은 배포 시 생성되는 PaaS-TA VM Base OS Image이며, 통합 Monitoring을 적용한 PaaS-TA 5.0는 Ubuntu xenial stemcell 315.36를 기반으로 한다.  
-BOSH 로그인 후 다음 명령어를 수행하여 Stemcell을 올린다.(Stemcell은 로컬 파일과 URL 두가지 방법으로 올릴 수 있으니 확인 후 명령어를 수행한다.)  
+BOSH 로그인 후 다음 명령어를 수행하여 Stemcell을 올린다.  
 {director_name}은 BOSH 설치 시 사용한 Director 명이다.
 
 - AWS
@@ -586,26 +582,62 @@ PaaS-TA 배포 시, 설치 Option을 추가해야 한다.
 
 
 ### <div id='1029'/>3.7.8. common_vars.yml
+common_vars.yml PaaS-TA 및 각종 Service 설치시 적용하는 공통 변수 설정 파일이 존재한다.  
+PaaS-TA를 설치할 때는 system_domain, paasta_admin_username, paasta_admin_password, uaa_client_admin_secret, uaa_client_portal_secret의 값을 변경 하여 설치 할 수 있다.  
+또한 Monitoring 정보인 metric_url, syslog_address, syslog_port,syslog_transport,saas_monitoring_url, monitoring_api_url 을 수정 할 수 있다.
+metric_url, syslog_address, saas_monitoring_url, monitoring_api_url는 향후 설치할 모니터링 VM의 주소이니 Monitoring 옵션을 포함한 BOSH의 변수값과 같은 값을 주어 설치를 한다.
+
 ```
-bosh_url: '10.0.1.6'					# BOSH URL ('bosh env' 명령어를 통해 확인 가능)
-bosh_client_admin_id: "admin"				# BOSH Client Admin ID
-bosh_client_admin_secret: "ert7na4jpewscztsxz48"	# BOSH Client Admin Secret
+# BOSH INFO
+bosh_url: "http://10.0.1.6"			# BOSH URL (e.g. "https://00.000.0.0")
+bosh_client_admin_id: "admin"			# BOSH Client Admin ID
+bosh_client_admin_secret: "ert7na4jpewscztsxz48"	# BOSH Client Admin Secret('echo $(bosh int ~/workspace/paasta-5.0/deployment/paasta-deployment/bosh/{iaas}/creds.yml --path /admin_password)' 명령어를 통해 확인 가능)
+bosh_director_port: 25555			# BOSH Director Port
+bosh_oauth_port: 8443				# BOSH OAuth Port
 
-system_domain: 61.252.53.246.xip.io			# Domain (xip.io를 사용하는 경우 HAProxy Public IP와 동일)
-paasta_admin_username: admin				# PaaS-TA Admin Username
-paasta_admin_password: admin				# PaaS-TA Admin Password
-uaa_client_admin_secret: "admin-secret"			# UAAC Admin Client에 접근하기 위한 Secret 변수
-uaa_client_portal_secret: "clientsecret"		# UAAC Portal Client에 접근하기 위한 Secret 변수
+# PAAS-TA INFO
+system_domain: "61.252.53.246.xip.io"		# Domain (xip.io를 사용하는 경우 HAProxy Public IP와 동일)
+paasta_admin_username: "admin"			# PaaS-TA Admin Username
+paasta_admin_password: "admin"			# PaaS-TA Admin Password
+paasta_nats_ip: "10.0.1.121"
+paasta_nats_port: 4222
+paasta_nats_user: "nats"
+paasta_nats_password: "7EZB5ZkMLMqT73h2JtxPv1fvh3UsqO"	# PaaS-TA Nats Password (CredHub 로그인후 'credhub get -n /micro-bosh/paasta/nats_password' 명령어를 통해 확인 가능)
+paasta_nats_private_networks_name: "default"	# PaaS-TA Nats 의 Network 이름
+paasta_database_ips: "10.0.1.123"		# PaaS-TA Database IP(e.g. "10.0.1.123")
+paasta_database_port: 5524			# PaaS-TA Database Port(e.g. 5524)
+paasta_cc_db_id: "cloud_controller"		# CCDB ID(e.g. "cloud_controller")
+paasta_cc_db_password: "cc_admin"		# CCDB Password(e.g. "cc_admin")
+paasta_uaa_db_id: "uaa"				# UAADB ID(e.g. "uaa")
+paasta_uaa_db_password: "uaa_admin"		# UAADB Password(e.g. "uaa_admin")
+paasta_api_version: "v3"
 
-metric_url: "10.0.161.101"				# Monitoring InfluxDB IP
-syslog_address: "10.0.121.100"				# Logsearch의 ls-router IP
-syslog_port: 2514					# Logsearch의 ls-router Port
-syslog_transport: "relp"				# Logsearch Protocol
-monitoring_api_url: "61.252.53.241"			# Monitoring-WEB의 Public IP
-saas_monitoring_url:"61.252.53.248"			# Pinpoint HAProxy WEBUI의 Public IP
+
+# UAAC INFO
+uaa_client_admin_id: "admin"			# UAAC Admin Client Admin ID
+uaa_client_admin_secret: "admin-secret"		# UAAC Admin Client에 접근하기 위한 Secret 변수
+uaa_client_portal_secret: "clientsecret"	# UAAC Portal Client에 접근하기 위한 Secret 변수
+
+# Monitoring INFO
+metric_url: "10.0.161.101"			# Monitoring InfluxDB IP
+syslog_address: "10.0.121.100"            	# Logsearch의 ls-router IP
+syslog_port: "2514"                          	# Logsearch의 ls-router Port
+syslog_transport: "relp"                        # Logsearch Protocol
+saas_monitoring_url: "61.252.53.248"	   	# Pinpoint HAProxy WEBUI의 Public IP
+monitoring_api_url: "61.252.53.241"        	# Monitoring-WEB의 Public IP
+
+### Portal INFO
+portal_web_user_ip: "52.78.88.252"
+portal_web_user_url: "http://portal-web-user.52.78.88.252.xip.io" 
+
+### ETC INFO
+abacus_url: "http://abacus.61.252.53.248.xip.io"	# Abacus URL (e.g. "http://abacus.xxx.xxx.xxx.xxx.xip.io")
 ```
 
 ### <div id='1030'/>3.7.9. {IaaS}-vars.yml
+
+PaaS-TA를 설치 할 때 적용되는 각종 변수값이나 배포 될 VM의 설정을 변경할 수 있다.
+
 ```
 # SERVICE VARIABLE
 deployment_name: "paasta"			# Deployment Name
@@ -915,8 +947,6 @@ PaaS-TA VM 중 singleton-blobstore, database의 AZs(zone)을 변경하면 조직
 
 이미 설치된 PaaS-TA의 재배포 시, singleton-blobstore, database의 azs(zone)을 변경하면 조직(ORG), 공간(SPACE), 앱(APP) 정보가 모두 삭제된다.
 
-다음은 PaaS-TA 배포 시 필수 옵션이며, cf_admin_password, cc_db_encryption_key, uaa_database_password, cc_database_password는 –v 옵션이 없는 경우 BOSH에서 자동 생성하여 BOSH CredHub에 저장한다.
-
 ### <div id='1022'/>3.7.1. deploy-aws-monitoring.sh
 ```
 bosh -e micro-bosh -d paasta -n deploy paasta-deployment-monitoring.yml \
@@ -1016,6 +1046,23 @@ $ chmod +x ${HOME}/workspace/paasta-5.0/deployment/monitoring-deployment/paasta/
 ```
 
 ## <div id='1030'/>3.8.  PaaS-TA 설치
+
+- 서버 환경에 맞추어 Deploy 스크립트 파일의 설정을 수정한다. 
+
+> $ vi ${HOME}/workspace/paasta-5.0/deployment/monitoring-deployment/paasta/deploy-aws.sh
+
+```
+bosh -e {director_name} -d paasta -n deploy paasta-deployment.yml \	# PaaS-TA Manifest File
+	-o operations/aws.yml \						# AWS 설정
+	-o operations/use-haproxy.yml \					# HAProxy 적용
+	-o operations/use-haproxy-public-network.yml \			# HAProxy Public Network 적용
+	-o operations/use-postgres.yml \				# Database Type 설정 (3.5버전 이하에서 Migration 시 필수)
+	-o operations/rename-network-and-deployment.yml \		# Rename Network and Deployment
+	-l aws-vars.yml \						# AWS 환경에 PaaS-TA 설치시 적용하는 변숫값 설정 파일
+	-l ../../common/common_vars.yml					# PaaS-TA 및 각종 Service 설치시 적용하는 공통 변수 설정 파일
+
+
+
 - PaaS-TA 설치 Shell Script 파일 실행 (BOSH 로그인 필요)
 
 ```
@@ -1073,6 +1120,123 @@ uaa/d49ee04f-6f1f-4fbc-97ac-76419511b2e7                  running        z1  10.
 
 Succeeded
 ```
+
+
+
+
+## <div id='1031'/>3.8.  PaaS-TA 설치 - 다운로드 된 Release 파일 이용 방식
+
+
+- 서비스 설치에 필요한 릴리즈 파일을 다운로드 받아 Local machine의 작업 경로로 위치시킨다.  
+  
+  - 설치 파일 다운로드 위치 : https://paas-ta.kr/download/package    
+
+```
+# 릴리즈 다운로드 파일 위치 경로 생성
+$ mkdir -p ~/workspace/paasta-5.0/release/paasta
+
+# 릴리즈 파일 다운로드 및 파일 경로 확인
+$ cd ${HOME}/workspace/paasta-5.0/release/paasta
+$ ls
+binary-buildpack-1.0.32-ubuntu-xenial-315.64-20190703-010740-177773032.tgz       loggregator-105.5-ubuntu-xenial-315.64-20190703-011056-709229397.tgz
+bosh-dns-aliases-0.0.3-ubuntu-xenial-315.64-20190703-005917-45013255.tgz         loggregator-agent-3.9-ubuntu-xenial-315.64-20190703-011227-052700948.tgz
+bpm-1.1.0-ubuntu-xenial-315.64-20190703-011218-840878281.tgz                     nats-27-ubuntu-xenial-315.64-20190703-011012-08860186.tgz
+capi-1.83.0-ubuntu-xenial-315.64-20190703-011352-736036246.tgz                   nginx-buildpack-1.0.13-ubuntu-xenial-315.64-20190703-010158-078624017.tgz
+cf-cli-1.16.0-ubuntu-xenial-315.64-20190703-010458-731652087.tgz                 nodejs-buildpack-1.6.51-ubuntu-xenial-315.64-20190703-010707-741053575.tgz
+cf-networking-2.23.0-ubuntu-xenial-315.64-20190703-011056-823948638.tgz          php-buildpack-4.3.77-ubuntu-xenial-315.64-20190703-010303-196110232.tgz
+cf-smoke-tests-40.0.112-ubuntu-xenial-315.64-20190709-042410-146373383.tgz       postgres-release-38.tgz
+cf-syslog-drain-10.2-ubuntu-xenial-315.64-20190703-011055-842044104.tgz          pxc-0.18.0-ubuntu-xenial-315.64-20190705-211325-403851041.tgz
+cflinuxfs3-0.113.0-ubuntu-xenial-315.64-20190708-232200-368636766.tgz            python-buildpack-1.6.34-ubuntu-xenial-315.64-20190703-010525-033925777.tgz
+credhub-2.4.0-ubuntu-xenial-315.64-20190703-010939-442789426.tgz                 r-buildpack-1.0.10-ubuntu-xenial-315.64-20190703-010623-140937123.tgz
+diego-2.34.0-ubuntu-xenial-315.64-20190703-011616-899984623.tgz                  routing-0.188.0-ubuntu-xenial-315.64-20190703-011414-513071207.tgz
+dotnet-core-buildpack-2.2.12-ubuntu-xenial-315.64-20190703-010337-286489233.tgz  ruby-buildpack-1.7.40-ubuntu-xenial-315.64-20190703-010707-743703201.tgz
+garden-runc-1.19.3-ubuntu-xenial-315.64-20190703-011651-220994654.tgz            silk-2.23.0-ubuntu-xenial-315.64-20190703-011145-360645247.tgz
+go-buildpack-1.8.40-ubuntu-xenial-315.64-20190703-010359-639769006.tgz           staticfile-buildpack-1.4.43-ubuntu-xenial-315.64-20190703-010525-898602366.tgz
+haproxy-boshrelease-9.6.1.tgz                                                    statsd-injector-1.10.0-ubuntu-xenial-315.64-20190703-010549-761652392.tgz
+java-buildpack-4.19.1-ubuntu-xenial-315.64-20190709-145004-482509766.tgz         syslog-release-11.4.0.tgz
+log-cache-2.2.2-ubuntu-xenial-315.64-20190703-011152-163727753.tgz               uaa-72.0-ubuntu-xenial-315.64-20190703-011111-665316203.tgz
+```
+
+- 서버 환경에 맞추어 Deploy 스크립트 파일의 설정을 수정한다. 
+
+> $ vi ${HOME}/workspace/paasta-5.0/deployment/monitoring-deployment/paasta/deploy-aws.sh
+
+```
+bosh -e {director_name} -d paasta -n deploy paasta-deployment.yml \
+	-o operations/aws.yml \						
+	-o operations/use-compiled-releases.yml \
+	-o operations/use-haproxy.yml \					
+	-o operations/use-haproxy-public-network.yml \			
+	-o operations/use-compiled-releases-haproxy.yml \
+	-o operations/use-postgres.yml \				
+	-o operations/use-compiled-releases-postgres.yml \
+	-o operations/rename-network-and-deployment.yml \		
+	-l aws-vars.yml \						
+	-l ../../common/common_vars.yml					
+```
+- PaaS-TA 설치 Shell Script 파일 실행 (BOSH 로그인 필요)
+
+```
+$ cd ${HOME}/workspace/paasta-5.0/deployment/paasta-deployment/paasta
+$ ./deploy-{IaaS}.sh
+```
+
+- PaaS-TA 설치 확인
+
+> $ bosh -e {director_name} vms -d paasta
+
+```
+ubuntu@inception:~$ bosh -e micro-bosh vms -d paasta
+Using environment '10.0.1.6' as client 'admin'
+
+Task 134. Done
+
+Deployment 'paasta'
+
+Instance                                                  Process State  AZ  IPs           VM CID               VM Type             Active
+adapter/58948983-7e9b-4761-89bf-6f88a6b9c7e2              running        z1  10.0.1.123    i-076d0dfa6ec1f7d98  small               true
+adapter/ffca4d6c-6ce4-4cf0-8084-39326e68c9eb              running        z2  10.0.41.122   i-0a61fc33453ec64d0  small               true
+api/4b7cff7b-1e44-44eb-840b-732c754b921c                  running        z1  10.0.1.128    i-05767b58d1d4b957c  medium              true
+api/da8ca5bd-e310-44b6-b54a-21865f7132bd                  running        z2  10.0.41.125   i-0ad626de643f5acb4  medium              true
+cc-worker/7babe563-bc7a-434d-85a2-4fd67081cfd7            running        z2  10.0.41.126   i-01b845e22ffc1eb48  medium              true
+cc-worker/a5475b17-af99-44dc-9241-1feb087010f3            running        z1  10.0.1.129    i-0c7e1f4e89871c8d7  medium              true
+credhub/27d026fe-a409-4f4e-8a22-61f121a2aba8              running        z2  10.0.41.134   i-0570c6ce731340f08  small               true
+credhub/c58fa66a-cff6-4532-9abd-d4ba3b31f60e              running        z1  10.0.1.137    i-048b62105a7373a3d  small               true
+database/d4449c40-25e4-4422-ac33-3584fe70f7c3             running        z1  10.0.1.124    i-0408dcd38fb9e7346  medium              true
+diego-api/3211715c-c2e3-4356-a9b0-30b5da9fb3b4            running        z2  10.0.41.123   i-09ab4c691aeb20d6a  small               true
+diego-api/77e870de-e4fb-4737-82c5-5504e63df0a4            running        z1  10.0.1.125    i-097475fa6e44911ab  small               true
+diego-cell/bd7cde8e-5424-4ded-8e6e-5f0513af7641           running        z2  10.0.41.132   i-0de8bdd034aaca50c  large-highmem-32GB  true
+diego-cell/c14318c5-cd0f-4c9f-acd4-8ab8908c169e           running        z1  10.0.1.135    i-00feefaa1eb37afb0  large-highmem-32GB  true
+doppler/10344617-d442-4e22-9af9-8cc35d8bf314              running        z2  10.0.41.130   i-0a831bffcf5d6c172  medium              true
+doppler/45bbbd94-3d5f-44df-9f01-11f8cdeb48ea              running        z1  10.0.1.133    i-07ad774745c4c6ab7  medium              true
+doppler/61fd7584-11be-442f-9c8a-2df1424121d8              running        z1  10.0.1.134    i-0ee286945a1939220  medium              true
+doppler/89adaeb7-16ac-431e-9ba3-754e74308af7              running        z2  10.0.41.131   i-0f47381253fddd716  medium              true
+haproxy/d645b06f-36eb-40d7-a828-8115794ca035              running        z7  10.0.0.121    i-0d3b17f8414573ebe  minimal             true
+                                                                             54.180.53.80
+log-api/c6d866b5-8350-427b-b873-cb7fbd5da943              running        z2  10.0.41.133   i-0c7de5da28f58f302  small               true
+log-api/d8376424-360a-4f1b-9488-503f49fd8550              running        z1  10.0.1.136    i-07d78c5dc6d854f8e  small               true
+nats/154e1623-9dfe-425f-8bea-90d9b444e1d7                 running        z1  10.0.1.122    i-0d2e6c416bd23047c  small               true
+nats/9d8f7df6-c22c-4f8e-ae28-83dbe9fa0de1                 running        z2  10.0.41.121   i-0c2169e16e77af947  small               true
+router/202e4d16-8044-4b47-8e7b-b6e827502b04               running        z1  10.0.1.131    i-0e08bd4fa4c54739c  small               true
+router/bd268bbd-1619-441c-a401-72d3cd9e18da               running        z2  10.0.41.128   i-0d6ca756c81fec386  small               true
+scheduler/33b5f3e2-83b4-4998-9e81-71cf60aaf82d            running        z1  10.0.1.130    i-0bbf05c84fc31e235  medium              true
+scheduler/a0dbe4d2-6f81-4df6-992b-111e10014609            running        z2  10.0.41.127   i-0a8b481db3cd80036  medium              true
+singleton-blobstore/d0aa4103-50f9-474d-b309-c0a0c402ad5c  running        z1  10.0.1.127    i-028ef29ff1c5c18ca  medium              true
+tcp-router/7998c2be-d535-49ca-bba6-5477c6018d78           running        z1  10.0.1.132    i-027e51e7407ada6cd  small               true
+tcp-router/e55653ea-cc33-4ead-b1d6-4b5f33fdb78b           running        z2  10.0.41.129   i-00fe2dda763b39cc9  small               true
+uaa/6ea05760-f851-413a-b03d-cfe83885d935                  running        z2  10.0.41.124   i-0577911096858aa61  medium              true
+uaa/d49ee04f-6f1f-4fbc-97ac-76419511b2e7                  running        z1  10.0.1.126    i-07938b838ca591170  medium              true
+
+31 vms
+
+Succeeded
+```
+
+
+
+
+
+
 
 ## <div id='1031'/>3.9.  PaaS-TA 로그인 
 
