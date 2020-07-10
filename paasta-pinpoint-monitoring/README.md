@@ -11,8 +11,8 @@
 　2.4 [Pinpoint security-group 등록](#24)  
 　2.5 [Pinpoint 서비스 브로커 등록](#25)  
 3\. [Sample Web App 연동 Pinpoint 연동](#3)  
-　- [Sample Web App 구조](#31)  
-  - [Sample Web App에 서비스 바인드 신청 및 App 확인](#32)  
+　● [Sample Web App 구조](#31)  
+　● [Sample Web App에 서비스 바인드 신청 및 App 확인](#32)  
 
 # <div id='1'> 1. 문서 개요
 ### <div id='11'> 1.1. 목적
