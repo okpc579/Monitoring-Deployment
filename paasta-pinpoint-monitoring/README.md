@@ -26,10 +26,10 @@
 본 문서(SaaS Monitoring Pinpoint 서비스팩 설치 가이드)는 전자정부표준프레임워크 기반의 PaaS-TA에서 제공되는 서비스팩인 Pinpoint 서비스팩을 BOSH 2.0을 이용하여 설치 하는 방법과 PaaS-TA의 SaaS 형태로 제공하는 Application 에서 Pinpoint 서비스를 사용하는 방법을 기술하였다.  
 PaaS-TA 3.5 버전부터는 BOSH 2.0 기반으로 deploy를 진행하며 기존 BOSH 1.0 기반으로 설치를 원할경우에는 PaaS-TA 3.1 이하 버전의 문서를 참고한다.
 
-### <div id='12'> ● 범위
+## <div id='12'> ● 범위
 설치 범위는 Pinpoint 서비스팩을 검증하기 위한 기본 설치를 기준으로 작성하였다.
 
-### <div id='13'> ● 시스템 구성도
+## <div id='13'> ● 시스템 구성도
 
 본 문서의 설치된 시스템 구성도이다.  
 Pinpoint Server, HBase의 HBase Master, Collector , WebUI2로 최소사항을 구성하였다. 
@@ -55,7 +55,7 @@ Pinpoint Server, HBase의 HBase Master, Collector , WebUI2로 최소사항을 �
   </tr>
 </table>
 
-### <div id='14'> ● 참고자료
+## <div id='14'> ● 참고자료
 [**http://bosh.io/docs**](http://bosh.io/docs)  
 [**http://docs.cloudfoundry.org/**](http://docs.cloudfoundry.org/)
 
@@ -79,7 +79,7 @@ Pinpoint Server, HBase의 HBase Master, Collector , WebUI2로 최소사항을 �
 
 
 
-### <div id='22'/>2.2.  설치 파일 다운로드
+## <div id='22'/>2.2.  설치 파일 다운로드
 
 - PaaS-TA를 설치하기 위한 deployment가 존재하지 않는다면 다운로드 받는다
 ```
@@ -90,9 +90,9 @@ $ git clone https://github.com/okpc579/Monitoring-Deployment.git monitoring-depl
 
 
 
-### <div id='23'> 2.3. Pinpoint Monitoring 설치 환경설정
+## <div id='23'> 2.3. Pinpoint Monitoring 설치 환경설정
 	
-#### <div id='231'>● pinpoint-vars.yml
+### <div id='231'>● pinpoint-vars.yml
 ```
 ### On-Demand Bosh Deployment Name Setting ###
 deployment_name: "paasta-pinpoint-monitoring"		# On-Demand Deployment Name
@@ -135,7 +135,7 @@ haproxy_webui_network: "default"			# HAProxy-WEBUI 네트워크
 haproxy_webui_persistent_disk_type: "30GB"		# HAProxy-WEBUI 영구 Disk 종류
 ```
 
-#### <div id='232'>● deploy-pinpoint.sh
+### <div id='232'>● deploy-pinpoint.sh
 ```
 echo 'y' | bosh -e micro-bosh -d paasta-pinpoint-monitoring deploy paasta-pinpoint.yml \
 	-o use-public-network.yml \
@@ -144,7 +144,7 @@ echo 'y' | bosh -e micro-bosh -d paasta-pinpoint-monitoring deploy paasta-pinpoi
 	-l pem.yml
 ```
 
-#### <div id='233'>● deploy-pinpoint-vsphere.sh
+### <div id='233'>● deploy-pinpoint-vsphere.sh
 ```
 echo 'y' | bosh -e micro-bosh -d paasta-pinpoint-monitoring deploy paasta-pinpoint.yml \
 	-o use-public-network-vsphere.yml \
@@ -169,7 +169,7 @@ $ cd ~/workspace/paasta-5.0/deployment/monitoring-deployment/paasta-monitoring
 $ sh deploy-logsearch.sh
 ```
 
-### <div id='26'/>2.6. 서비스 설치 확인
+## <div id='26'/>2.6. 서비스 설치 확인
 Pinpoint Monitoring이 설치 완료 되었음을 확인한다.
 ```
 $ bosh –e {director_name} vms
@@ -186,7 +186,7 @@ $ bosh –e {director_name} vms
 		pinpoint_web/c23b79cf-ef55-42f5-9c2a-b8102b6e5ca8   running        z3  10.0.81.123   i-02a82ab6f02784317  caas_small_highmem  true 
 ```
 
-### <div id='27'> 2.7. security-group 등록
+## <div id='27'> 2.7. security-group 등록
 Pinpoint collector와 배포 app간 통신을 위한  처리.
 
 ```
@@ -214,7 +214,7 @@ $ cf bind-staging-security-group pinpoint
 $ cf bind-running-security-group pinpoint
 ```
 
-### <div id='28'> 2.8. Pinpoint User-Provided service 등록
+## <div id='28'> 2.8. Pinpoint User-Provided service 등록
 
 Pinpoint 서비스팩 배포가 완료 되었으면 Application에서 서비스 팩을 사용하기 위해서 먼저 Pinpoint User-Provided service를 등록해 주어야 한다.
 
