@@ -491,7 +491,7 @@ $ cd ~/workspace/paasta-5.0/deployment/monitoring-deployment/paasta-monitoring
 $ sh deploy-logsearch.sh
 ```
 
-
+### <div id='5'/>2.7. 서비스 설치 확인
 logsearch가 설치 완료 되었음을 확인한다.
 ```
 $ bosh –e {director_name} vms
