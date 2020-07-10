@@ -5,25 +5,31 @@
 　● [시스템 구성도](#13)  
 　● [참고자료](#14)  
 2\. [Pinpoint 서비스팩 설치](#2)  
-　2.1 [설치전 준비사항](#21)  
-　2.2 [Pinpoint 서비스 릴리즈 업로드](#22)  
-　2.3 [Pinpoint 서비스 Deployment 파일 수정 및 배포](#23)  
-　2.4 [Pinpoint security-group 등록](#24)  
-　2.5 [Pinpoint 서비스 브로커 등록](#25)  
+　2.1 [Prerequisite](#21)  
+　2.2 [설치 파일 다운로드](#22)  
+　2.3 [Pinpoint Monitoring 설치 환경설정](#23)  
+　　● [pinpoint-vars.yml](#231)
+　　● [deploy-pinpoint.sh](#231)
+　　● [deploy-pinpoint-vsphere.sh](#231)
+　2.4. [Pinpoint Monitoring 설치](#24)  
+　2.5. [Pinpoint Monitoring 설치 - 다운로드 된 PaaS-TA Release 파일 이용 방식](#25)  
+　2.6. [서비스 설치 확인](#26)  
+　2.7. [Security-Group 등록](#27)  
+　2.8. [Pinpoint User-Provided Service 등록](#28)  
 3\. [Sample Web App 연동 Pinpoint 연동](#3)  
 　● [Sample Web App 구조](#31)  
 　● [Sample Web App에 서비스 바인드 신청 및 App 확인](#32)  
 
 # <div id='1'> 1. 문서 개요
-### <div id='11'> 1.1. 목적
+### <div id='11'> ● 목적
 
 본 문서(SaaS Monitoring Pinpoint 서비스팩 설치 가이드)는 전자정부표준프레임워크 기반의 PaaS-TA에서 제공되는 서비스팩인 Pinpoint 서비스팩을 BOSH 2.0을 이용하여 설치 하는 방법과 PaaS-TA의 SaaS 형태로 제공하는 Application 에서 Pinpoint 서비스를 사용하는 방법을 기술하였다.  
 PaaS-TA 3.5 버전부터는 BOSH 2.0 기반으로 deploy를 진행하며 기존 BOSH 1.0 기반으로 설치를 원할경우에는 PaaS-TA 3.1 이하 버전의 문서를 참고한다.
 
-### <div id='12'> 1.2. 범위
+### <div id='12'> ● 범위
 설치 범위는 Pinpoint 서비스팩을 검증하기 위한 기본 설치를 기준으로 작성하였다.
 
-### <div id='13'> 1.3. 시스템 구성도
+### <div id='13'> ● 시스템 구성도
 
 본 문서의 설치된 시스템 구성도이다.  
 Pinpoint Server, HBase의 HBase Master, Collector , WebUI2로 최소사항을 구성하였다. 
@@ -49,7 +55,7 @@ Pinpoint Server, HBase의 HBase Master, Collector , WebUI2로 최소사항을 �
   </tr>
 </table>
 
-### <div id='14'> 1.4. 참고자료
+### <div id='14'> ● 참고자료
 [**http://bosh.io/docs**](http://bosh.io/docs)  
 [**http://docs.cloudfoundry.org/**](http://docs.cloudfoundry.org/)
 
