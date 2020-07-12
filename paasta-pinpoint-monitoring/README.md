@@ -152,7 +152,7 @@ abacus_url: "http://abacus.61.252.53.248.xip.io"	# Abacus URL (e.g. "http://abac
 
 ```
 ### On-Demand Bosh Deployment Name Setting ###
-deployment_name: "paasta-pinpoint-monitoring"		# On-Demand Deployment Name
+deployment_name: "pinpoint-monitoring"			# On-Demand Deployment Name
 #### Main Stemcells Setting ###
 stemcell_os: "ubuntu-xenial"				# Deployment Main Stemcell OS
 stemcell_version: "315.36"				# Main Stemcell Version
@@ -194,7 +194,7 @@ haproxy_webui_persistent_disk_type: "30GB"		# HAProxy-WEBUI 영구 Disk 종류
 
 ### <div id='232'>● deploy-pinpoint.sh
 ```
-echo 'y' | bosh -e micro-bosh -d paasta-pinpoint-monitoring deploy paasta-pinpoint.yml \
+echo 'y' | bosh -e micro-bosh -d pinpoint-monitoring deploy paasta-pinpoint.yml \
 	-o use-public-network.yml \
 	-l pinpoint-vars.yml \
 	-l ../../common/common_vars.yml \
@@ -203,7 +203,7 @@ echo 'y' | bosh -e micro-bosh -d paasta-pinpoint-monitoring deploy paasta-pinpoi
 
 ### <div id='233'>● deploy-pinpoint-vsphere.sh
 ```
-echo 'y' | bosh -e micro-bosh -d paasta-pinpoint-monitoring deploy paasta-pinpoint.yml \
+echo 'y' | bosh -e micro-bosh -d pinpoint-monitoring deploy paasta-pinpoint.yml \
 	-o use-public-network-vsphere.yml \
 	-l pinpoint-vars.yml \
 	-l ../../common/common_vars.yml \
@@ -245,7 +245,7 @@ $ mkdir -p ~/workspace/paasta-5.0/release/paasta-monitoring
 $ cd ${HOME}/workspace/paasta-5.0/release/paasta-monitoring
 $ ls
 ..................
-logsearch-boshrelease-209.0.1.tgz						logsearch-for-cloudfoundry-207.0.1.tgz
+paasta-pinpoint-monitoring-release.tgz
 ..................
 ```
 
