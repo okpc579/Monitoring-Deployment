@@ -200,12 +200,14 @@ $ sh deploy-logsearch.sh
 
 ```
 # 릴리즈 다운로드 파일 위치 경로 생성
-$ mkdir -p ~/workspace/paasta-5.0/release/paasta
+$ mkdir -p ~/workspace/paasta-5.0/release/paasta-monitoring
 
 # 릴리즈 파일 다운로드 및 파일 경로 확인
-$ cd ${HOME}/workspace/paasta-5.0/release/paasta
+$ cd ${HOME}/workspace/paasta-5.0/release/paasta-monitoring
 $ ls
+..................
 logsearch-boshrelease-209.0.1.tgz						logsearch-for-cloudfoundry-207.0.1.tgz
+..................
 ```
 
 
