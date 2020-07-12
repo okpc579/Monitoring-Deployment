@@ -557,7 +557,7 @@ PaaS-TA 배포 시, 설치 Option을 추가해야 한다.
 
 
 ### <div id='1019'/>● common_vars.yml
-common_vars.yml PaaS-TA 및 각종 Service 설치시 적용하는 공통 변수 설정 파일이 존재한다.  
+common 폴더에 있는 common_vars.yml PaaS-TA 및 각종 Service 설치시 적용하는 공통 변수 설정 파일이 존재한다.  
 PaaS-TA를 설치할 때는 system_domain, paasta_admin_username, paasta_admin_password, uaa_client_admin_secret, uaa_client_portal_secret의 값을 변경 하여 설치 할 수 있다.  
 또한 Monitoring 정보인 metric_url, syslog_address, syslog_port,syslog_transport,saas_monitoring_url, monitoring_api_url 을 수정 할 수 있다.
 metric_url, syslog_address, saas_monitoring_url, monitoring_api_url는 향후 설치할 모니터링 VM의 주소이니 Monitoring 옵션을 포함한 BOSH의 변수값과 같은 값을 주어 설치를 한다.
