@@ -276,15 +276,15 @@ Pinpoint Monitoring이 설치 완료 되었음을 확인한다.
 $ bosh –e {director_name} vms
 
 
-		$ bosh -e micro-bosh -d paasta-pinpoint-monitoring vms
-		Deployment 'paasta-pinpoint-monitoring'
+$ bosh -e micro-bosh -d paasta-pinpoint-monitoring vms
+Deployment 'paasta-pinpoint-monitoring'
 
-		Instance                                            Process State  AZ  IPs           VM CID               VM Type             Active  
-		collector/a7932462-5a55-4ad6-9a50-6d9775d8391a      running        z3  10.0.81.122   i-0104012f0c4cf1051  caas_small_highmem  true  
-		h_master/7024f1d8-7911-4cc6-ac5c-8d9295221efa       running        z3  10.0.81.121   i-02b1cd70c35117d8d  caas_small_highmem  true  
-		haproxy_webui/b30b856c-ad74-4ff5-a9ee-32e2ef641ffa  running        z7  10.0.0.122    i-046052aa5360f6b6f  caas_small_highmem  true  
-										       15.165.3.150                                             
-		pinpoint_web/c23b79cf-ef55-42f5-9c2a-b8102b6e5ca8   running        z3  10.0.81.123   i-02a82ab6f02784317  caas_small_highmem  true 
+Instance                                            Process State  AZ  IPs           VM CID               VM Type             Active  
+collector/a7932462-5a55-4ad6-9a50-6d9775d8391a      running        z3  10.0.81.122   i-0104012f0c4cf1051  caas_small_highmem  true  
+h_master/7024f1d8-7911-4cc6-ac5c-8d9295221efa       running        z3  10.0.81.121   i-02b1cd70c35117d8d  caas_small_highmem  true  
+haproxy_webui/b30b856c-ad74-4ff5-a9ee-32e2ef641ffa  running        z7  10.0.0.122    i-046052aa5360f6b6f  caas_small_highmem  true  
+								       15.165.3.150                                             
+pinpoint_web/c23b79cf-ef55-42f5-9c2a-b8102b6e5ca8   running        z3  10.0.81.123   i-02a82ab6f02784317  caas_small_highmem  true 
 ```
 
 ## <div id='27'> 2.7. security-group 등록
