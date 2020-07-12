@@ -255,6 +255,7 @@ paasta-pinpoint-monitoring-release.tgz
 
 ```
 echo 'y' | bosh -e {director_name} -d pinpoint-monitoring deploy paasta-pinpoint.yml \
+	-o use-compiled-releases-logsearch.yml \
 	-o use-public-network.yml \
 	-l pinpoint-vars.yml \
 	-l ../../common/common_vars.yml \
