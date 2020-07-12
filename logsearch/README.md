@@ -205,23 +205,28 @@ $ mkdir -p ~/workspace/paasta-5.0/release/paasta
 # 릴리즈 파일 다운로드 및 파일 경로 확인
 $ cd ${HOME}/workspace/paasta-5.0/release/paasta
 $ ls
-binary-buildpack-1.0.32-ubuntu-xenial-315.64-20190703-010740-177773032.tgz       loggregator-105.5-ubuntu-xenial-315.64-20190703-011056-709229397.tgz
-bosh-dns-aliases-0.0.3-ubuntu-xenial-315.64-20190703-005917-45013255.tgz         loggregator-agent-3.9-ubuntu-xenial-315.64-20190703-011227-052700948.tgz
-bpm-1.1.0-ubuntu-xenial-315.64-20190703-011218-840878281.tgz                     nats-27-ubuntu-xenial-315.64-20190703-011012-08860186.tgz
-capi-1.83.0-ubuntu-xenial-315.64-20190703-011352-736036246.tgz                   nginx-buildpack-1.0.13-ubuntu-xenial-315.64-20190703-010158-078624017.tgz
-cf-cli-1.16.0-ubuntu-xenial-315.64-20190703-010458-731652087.tgz                 nodejs-buildpack-1.6.51-ubuntu-xenial-315.64-20190703-010707-741053575.tgz
-cf-networking-2.23.0-ubuntu-xenial-315.64-20190703-011056-823948638.tgz          php-buildpack-4.3.77-ubuntu-xenial-315.64-20190703-010303-196110232.tgz
-cf-smoke-tests-40.0.112-ubuntu-xenial-315.64-20190709-042410-146373383.tgz       postgres-release-38.tgz
-cf-syslog-drain-10.2-ubuntu-xenial-315.64-20190703-011055-842044104.tgz          pxc-0.18.0-ubuntu-xenial-315.64-20190705-211325-403851041.tgz
-cflinuxfs3-0.113.0-ubuntu-xenial-315.64-20190708-232200-368636766.tgz            python-buildpack-1.6.34-ubuntu-xenial-315.64-20190703-010525-033925777.tgz
-credhub-2.4.0-ubuntu-xenial-315.64-20190703-010939-442789426.tgz                 r-buildpack-1.0.10-ubuntu-xenial-315.64-20190703-010623-140937123.tgz
-diego-2.34.0-ubuntu-xenial-315.64-20190703-011616-899984623.tgz                  routing-0.188.0-ubuntu-xenial-315.64-20190703-011414-513071207.tgz
-dotnet-core-buildpack-2.2.12-ubuntu-xenial-315.64-20190703-010337-286489233.tgz  ruby-buildpack-1.7.40-ubuntu-xenial-315.64-20190703-010707-743703201.tgz
-garden-runc-1.19.3-ubuntu-xenial-315.64-20190703-011651-220994654.tgz            silk-2.23.0-ubuntu-xenial-315.64-20190703-011145-360645247.tgz
-go-buildpack-1.8.40-ubuntu-xenial-315.64-20190703-010359-639769006.tgz           staticfile-buildpack-1.4.43-ubuntu-xenial-315.64-20190703-010525-898602366.tgz
-haproxy-boshrelease-9.6.1.tgz                                                    statsd-injector-1.10.0-ubuntu-xenial-315.64-20190703-010549-761652392.tgz
-java-buildpack-4.19.1-ubuntu-xenial-315.64-20190709-145004-482509766.tgz         syslog-release-11.4.0.tgz
-log-cache-2.2.2-ubuntu-xenial-315.64-20190703-011152-163727753.tgz               uaa-72.0-ubuntu-xenial-315.64-20190703-011111-665316203.tgz
+binary-buildpack-1.0.32-ubuntu-xenial-315.36-20190604-002102-261697356.tgz       logsearch-for-cloudfoundry-207.0.1.tgz
+bosh-dns-aliases-0.0.3-ubuntu-xenial-315.36-20190604-001210-462767884.tgz        nats-27-ubuntu-xenial-315.36-20190604-002225-109344473.tgz
+bpm-1.1.0-ubuntu-xenial-315.36-20190605-202629-386782261.tgz                     nginx-buildpack-1.0.11-ubuntu-xenial-315.36-20190604-002429-400792978.tgz
+capi-1.82.0-ubuntu-xenial-315.36-20190605-183357-126649814.tgz                   nodejs-buildpack-1.6.49-ubuntu-xenial-315.36-20190604-002440-619297529.tgz
+cf-cli-1.16.0-ubuntu-xenial-315.36-20190605-014339-033233424.tgz                 paasta-monitoring-agent.tgz
+cf-networking-2.22.0-ubuntu-xenial-315.36-20190604-002157-362880656.tgz          paasta-monitoring-release.tgz
+cf-smoke-tests-40.0.108-ubuntu-xenial-315.36-20190604-222504-842905721.tgz       paasta-pinpoint-monitoring-release.tgz
+cf-syslog-drain-10.2-ubuntu-xenial-315.36-20190604-002121-629630784.tgz          php-buildpack-4.3.76-ubuntu-xenial-315.36-20190604-002442-859401188.tgz
+cflinuxfs3-0.96.0-ubuntu-xenial-315.36-20190604-235920-773013445.tgz             postgres-release-37.tgz
+credhub-2.4.0-ubuntu-xenial-315.36-20190604-002621-62598463.tgz                  pxc-0.17.0-ubuntu-xenial-315.36-20190604-004815-833345153.tgz
+diego-2.31.0-ubuntu-xenial-315.36.tgz                                            python-buildpack-1.6.32-ubuntu-xenial-315.36-20190604-001946-548154414.tgz
+dotnet-core-buildpack-2.2.11-ubuntu-xenial-315.36-20190604-001931-734929687.tgz  r-buildpack-1.0.9-ubuntu-xenial-315.36-20190604-001944-133811855.tgz
+garden-runc-1.19.2-ubuntu-xenial-315.36-20190604-002855-407749562.tgz            redis-14.0.1.tgz
+go-buildpack-1.8.39-ubuntu-xenial-315.36-20190604-003147-244709132.tgz           routing-0.188.0-ubuntu-xenial-315.36-20190604-004738-877800074.tgz
+haproxy-boshrelease-9.6.0.tgz                                                    ruby-buildpack-1.7.38-ubuntu-xenial-315.36-20190604-001757-160658279.tgz
+influxdb.tgz                                                                     silk-2.22.0-ubuntu-xenial-315.36-20190604-002036-429929812.tgz
+java-buildpack-4.19-ubuntu-xenial-315.36-20190604-002437-994464737.tgz           staticfile-buildpack-1.4.42-ubuntu-xenial-315.36-20190604-002648-961614337.tgz
+log-cache-2.2.2-ubuntu-xenial-315.36-20190604-002739-806070522.tgz               statsd-injector-1.10.0-ubuntu-xenial-315.36-20190604-002016-521547214.tgz
+loggregator-105.5-ubuntu-xenial-315.36-20190604-002934-907477475.tgz             syslog-release-11.4.0.tgz
+loggregator-agent-3.9-ubuntu-xenial-315.36-20190604-002328-413557573.tgz         uaa-72.0-ubuntu-xenial-315.36-20190604-003150-361425493.tgz
+logsearch-boshrelease-209.0.1.tgz
+
 ```
 
 
