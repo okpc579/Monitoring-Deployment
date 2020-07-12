@@ -36,7 +36,7 @@
 > $ bosh -e {director-name} stemcells  
 
 
-### <div id='3'/>2.2. 설치 파일 다운로드
+### <div id='4'/>2.2. 설치 파일 다운로드
 
 - PaaS-TA Monitoring을 설치하기 위한 deployment가 존재하지 않는다면 다운로드 받는다
 ```
@@ -47,11 +47,11 @@ $ git clone https://github.com/PaaS-TA/PaaS-TA-Deployment.git paasta-deployment
 
 ![PaaSTa_release_dir_5.0]
 
-### <div id='3'/>2.3. PaaS-TA Monitoring 설치 환경설정
+### <div id='5'/>2.3. PaaS-TA Monitoring 설치 환경설정
 
 
 
-### <div id='7'/>● common_vars.yml
+### <div id='6'/>● common_vars.yml
 common_vars.yml PaaS-TA 및 각종 Service 설치시 적용하는 공통 변수 설정 파일이 존재한다.
 PaaS-TA Monitoring을 설치할 때는 paasta_admin_username, paasta_admin_password, metric_url, monitoring_api_url, saas_monitoring_url 값을 변경 하여 설치 할 수 있다.
 paasta_admin_username, paasta_admin_password는 PaaS-TA를 설치할 때의 변수값과 같은 값을 주어 설치를 한다
@@ -79,7 +79,7 @@ monitoring_api_url: "61.252.53.241"		# Monitoring-WEB의 Public IP
 saas_monitoring_url: "61.252.53.248"		# Pinpoint HAProxy WEBUI의 Public IP
 ```
 
-### <div id='8'/>● paasta-monitoring-vars.yml
+### <div id='7'/>● paasta-monitoring-vars.yml
 ```
 # SERVICE VARIABLE
 inception_os_user_name: "ubuntu"
@@ -164,7 +164,7 @@ monitoring_web_vm_type: "small"		# Monitoring-WEB VM 종류
 monitoring_web_network: "default"	# Monitoring-WEB 네트워크
 ```
 
-#### <div id='6'/>●	deploy-paasta-monitoring.sh
+#### <div id='8'/>●	deploy-paasta-monitoring.sh
 ```
 bosh -e {director_name} -n -d paasta-monitoring deploy paasta-monitoring.yml  \
 	-o use-public-network-openstack.yml \
@@ -173,7 +173,7 @@ bosh -e {director_name} -n -d paasta-monitoring deploy paasta-monitoring.yml  \
 	-l ../../common/common_vars.yml
 ```
 
-### <div id='6'/>2.4. PaaS-TA Monitoring 설치
+### <div id='9'/>2.4. PaaS-TA Monitoring 설치
 
 - 서버 환경에 맞추어 Deploy 스크립트 파일의 설정을 수정한다. 
 
@@ -192,7 +192,7 @@ $ cd ${HOME}/workspace/paasta-5.0/deployment/monitoring-deployment/paasta-monito
 $ sh deploy-paasta-monitoring.sh
 ```
 
-### <div id='6'/>2.5. PaaS-TA Monitoring 설치 - 다운로드 된 Relases 파일 이용 방식
+### <div id='10'/>2.5. PaaS-TA Monitoring 설치 - 다운로드 된 Relases 파일 이용 방식
 
 
 - 서비스 설치에 필요한 릴리즈 파일을 다운로드 받아 Local machine의 작업 경로로 위치시킨다.  
@@ -230,7 +230,7 @@ $ cd ${HOME}/workspace/paasta-5.0/deployment/monitoring-deployment/paasta-monito
 $ sh deploy-paasta-monitoring.sh
 ```
 
-### <div id='6'/>2.6. PaaS-TA Monitoring 설치
+### <div id='11'/>2.6. PaaS-TA Monitoring 설치
 
 PaaS-TA Monitoring이 설치 완료 되었음을 확인한다.
 ```
@@ -239,7 +239,7 @@ $ bosh –e {director_name} vms
 ![PaaSTa_monitoring_vms_5.0]
 
 
-## <div id='9'/>3. PaaS-TA Monitoring Dashboard 접속
+## <div id='12'/>3. PaaS-TA Monitoring Dashboard 접속
  
  http://{monitoring_api_url}:8080/public/login.html 에 접속하여 회원 가입 후 Main Dashboard에 접속한다.
 
