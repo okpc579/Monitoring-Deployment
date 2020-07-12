@@ -1060,7 +1060,7 @@ bosh -e {director_name} -d paasta -n deploy paasta-deployment.yml \	# PaaS-TA Ma
 	-o operations/rename-network-and-deployment.yml \		# Rename Network and Deployment
 	-l aws-vars.yml \						# AWS 환경에 PaaS-TA 설치시 적용하는 변숫값 설정 파일
 	-l ../../common/common_vars.yml					# PaaS-TA 및 각종 Service 설치시 적용하는 공통 변수 설정 파일
-
+```
 
 
 - PaaS-TA 설치 Shell Script 파일 실행 (BOSH 로그인 필요)
