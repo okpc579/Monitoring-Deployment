@@ -92,7 +92,64 @@ $ git clone https://github.com/okpc579/Monitoring-Deployment.git monitoring-depl
 
 ## <div id='23'> 2.3. Pinpoint Monitoring 설치 환경설정
 	
+	
+### <div id='6'/>● common_vars.yml
+common_vars.yml PaaS-TA 및 각종 Service 설치시 적용하는 공통 변수 설정 파일이 존재한다.  
+Pinpoint-Monitoring을 설치할 때는 monitoring_api_url 값을 변경 하여 설치 할 수 있다.  
+monitoring_api_url는 Monitoring 옵션을 포함한 BOSH와 PaaS-TA를 설치할 때의 변수값과 같은 값을 주어 설치를 한다.
+
+```
+# BOSH INFO
+bosh_url: "http://10.0.1.6"			# BOSH URL (e.g. "https://00.000.0.0")
+bosh_client_admin_id: "admin"			# BOSH Client Admin ID
+bosh_client_admin_secret: "ert7na4jpewscztsxz48"	# BOSH Client Admin Secret('echo $(bosh int ~/workspace/paasta-5.0/deployment/paasta-deployment/bosh/{iaas}/creds.yml --path /admin_password)' 명령어를 통해 확인 가능)
+bosh_director_port: 25555			# BOSH Director Port
+bosh_oauth_port: 8443				# BOSH OAuth Port
+
+# PAAS-TA INFO
+system_domain: "61.252.53.246.xip.io"		# Domain (xip.io를 사용하는 경우 HAProxy Public IP와 동일)
+paasta_admin_username: "admin"			# PaaS-TA Admin Username
+paasta_admin_password: "admin"			# PaaS-TA Admin Password
+paasta_nats_ip: "10.0.1.121"
+paasta_nats_port: 4222
+paasta_nats_user: "nats"
+paasta_nats_password: "7EZB5ZkMLMqT73h2JtxPv1fvh3UsqO"	# PaaS-TA Nats Password (CredHub 로그인후 'credhub get -n /micro-bosh/paasta/nats_password' 명령어를 통해 확인 가능)
+paasta_nats_private_networks_name: "default"	# PaaS-TA Nats 의 Network 이름
+paasta_database_ips: "10.0.1.123"		# PaaS-TA Database IP(e.g. "10.0.1.123")
+paasta_database_port: 5524			# PaaS-TA Database Port(e.g. 5524)
+paasta_cc_db_id: "cloud_controller"		# CCDB ID(e.g. "cloud_controller")
+paasta_cc_db_password: "cc_admin"		# CCDB Password(e.g. "cc_admin")
+paasta_uaa_db_id: "uaa"				# UAADB ID(e.g. "uaa")
+paasta_uaa_db_password: "uaa_admin"		# UAADB Password(e.g. "uaa_admin")
+paasta_api_version: "v3"
+
+
+# UAAC INFO
+uaa_client_admin_id: "admin"			# UAAC Admin Client Admin ID
+uaa_client_admin_secret: "admin-secret"		# UAAC Admin Client에 접근하기 위한 Secret 변수
+uaa_client_portal_secret: "clientsecret"	# UAAC Portal Client에 접근하기 위한 Secret 변수
+
+# Monitoring INFO
+metric_url: "10.0.161.101"			# Monitoring InfluxDB IP
+syslog_address: "10.0.121.100"            	# Logsearch의 ls-router IP
+syslog_port: "2514"                          	# Logsearch의 ls-router Port
+syslog_transport: "relp"                        # Logsearch Protocol
+saas_monitoring_url: "61.252.53.248"	   	# Pinpoint HAProxy WEBUI의 Public IP
+monitoring_api_url: "61.252.53.241"        	# Monitoring-WEB의 Public IP
+
+### Portal INFO
+portal_web_user_ip: "52.78.88.252"
+portal_web_user_url: "http://portal-web-user.52.78.88.252.xip.io" 
+
+### ETC INFO
+abacus_url: "http://abacus.61.252.53.248.xip.io"	# Abacus URL (e.g. "http://abacus.xxx.xxx.xxx.xxx.xip.io")
+```
+
+
 ### <div id='231'>● pinpoint-vars.yml
+	
+모니터링 하려는 VM에 접근을 하기 위해 PemSSH의 값을 true로 한다면 BOSH를 설치할때 IaaS의 VM을 만들 수 있는 권한을 주었던 Key를 같은 폴더에 있는 pem.yml에 같은 형식으로 복사하여야 한다.
+
 ```
 ### On-Demand Bosh Deployment Name Setting ###
 deployment_name: "paasta-pinpoint-monitoring"		# On-Demand Deployment Name
@@ -154,19 +211,61 @@ echo 'y' | bosh -e micro-bosh -d paasta-pinpoint-monitoring deploy paasta-pinpoi
 ```
 
 ## <div id='24'> 2.4. Pinpoint Monitoring 설치
-deploy.sh을 실행하여 logsearch를 설치 한다.
+	
+- 서버 환경에 맞추어 Deploy 스크립트 파일의 설정을 수정한다. 
+
+> $ vi ${HOME}/workspace/paasta-5.0/deployment/monitoring-deployment/pinpoint-monitoring/deploy-pinpoint.sh
+
+```
+echo 'y' | bosh -e {director_name} -d pinpoint-monitoring deploy paasta-pinpoint.yml \
+	-o use-public-network.yml \
+	-l pinpoint-vars.yml \
+	-l ../../common/common_vars.yml \
+	-l pem.yml
+```
+
+- Pinpoint Monitoring 설치 Shell Script 파일 실행 (BOSH 로그인 필요)
 
 ```
 $ cd ~/workspace/paasta-5.0/deployment/monitoring-deployment/paasta-monitoring
-$ sh deploy-logsearch.sh
+$ sh deploy-pinpoint.sh
 ```
 
 ## <div id='25'/>2.5. Pinpoint Monitoring 설치 - 다운로드 된 Release 파일 이용 방식
-deploy.sh을 실행하여 logsearch를 설치 한다.
+
+- 서비스 설치에 필요한 릴리즈 파일을 다운로드 받아 Local machine의 작업 경로로 위치시킨다.  
+  
+  - 설치 파일 다운로드 위치 : https://paas-ta.kr/download/package    
+
+```
+# 릴리즈 다운로드 파일 위치 경로 생성
+$ mkdir -p ~/workspace/paasta-5.0/release/paasta-monitoring
+
+# 릴리즈 파일 다운로드 및 파일 경로 확인
+$ cd ${HOME}/workspace/paasta-5.0/release/paasta-monitoring
+$ ls
+..................
+logsearch-boshrelease-209.0.1.tgz						logsearch-for-cloudfoundry-207.0.1.tgz
+..................
+```
+
+- 서버 환경에 맞추어 Deploy 스크립트 파일의 설정을 수정한다. 
+
+> $ vi ${HOME}/workspace/paasta-5.0/deployment/monitoring-deployment/pinpoint-monitoring/deploy-pinpoint.sh
+
+```
+echo 'y' | bosh -e {director_name} -d pinpoint-monitoring deploy paasta-pinpoint.yml \
+	-o use-public-network.yml \
+	-l pinpoint-vars.yml \
+	-l ../../common/common_vars.yml \
+	-l pem.yml
+```
+
+- Pinpoint Monitoring 설치 Shell Script 파일 실행 (BOSH 로그인 필요)
 
 ```
 $ cd ~/workspace/paasta-5.0/deployment/monitoring-deployment/paasta-monitoring
-$ sh deploy-logsearch.sh
+$ sh deploy-pinpoint.sh
 ```
 
 ## <div id='26'/>2.6. 서비스 설치 확인
