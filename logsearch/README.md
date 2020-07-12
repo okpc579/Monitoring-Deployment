@@ -55,9 +55,8 @@ $ cd ${HOME}/workspace/paasta-5.0/deployment/monitoring-deployment/paasta-monito
 
 ### <div id='6'/>● common_vars.yml
 common_vars.yml PaaS-TA 및 각종 Service 설치시 적용하는 공통 변수 설정 파일이 존재한다.  
-PaaS-TA를 설치할 때는 system_domain, paasta_admin_username, paasta_admin_password, uaa_client_admin_secret, uaa_client_portal_secret의 값을 변경 하여 설치 할 수 있다.  
-또한 Monitoring 정보인 metric_url, syslog_address, syslog_port,syslog_transport,saas_monitoring_url, monitoring_api_url 을 수정 할 수 있다.
-metric_url, syslog_address, saas_monitoring_url, monitoring_api_url는 향후 설치할 모니터링 VM의 주소이니 Monitoring 옵션을 포함한 BOSH의 변수값과 같은 값을 주어 설치를 한다.
+Logsearch를 설치할 때는 syslog_address의 값을 변경 하여 설치 할 수 있다.  
+syslog_address는 Monitoring 옵션을 포함한 BOSH와 PaaS-TA를 설치할 때의 변수값과 같은 값을 주어 설치를 한다.
 
 ```
 # BOSH INFO
@@ -167,11 +166,6 @@ ls_router_network: "default"			# LS-Router 네트워크
 ```
 
 ### <div id='8'/>● deploy-logsearch.sh
-
-deploy.sh의 –v 의 inception_os_user_name, router_ip, system_domain 및 director_name을 시스템 상황에 맞게 설정한다.  
-system_domain은 PaaS-TA 설치시 설정했던 system_domain을 입력하면 된다.  
-router_ip는 ls-router가 설치된 azs에서 정의한 cider값의 적당한 IP를 지정한다.
-
 ```
 bosh –e {director_name} -d logsearch deploy logsearch-deployment.yml \				
 	-o use-compiled-releases-logsearch.yml \
@@ -180,19 +174,75 @@ bosh –e {director_name} -d logsearch deploy logsearch-deployment.yml \
 ```
 
 ### <div id='9'/>2.4. Logsearch 설치
-deploy.sh을 실행하여 logsearch를 설치 한다.
+
+- 서버 환경에 맞추어 Deploy 스크립트 파일의 설정을 수정한다. 
+
+> $ vi ${HOME}/workspace/paasta-5.0/deployment/monitoring-deployment/logsearch/deploy-logsearch.sh
 
 ```
-$ cd ~/workspace/paasta-5.0/deployment/monitoring-deployment/paasta-monitoring
+bosh –e {director_name} -d logsearch deploy logsearch-deployment.yml \	
+	-l logsearch-vars.yml \
+	-l ../../common/common_vars.yml
+```
+
+- Logsearch 설치 Shell Script 파일 실행 (BOSH 로그인 필요)
+
+```
+$ cd ~/workspace/paasta-5.0/deployment/monitoring-deployment/logsearch
 $ sh deploy-logsearch.sh
 ```
+
 ### <div id='10'/>2.5. Logsearch 설치 - 다운로드 된 Release 파일 이용 방식
-deploy.sh을 실행하여 logsearch를 설치 한다.
+
+- 서비스 설치에 필요한 릴리즈 파일을 다운로드 받아 Local machine의 작업 경로로 위치시킨다.  
+  
+  - 설치 파일 다운로드 위치 : https://paas-ta.kr/download/package    
 
 ```
-$ cd ~/workspace/paasta-5.0/deployment/monitoring-deployment/paasta-monitoring
+# 릴리즈 다운로드 파일 위치 경로 생성
+$ mkdir -p ~/workspace/paasta-5.0/release/paasta
+
+# 릴리즈 파일 다운로드 및 파일 경로 확인
+$ cd ${HOME}/workspace/paasta-5.0/release/paasta
+$ ls
+binary-buildpack-1.0.32-ubuntu-xenial-315.64-20190703-010740-177773032.tgz       loggregator-105.5-ubuntu-xenial-315.64-20190703-011056-709229397.tgz
+bosh-dns-aliases-0.0.3-ubuntu-xenial-315.64-20190703-005917-45013255.tgz         loggregator-agent-3.9-ubuntu-xenial-315.64-20190703-011227-052700948.tgz
+bpm-1.1.0-ubuntu-xenial-315.64-20190703-011218-840878281.tgz                     nats-27-ubuntu-xenial-315.64-20190703-011012-08860186.tgz
+capi-1.83.0-ubuntu-xenial-315.64-20190703-011352-736036246.tgz                   nginx-buildpack-1.0.13-ubuntu-xenial-315.64-20190703-010158-078624017.tgz
+cf-cli-1.16.0-ubuntu-xenial-315.64-20190703-010458-731652087.tgz                 nodejs-buildpack-1.6.51-ubuntu-xenial-315.64-20190703-010707-741053575.tgz
+cf-networking-2.23.0-ubuntu-xenial-315.64-20190703-011056-823948638.tgz          php-buildpack-4.3.77-ubuntu-xenial-315.64-20190703-010303-196110232.tgz
+cf-smoke-tests-40.0.112-ubuntu-xenial-315.64-20190709-042410-146373383.tgz       postgres-release-38.tgz
+cf-syslog-drain-10.2-ubuntu-xenial-315.64-20190703-011055-842044104.tgz          pxc-0.18.0-ubuntu-xenial-315.64-20190705-211325-403851041.tgz
+cflinuxfs3-0.113.0-ubuntu-xenial-315.64-20190708-232200-368636766.tgz            python-buildpack-1.6.34-ubuntu-xenial-315.64-20190703-010525-033925777.tgz
+credhub-2.4.0-ubuntu-xenial-315.64-20190703-010939-442789426.tgz                 r-buildpack-1.0.10-ubuntu-xenial-315.64-20190703-010623-140937123.tgz
+diego-2.34.0-ubuntu-xenial-315.64-20190703-011616-899984623.tgz                  routing-0.188.0-ubuntu-xenial-315.64-20190703-011414-513071207.tgz
+dotnet-core-buildpack-2.2.12-ubuntu-xenial-315.64-20190703-010337-286489233.tgz  ruby-buildpack-1.7.40-ubuntu-xenial-315.64-20190703-010707-743703201.tgz
+garden-runc-1.19.3-ubuntu-xenial-315.64-20190703-011651-220994654.tgz            silk-2.23.0-ubuntu-xenial-315.64-20190703-011145-360645247.tgz
+go-buildpack-1.8.40-ubuntu-xenial-315.64-20190703-010359-639769006.tgz           staticfile-buildpack-1.4.43-ubuntu-xenial-315.64-20190703-010525-898602366.tgz
+haproxy-boshrelease-9.6.1.tgz                                                    statsd-injector-1.10.0-ubuntu-xenial-315.64-20190703-010549-761652392.tgz
+java-buildpack-4.19.1-ubuntu-xenial-315.64-20190709-145004-482509766.tgz         syslog-release-11.4.0.tgz
+log-cache-2.2.2-ubuntu-xenial-315.64-20190703-011152-163727753.tgz               uaa-72.0-ubuntu-xenial-315.64-20190703-011111-665316203.tgz
+```
+
+
+- 서버 환경에 맞추어 Deploy 스크립트 파일의 설정을 수정한다. 
+
+> $ vi ${HOME}/workspace/paasta-5.0/deployment/monitoring-deployment/logsearch/deploy-logsearch.sh
+
+```
+bosh –e {director_name} -d logsearch deploy logsearch-deployment.yml \				
+	-o use-compiled-releases-logsearch.yml \
+	-l logsearch-vars.yml \
+	-l ../../common/common_vars.yml
+```
+
+- Logsearch 설치 Shell Script 파일 실행 (BOSH 로그인 필요)
+
+```
+$ cd ~/workspace/paasta-5.0/deployment/monitoring-deployment/logsearch
 $ sh deploy-logsearch.sh
 ```
+
 
 ### <div id='11'/>2.6. 서비스 설치 확인
 logsearch가 설치 완료 되었음을 확인한다.
