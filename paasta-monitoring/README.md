@@ -52,7 +52,7 @@ $ git clone https://github.com/PaaS-TA/monitoring-deployment.git
 ${HOME}/workspace/paasta-5.0/deployment/monitoring-deployment/paasta-monitoring 이하 디렉터리에는 PaaS-TA Monitoring 설치를 위한 Shell Script 파일이 존재한다.
 
 ### <div id='6'/>● common_vars.yml
-common_vars.yml PaaS-TA 및 각종 Service 설치시 적용하는 공통 변수 설정 파일이 존재한다.
+common 폴더에 있는 common_vars.yml PaaS-TA 및 각종 Service 설치시 적용하는 공통 변수 설정 파일이 존재한다.
 PaaS-TA Monitoring을 설치할 때는 paasta_admin_username, paasta_admin_password, metric_url, monitoring_api_url, saas_monitoring_url 값을 변경 하여 설치 할 수 있다.
 paasta_admin_username, paasta_admin_password는 PaaS-TA를 설치할 때의 변수값과 같은 값을 주어 설치를 한다
 metric_url는 Monitoring 옵션을 포함한 BOSH와 PaaS-TA를 설치할 때의 변수값과 같은 값을 주어 설치를 한다.
