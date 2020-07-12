@@ -50,7 +50,7 @@ $ git clone https://github.com/PaaS-TA/monitoring-deployment.git
 PaaS-TA VM Log수집을 위해서는 Logsearch가 설치되어야 한다. 
 
 ```
-$ cd ${HOME}/workspace/paasta-5.0/deployment/monitoring-deployment/paasta-monitoring
+$ cd ${HOME}/workspace/paasta-5.0/deployment/monitoring-deployment/logsearch
 ```
 
 ### <div id='6'/>● common_vars.yml
