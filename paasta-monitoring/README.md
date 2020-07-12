@@ -207,7 +207,8 @@ $ mkdir -p ~/workspace/paasta-5.0/release/paasta-monitoring
 $ cd ${HOME}/workspace/paasta-5.0/release/paasta-monitoring
 $ ls
 ..................
-logsearch-boshrelease-209.0.1.tgz						logsearch-for-cloudfoundry-207.0.1.tgz
+bpm-1.1.0-ubuntu-xenial-315.36-20190605-202629-386782261.tgz			paasta-monitoring-release.tgz
+redis-14.0.1.tgz								influxdb.tgz
 ..................
 ```
 
