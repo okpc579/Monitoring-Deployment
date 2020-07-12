@@ -52,6 +52,11 @@ $ git clone https://github.com/PaaS-TA/PaaS-TA-Deployment.git paasta-deployment
 
 
 ### <div id='7'/>● common_vars.yml
+common_vars.yml PaaS-TA 및 각종 Service 설치시 적용하는 공통 변수 설정 파일이 존재한다.
+PaaS-TA Monitoring을 설치할 때는 paasta_admin_username, paasta_admin_password, metric_url, monitoring_api_url, saas_monitoring_url 값을 변경 하여 설치 할 수 있다.
+paasta_admin_username, paasta_admin_password는 PaaS-TA를 설치할 때의 변수값과 같은 값을 주어 설치를 한다
+metric_url는 Monitoring 옵션을 포함한 BOSH와 PaaS-TA를 설치할 때의 변수값과 같은 값을 주어 설치를 한다.
+saas_monitoring_url는 Pinpoint Monitoring을 설치할 때의 변수값과 같은 값을 주어 설치를 한다.
 ```
 # BOSH
 bosh_url: "10.0.1.6"				# BOSH URL ('bosh env' 명령어를 통해 확인 가능)
@@ -75,8 +80,6 @@ saas_monitoring_url: "61.252.53.248"		# Pinpoint HAProxy WEBUI의 Public IP
 ```
 
 ### <div id='8'/>● paasta-monitoring-vars.yml
-deploy-paasta-monitoring.sh의 –v 의 inception_os_user_name, system_domain 및 director_name을 시스템 상황에 맞게 설정한다.
-
 ```
 # SERVICE VARIABLE
 inception_os_user_name: "ubuntu"
@@ -172,18 +175,57 @@ bosh -e {director_name} -n -d paasta-monitoring deploy paasta-monitoring.yml  \
 
 ### <div id='6'/>2.4. PaaS-TA Monitoring 설치
 
-deploy-paasta-monitoring.sh을 실행하여 PaaS-TA Monitoring을 설치 한다.
+- 서버 환경에 맞추어 Deploy 스크립트 파일의 설정을 수정한다. 
+
+> $ vi ${HOME}/workspace/paasta-5.0/deployment/monitoring-deployment/paasta-monitoring/deploy-paasta-monitoring.sh
+
+```
+bosh -e {director_name} -n -d paasta-monitoring deploy paasta-monitoring.yml  \
+	-o use-public-network-openstack.yml \
+	-l paasta-monitoring-vars.yml \
+	-l ../../common/common_vars.yml
+```
+
+- PaaS-TA Monitoring 설치 Shell Script 파일 실행 (BOSH 로그인 필요)
 ```
 $ cd ${HOME}/workspace/paasta-5.0/deployment/monitoring-deployment/paasta-monitoring
-$ deploy-paasta-monitoring.sh
+$ sh deploy-paasta-monitoring.sh
 ```
 
 ### <div id='6'/>2.5. PaaS-TA Monitoring 설치 - 다운로드 된 Relases 파일 이용 방식
 
-deploy-paasta-monitoring.sh을 실행하여 PaaS-TA Monitoring을 설치 한다.
+
+- 서비스 설치에 필요한 릴리즈 파일을 다운로드 받아 Local machine의 작업 경로로 위치시킨다.  
+  
+  - 설치 파일 다운로드 위치 : https://paas-ta.kr/download/package    
+
+```
+# 릴리즈 다운로드 파일 위치 경로 생성
+$ mkdir -p ~/workspace/paasta-5.0/release/paasta-monitoring
+
+# 릴리즈 파일 다운로드 및 파일 경로 확인
+$ cd ${HOME}/workspace/paasta-5.0/release/paasta-monitoring
+$ ls
+..................
+logsearch-boshrelease-209.0.1.tgz						logsearch-for-cloudfoundry-207.0.1.tgz
+..................
+```
+
+- 서버 환경에 맞추어 Deploy 스크립트 파일의 설정을 수정한다. 
+
+> $ vi ${HOME}/workspace/paasta-5.0/deployment/monitoring-deployment/paasta-monitoring/deploy-paasta-monitoring.sh
+
+```
+bosh -e {director_name} -n -d paasta-monitoring deploy paasta-monitoring.yml  \
+	-o use-public-network-openstack.yml \
+	-l paasta-monitoring-vars.yml \
+	-l ../../common/common_vars.yml
+```
+
+- PaaS-TA Monitoring 설치 Shell Script 파일 실행 (BOSH 로그인 필요)
 ```
 $ cd ${HOME}/workspace/paasta-5.0/deployment/monitoring-deployment/paasta-monitoring
-$ deploy-paasta-monitoring.sh
+$ sh deploy-paasta-monitoring.sh
 ```
 
 ### <div id='6'/>2.6. PaaS-TA Monitoring 설치
