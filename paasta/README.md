@@ -463,7 +463,7 @@ $ bosh -e {director_name} update-runtime-config -n runtime-configs/dns.yml
 $ bosh –e {director_name} runtime-config  
 ```
 
-## <div id='1017'/>3.6.  PaaS-TA 
+## <div id='1017'/>3.6.  PaaS-TA 환경 설정
 
 ${HOME}/workspace/paasta-5.0/deployment/monitoring-deployment 이하 디렉터리에는 IaaS별 PaaS-TA 설치 Shell Script 파일이 존재하며, 이를 실행하여 PaaS-TA를 설치한다.  
 파일명은 deploy-{IaaS}-monitoring.sh이다.  
