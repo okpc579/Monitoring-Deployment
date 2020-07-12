@@ -54,7 +54,7 @@ $ cd ${HOME}/workspace/paasta-5.0/deployment/monitoring-deployment/logsearch
 ```
 
 ### <div id='6'/>● common_vars.yml
-common_vars.yml PaaS-TA 및 각종 Service 설치시 적용하는 공통 변수 설정 파일이 존재한다.  
+common 폴더에 있는 common_vars.yml PaaS-TA 및 각종 Service 설치시 적용하는 공통 변수 설정 파일이 존재한다.  
 Logsearch를 설치할 때는 syslog_address의 값을 변경 하여 설치 할 수 있다.  
 syslog_address는 Monitoring 옵션을 포함한 BOSH와 PaaS-TA를 설치할 때의 변수값과 같은 값을 주어 설치를 한다.
 
