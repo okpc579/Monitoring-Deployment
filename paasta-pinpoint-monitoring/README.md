@@ -96,7 +96,7 @@ $ git clone https://github.com/PaaS-TA/monitoring-deployment.git
 ${HOME}/workspace/paasta-5.0/deployment/monitoring-deployment/pinpoint-monitoring 이하 디렉터리에는 Pinpoint Monitoring 설치를 위한 Shell Script 파일이 존재한다.
 	
 ### <div id='231'/>● common_vars.yml
-common_vars.yml PaaS-TA 및 각종 Service 설치시 적용하는 공통 변수 설정 파일이 존재한다.  
+common 폴더에 있는 common_vars.yml PaaS-TA 및 각종 Service 설치시 적용하는 공통 변수 설정 파일이 존재한다.  
 Pinpoint-Monitoring을 설치할 때는 saas_monitoring_url 값을 변경 하여 설치 할 수 있다.  
 
 ```
