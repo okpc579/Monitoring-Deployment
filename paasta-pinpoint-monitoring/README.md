@@ -85,8 +85,8 @@ Pinpoint Server, HBase의 HBase Master, Collector , WebUI2로 최소사항을 �
 - PaaS-TA를 설치하기 위한 deployment가 존재하지 않는다면 다운로드 받는다
 ```
 $ cd ${HOME}/workspace/paasta-5.0/deployment
-$ git clone https://github.com/okpc579/Common-Deployment.git common
-$ git clone https://github.com/okpc579/Monitoring-Deployment.git monitoring-deployment
+$ git clone https://github.com/PaaS-TA/Common-Deployment.git common
+$ git clone https://github.com/PaaS-TA/Monitoring-Deployment.git monitoring-deployment
 ```
 
 
